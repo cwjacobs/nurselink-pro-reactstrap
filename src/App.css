@@ -1,14 +1,22 @@
-.header {
-  text-align: center;
+.app {
+  background-color: black;
 }
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
+.app-logo {
   height        : 40vmin;
   pointer-events: none;
+}
+
+.header {
+  text-align      : center;
+  color           : antiquewhite;
+  background-color: rgb(39, 39, 39);
+  padding         : 12px;
+  padding-top     : 20px;
+  padding-bottom  : 20px;
+  border-radius   : 4px;
+  border-width    : 2px;
+  border-style    : outset;
 }
 
 @media (prefers-reduced-motion: no-preference) {
