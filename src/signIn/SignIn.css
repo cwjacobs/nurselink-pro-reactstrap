@@ -1,8 +1,8 @@
 .jumbo {
-  color       : white;
-  background  : #2c88f1 !important;
-  border-width: 3px;
-  border-style: outset;
+  color          : white;
+  /* background  : #2c88f1 !important; */
+  border-width   : 3px;
+  border-style   : outset;
 }
 
 .login-form {

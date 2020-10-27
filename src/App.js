@@ -1,23 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
-import { SignIn } from './signIn/SignIn';
+import Button from 'react-bootstrap/Button';
 
 import './App.css';
+import { SignIn } from './signIn/SignIn';
+import { Navigation } from './navigation/Navigation';
+import { ClientArea } from './clientarea/ClientArea';
 
 // const appName = "Medica360";
 // const appName = "Nurse Link";
+const { innerHeight } = window
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      height: 0,
+      isSignedIn: false,
+      signedInAccount: null,
+      clickedAccount: null,
+    };
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      height: innerHeight,
+    })
+  }
+
+  setIsSignedIn = (value) => {
+    this.setState({
+      isSignedIn: value,
+    })
+  }
+
+  setSignedInAccount = (value) => {
+    this.setState({
+      isSignedIn: true,
+      signedInAccount: value,
+    })
+  }
+
+  setClickedAccount = (account) => {
+    this.setState({
+      clickedAccount: account,
+    })
+  }
+
+  signOutHandler = () => {
+    this.setIsSignedIn(false);
   }
 
   render() {
     return (
-      <Container fluid className="p-3 app">
-        <h1 className="header">Welcome To Medica360</h1>
-        <SignIn></SignIn>
+      <Container fluid className="p-3 app" style={{ height: this.state.height }}>
+        {!this.state.isSignedIn && <div>
+          <h1 className="header">Welcome To Medica360</h1>
+          <SignIn setSignedInAccount={this.setSignedInAccount}></SignIn>
+        </div>
+        }
+        {this.state.isSignedIn && <div>
+          <Navigation></Navigation>
+          <ClientArea account={this.state.clickedAccount}></ClientArea>
+          <Button variant="outline-info" type="button" onClick={this.signOutHandler}>Sign Out</Button>
+        </div>
+        }
       </Container>
     );
   }

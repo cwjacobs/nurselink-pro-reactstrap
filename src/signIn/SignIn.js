@@ -1,37 +1,70 @@
 import React, { useState } from 'react';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+
+import { firebaseLogin, getNurseLinkAcct } from '../conn/nlFirestore'
 
 import './SignIn.css';
 
 const SignIn = (props) => {
+  const [email, setEmail] = useState("holderman.john@gmail.com");
+  const [password, setPassword] = useState("firebase");
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleShowPassword = () => {
     setIsShowPassword(!isShowPassword);
   }
 
+  const handleEmailChange = (e) => {
+    console.log(e.target.value);
+    setEmail(e.target.value);
+  }
+
+  const handlePasswordChange = (e) => {
+    console.log(e.target.value);
+    setPassword(e.target.value);
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    firebaseLogin(email, password)
+      .then(() => {
+        let key = email;
+        getNurseLinkAcct(key)
+          .then((result) => {
+            props.setSignedInAccount(result);
+            // alert(`Authenticated account: ${result.acctInfo.key} ${result.acctInfo.firstName} ${result.acctInfo.lastName} ${result.acctInfo.phoneNumber}`);
+          })
+          .catch((e) => {
+            alert(`No Account dor signed in user has been found: ${e}`);
+          })
+      })
+      .catch((e) => {
+        alert(`Sign In credentials ${e} do not match our records`);
+      })
+  }
+
   return (
-    <Jumbotron className="jumbo">
+    <Jumbotron className="bg-info jumbo">
       <div className="login-form mx-auto">
         <h1 style={{ marginBottom: 0.5 + 'em' }}>Sign In</h1>
-        <Form>
+        <Form onSubmit={submitHandler}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => { handleEmailChange(e) }} />
             <Form.Text className="text-muted">
               Use of this workstation falls under the Medica360 Code of Conduct Policy and your acceptance of that policy.
-                </Form.Text>
+            </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type={isShowPassword ? "text" : "password"} placeholder="Password" />
+            <Form.Control type={isShowPassword ? "text" : "password"} placeholder="Password" value={password} onChange={(e) => { handlePasswordChange(e) }} />
           </Form.Group>
-          <Form.Group controlId="formBasicCheckbox">
+          <Form.Group className="info" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Show Password" onClick={handleShowPassword} />
           </Form.Group>
-          <Button variant="primary" type="submit">Submit</Button>
+          <Button variant="outline-info" type="submit">Submit</Button>
         </Form>
       </div>
     </Jumbotron>
