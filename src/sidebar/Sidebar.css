@@ -1,5 +1,6 @@
 .sidebar-content {
-    margin         : 3px;
+    margin         : 6px;
+    width          : 100%;
     align-items    : center;
     justify-content: center;
 }
