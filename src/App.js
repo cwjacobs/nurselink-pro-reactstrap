@@ -15,7 +15,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      height: 0,
+      appHeight: 0,
       isSignedIn: false,
       signedInAccount: null,
       clickedAccount: null,
@@ -24,7 +24,21 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.setState({
-      height: innerHeight,
+      appHeight: innerHeight,
+    })
+  }
+
+  // componentDidUpdate = () => {
+  //   if (this.state.appHeight !== innerHeight) {
+  //     this.setState({
+  //       appHeight: innerHeight,
+  //     })
+  //   }
+  // }
+
+  setAppHeight = (value) => {
+    this.setState({
+      appHeight: value,
     })
   }
 
@@ -53,7 +67,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container fluid className="p-3 app" style={{ height: this.state.height }}>
+      <Container id="appcontainer" fluid className="p-3 app" style={{ height: this.state.appHeight }}>
         {!this.state.isSignedIn && <div>
           <h1 className="header">Welcome To Medica360</h1>
           <SignIn setSignedInAccount={this.setSignedInAccount}></SignIn>
@@ -61,7 +75,7 @@ class App extends React.Component {
         }
         {this.state.isSignedIn && <div>
           <Navigation></Navigation>
-          <ClientArea account={this.state.clickedAccount}></ClientArea>
+          <ClientArea setAppHeight={this.setAppHeight} signedInAccount={this.state.signedInAccount} setClickedAccount={this.setClickedAccount}></ClientArea>
           <Button variant="outline-info" type="button" onClick={this.signOutHandler}>Sign Out</Button>
         </div>
         }

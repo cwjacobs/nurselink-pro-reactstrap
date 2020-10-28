@@ -37,7 +37,7 @@ const SignIn = (props) => {
             // alert(`Authenticated account: ${result.acctInfo.key} ${result.acctInfo.firstName} ${result.acctInfo.lastName} ${result.acctInfo.phoneNumber}`);
           })
           .catch((e) => {
-            alert(`No Account dor signed in user has been found: ${e}`);
+            alert(`No Account for signed in user has been found: ${e}`);
           })
       })
       .catch((e) => {

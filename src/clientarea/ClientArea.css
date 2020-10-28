@@ -1,40 +1,13 @@
-.parent {
-    align-items    : left;
-    justify-content: left;
+.sidebar-layout {
+    border-width: 1px;
+    border-style: solid;
+    margin-top  : 3px;
+    border-color: white;
 }
 
-.sidebar {
-    color                : white;
-    /* background        : #2c88f1 !important; */
-    border-width         : 1px;
-    border-style         : solid;
-    /* width             : 30%; */
-    /* height            : 500px; */
-    margin-top           : 3px;
-    align-items          : center;
-    justify-content      : center;
-}
-
-.accountbtn {
-    width : 100%;
-    height: 8vh;
-    margin: 6px;
-}
-
-.workarea {
-    color           : white;
-    /* background   : #516883 !important; */
-    /* background   : rgb(204, 204, 204) !important; */
-
-    border-width      : 1px;
-    border-style      : solid;
-    /* width          : 30%; */
-    /* height         : 500px; */
-    margin-top        : 3px;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.infopane-layout {
+    border-width: 1px;
+    border-style: solid;
+    margin-top  : 3px;
+    border-color: white;
 }
