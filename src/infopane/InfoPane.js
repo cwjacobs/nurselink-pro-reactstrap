@@ -18,9 +18,9 @@ const InfoPane = (props) => {
                         <Card.Header as="h5" className='bg-info cardheader'>{`Patient: ${clickedAccount.acctInfo.firstName} ${clickedAccount.acctInfo.lastName}`}</Card.Header>
                         <Card.Body>
                             <Card.Title>Drug Regimin</Card.Title>
-                            <Card.Text>With supporting text below as a natural lead-in to additional content.</Card.Text>
-                            <MedTable></MedTable>
-                            <Button variant="primary">Go somewhere</Button>
+                            <Card.Text>Select a date below for corresponding list of medications and daily adherence.</Card.Text>
+                            <MedTable clickedAccount={clickedAccount}></MedTable>
+                            <Button variant="primary">Adherence</Button>
                         </Card.Body>
                     </Card>
                 </div>
