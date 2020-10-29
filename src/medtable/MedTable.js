@@ -8,9 +8,9 @@ import Form from 'react-bootstrap/Form';
 import '../infopane/InfoPane.css';
 
 const MedTable = (props) => {
-
     const {
         clickedAccount,
+        medicineList,
     } = props;
 
     const [date, setDate] = useState(new Date());
@@ -55,42 +55,20 @@ const MedTable = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Atorvastatin</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Pill</td>
-                        <td>20</td>
-                        <td>mg</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Lisinopril</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Pill</td>
-                        <td>10</td>
-                        <td>mg</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Garlic</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>Capsule</td>
-                        <td>200</td>
-                        <td>iu</td>
-                        <td>3</td>
-                        <td>0</td>
-                        <td>0</td>
-                    </tr>
+                    {medicineList && medicineList.map((currentValue, index) =>
+                        <tr key={index} className="data-row">
+                            <td>{currentValue.uuid}</td>
+                            <td>{currentValue.name}</td>
+                            <td>{currentValue.numDailyDoses}</td>
+                            <td>{currentValue.quantityPerDose}</td>
+                            <td>{currentValue.formFactor}</td>
+                            <td>{currentValue.strength}</td>
+                            <td>{currentValue.strengthUnits}</td>
+                            <td>{currentValue.numDosesTaken}</td>
+                            <td>{currentValue.numDosesSkipped}</td>
+                            <td>{currentValue.numDosesSnoozed}</td>
+                        </tr>
+                    )}
                 </tbody>
             </Table>
         </div>
