@@ -22,6 +22,11 @@ const InfoPane = (props) => {
     useEffect(() => {
         setDateComponents(getDateComponents(date));
 
+        let datePicker = document.getElementById('datePicker');
+        if (datePicker) {
+            datePicker.valueAsDate = date;
+        }
+
         if (clickedAccount) {
             const dailyLog = getDailyLog(date);
             setDailyLog(dailyLog);
@@ -105,8 +110,14 @@ const InfoPane = (props) => {
                                     {dateComponents && <h5 className="datedisplay">{`${dateComponents.monthName} ${dateComponents.day}, ${dateComponents.year}`}</h5>}
                                 </Col>
                             </Row>
-                            <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>
-                            <Button variant="primary" onClick={handleMostRecentClick}>Most Recent</Button>
+                            <Row className="medtable-container">
+                                <Col xs={12}>
+                                    <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>
+                                </Col>
+                            </Row>
+                            <Row className="medtable-button-row">
+                                <Button variant="primary" onClick={handleMostRecentClick}>Most Recent</Button>
+                            </Row>
                         </Card.Body>
                     </Card>
                 </div>

@@ -11,3 +11,13 @@
 .datedisplay {
     margin-top: 30px !important;
 }
+
+.medtable-container {
+    height    : 42vh;
+    overflow-y: scroll;
+    border    : 1px solid lightgray;
+}
+
+.medtable-button-row {
+    margin: 1vh;
+}

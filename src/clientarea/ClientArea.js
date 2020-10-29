@@ -9,7 +9,7 @@ import './ClientArea.css';
 const ClientArea = (props) => {
     const { setAppHeight, signedInAccount } = props;
 
-    const navbarPadding = 60;
+    const navbarPadding = 30;
     const { innerHeight } = window
 
     const [clickedAccount, setClickedAccount] = useState();
