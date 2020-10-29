@@ -1,44 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
-
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
 
 import '../infopane/InfoPane.css';
 
 const MedTable = (props) => {
     const {
-        clickedAccount,
         medicineList,
     } = props;
 
-    const [date, setDate] = useState(new Date());
-
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
     useEffect(() => {
-        // alert(`date: ${date} - clickedAccount: ${clickedAccount.monthlyLog.month}`);
     })
-
-    const handleDateChange = (e) => {
-        let date = new Date(e.target.value);
-        setDate(date);
-    }
 
     return (
         <div>
-            <Row>
-                <Col xs={2}>
-                    <Form.Group controlId="medListDate">
-                        <Form.Label>Select Date</Form.Label>
-                        <Form.Control variant="info" type="date" onChange={(e) => handleDateChange(e)} />
-                    </Form.Group>
-                </Col>
-                <Col xs={3}>
-                    <h5 className="datedisplay">{`${months[date.getMonth()]} ${date.getUTCDate()}, ${date.getUTCFullYear()}`}</h5>
-                </Col>
-            </Row>
             <Table striped bordered hover size="sm" variant="light">
                 <thead>
                     <tr>
@@ -72,7 +46,6 @@ const MedTable = (props) => {
                 </tbody>
             </Table>
         </div>
-
     )
 }
 
