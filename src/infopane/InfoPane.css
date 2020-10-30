@@ -2,7 +2,6 @@
     margin         : 3px;
     align-items    : center;
     justify-content: center;
-    text-align     : center;
 }
 
 .cardheader {
@@ -19,14 +18,20 @@
     border    : 1px solid lightgray;
 }
 
+.medtable {
+    margin-top: -1px;
+}
+
 /** Fixed header with background */
 th {
     position: sticky;
-    top     : 0px;
+    top     : -1px;
     z-index : 100;
 }
 
-table>thead>tr>th {
+table>thead>tr>th,
+.table>thead>tr>td {
+    opacity   : 1;
     background: #51596a !important;
     color     : #ffffff !important;
 }

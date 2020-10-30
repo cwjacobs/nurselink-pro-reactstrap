@@ -13,9 +13,9 @@ const MedTable = (props) => {
 
     return (
         <div>
-            <Table responsive="sm" striped bordered hover size="sm" variant="light">
+            <Table className="medtable" responsive="sm" striped bordered hover size="sm" variant="light">
                 <thead>
-                    <tr>
+                    <tr style={{ textAlign: "center" }}>
                         <th style={{ paddingLeft: "0px" }}>Id</th>
                         <th style={{ paddingLeft: "0px" }}>Medicine</th>
                         <th>Doses/Day</th>
@@ -30,7 +30,7 @@ const MedTable = (props) => {
                 </thead>
                 <tbody>
                     {medicineList && medicineList.map((currentValue, index) =>
-                        <tr key={index} className="data-row">
+                        <tr style={{ textAlign: "center" }} key={index} className="data-row">
                             <td style={{ textAlign: "left", paddingLeft: "5px" }}>{currentValue.uuid}</td>
                             <td style={{ textAlign: "left", paddingLeft: "9px" }}>{currentValue.name}</td>
                             <td style={{ textAlign: "center", paddingLeft: "0px" }}>{currentValue.numDailyDoses}</td>

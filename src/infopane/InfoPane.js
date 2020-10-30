@@ -130,8 +130,8 @@ const InfoPane = (props) => {
                     <Card bg='light'>
                         <Card.Header as="h5" className={`${cardHeaderVariant} cardheader`}>{`Patient: ${clickedAccount.acctInfo.firstName} ${clickedAccount.acctInfo.lastName}`}</Card.Header>
                         <Card.Body>
-                            <Card.Title className="cardtitle">{infoPaneTitle}</Card.Title>
-                            <Card.Text>Select a date below for corresponding list of medications and daily adherence.</Card.Text>
+                            <Card.Title as="h4" className="cardtitle">{infoPaneTitle}</Card.Title>
+                            <Card.Text style={{ textAlign: "left" }}>Select a date below for corresponding list of medications and daily adherence.</Card.Text>
                             <Row>
                                 <Col xs={2}>
                                     <Form.Group controlId="medListDate">
