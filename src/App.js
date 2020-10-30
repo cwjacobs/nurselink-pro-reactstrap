@@ -37,9 +37,9 @@ class App extends React.Component {
   // }
 
   setAppHeight = (value) => {
-    this.setState({
-      appHeight: value,
-    })
+    // this.setState({
+    //   appHeight: value,
+    // })
   }
 
   setIsSignedIn = (value) => {
@@ -67,7 +67,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container id="appcontainer" fluid className="p-3 app" style={{ height: this.state.appHeight }}>
+      <Container id="appcontainer" fluid className="p-3 bg-dark app">
         {!this.state.isSignedIn && <div>
           <h1 className="header">Welcome To Medica360</h1>
           <SignIn setSignedInAccount={this.setSignedInAccount}></SignIn>

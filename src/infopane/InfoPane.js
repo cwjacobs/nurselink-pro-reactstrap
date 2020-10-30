@@ -128,7 +128,7 @@ const InfoPane = (props) => {
             {clickedAccount &&
                 <div>
                     <Card bg='light'>
-                        <Card.Header as="h5" className={`${cardHeaderVariant} cardheader`}>{`Patient: ${clickedAccount.acctInfo.firstName} ${clickedAccount.acctInfo.lastName}`}</Card.Header>
+                        <Card.Header as="h3" className={`${cardHeaderVariant} cardheader`}>{`Patient: ${clickedAccount.acctInfo.firstName} ${clickedAccount.acctInfo.lastName}`}</Card.Header>
                         <Card.Body>
                             <Card.Title as="h4" className="cardtitle">{infoPaneTitle}</Card.Title>
                             <Card.Text style={{ textAlign: "left" }}>Select a date below for corresponding list of medications and daily adherence.</Card.Text>

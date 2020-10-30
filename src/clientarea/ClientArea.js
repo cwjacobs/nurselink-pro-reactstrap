@@ -30,14 +30,16 @@ const ClientArea = (props) => {
     }, [innerHeight, setAppHeight, signedInAccount]);
 
     return (
-        <Row id="clientarea" className={"p-3"} style={{ height: clientAreaHeight }}>
-            <Col xs={2} className="bg-dark sidebar-layout">
-                <Sidebar signedInAccount={signedInAccount} setClickedAccount={setClickedAccount}></Sidebar>
-            </Col>
-            <Col xs={10} className="bg-dark infopane-layout">
-                <InfoPane clickedAccount={clickedAccount}></InfoPane>
-            </Col>
-        </Row>
+        <div className="clientArea">
+            <Row id="clientarea" className={"p-3"}>
+                <Col xs={2} className="bg-dark sidebar-layout">
+                    <Sidebar signedInAccount={signedInAccount} setClickedAccount={setClickedAccount}></Sidebar>
+                </Col>
+                <Col xs={10} className="bg-dark infopane-layout">
+                    <InfoPane clickedAccount={clickedAccount}></InfoPane>
+                </Col>
+            </Row>
+        </div>
     )
 }
 
