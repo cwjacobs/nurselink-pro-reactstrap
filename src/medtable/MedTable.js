@@ -13,11 +13,11 @@ const MedTable = (props) => {
 
     return (
         <div>
-            <Table className="" responsive="sm" striped bordered hover size="sm" variant="light">
+            <Table responsive="sm" striped bordered hover size="sm" variant="light">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Medicine</th>
+                        <th style={{ paddingLeft: "0px" }}>Id</th>
+                        <th style={{ paddingLeft: "0px" }}>Medicine</th>
                         <th>Doses/Day</th>
                         <th>Qty/Dose</th>
                         <th>Form Factor</th>
@@ -31,9 +31,9 @@ const MedTable = (props) => {
                 <tbody>
                     {medicineList && medicineList.map((currentValue, index) =>
                         <tr key={index} className="data-row">
-                            <td>{currentValue.uuid}</td>
-                            <td>{currentValue.name}</td>
-                            <td>{currentValue.numDailyDoses}</td>
+                            <td style={{ textAlign: "left", paddingLeft: "5px" }}>{currentValue.uuid}</td>
+                            <td style={{ textAlign: "left", paddingLeft: "9px" }}>{currentValue.name}</td>
+                            <td style={{ textAlign: "center", paddingLeft: "0px" }}>{currentValue.numDailyDoses}</td>
                             <td>{currentValue.quantityPerDose}</td>
                             <td>{currentValue.formFactor}</td>
                             <td>{currentValue.strength}</td>

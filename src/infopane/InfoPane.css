@@ -2,6 +2,7 @@
     margin         : 3px;
     align-items    : center;
     justify-content: center;
+    text-align     : center;
 }
 
 .cardheader {
@@ -25,8 +26,7 @@ th {
     z-index : 100;
 }
 
-table>thead>tr>th,
-table>thead>tr>td {
+table>thead>tr>th {
     background: #51596a !important;
     color     : #ffffff !important;
 }
