@@ -31,7 +31,6 @@ th {
 
 table>thead>tr>th,
 .table>thead>tr>td {
-    opacity   : 1;
     background: #51596a !important;
     color     : #ffffff !important;
 }
