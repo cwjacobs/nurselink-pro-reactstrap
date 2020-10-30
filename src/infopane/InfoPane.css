@@ -18,6 +18,25 @@
     border    : 1px solid lightgray;
 }
 
+/** Fixed header with background */
+th {
+    position: sticky;
+    top     : 0px;
+    z-index : 100;
+}
+
+table>thead>tr>th,
+table>thead>tr>td {
+    background: #51596a !important;
+    color     : #ffffff !important;
+}
+
+/**                             */
+
+.medtable-buttons {
+    width: 80%;
+}
+
 .medtable-button-row {
     margin: 1vh;
 }

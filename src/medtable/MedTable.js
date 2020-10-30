@@ -13,7 +13,7 @@ const MedTable = (props) => {
 
     return (
         <div>
-            <Table responsive="sm" striped bordered hover size="sm" variant="light">
+            <Table className="" responsive="sm" striped bordered hover size="sm" variant="light">
                 <thead>
                     <tr>
                         <th>Id</th>

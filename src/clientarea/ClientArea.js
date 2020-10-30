@@ -31,7 +31,7 @@ const ClientArea = (props) => {
 
     return (
         <Row id="clientarea" className={"p-3"} style={{ height: clientAreaHeight }}>
-            <Col xs={2} className="bg-info sidebar-layout">
+            <Col xs={2} className="bg-dark sidebar-layout">
                 <Sidebar signedInAccount={signedInAccount} setClickedAccount={setClickedAccount}></Sidebar>
             </Col>
             <Col xs={10} className="bg-dark infopane-layout">

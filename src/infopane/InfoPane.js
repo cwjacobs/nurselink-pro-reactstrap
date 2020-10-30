@@ -16,6 +16,18 @@ const InfoPane = (props) => {
     const [date, setDate] = useState(new Date());
     const [dailyLog, setDailyLog] = useState();
     const [dateComponents, setDateComponents] = useState();
+    const [infoPaneTitle, setInfoPaneTitle] = useState("Medicine Table");
+    const [cardHeaderVariant, setCardHeaderVariant] = useState("bg-info");
+    const [medTableButtonVariant, setMedTableButtonVariant] = useState("info");
+    const [adherenceButtonVariant, setAdherenceButtonVariant] = useState("outline-primary");
+    const [trendsButtonVariant, setTrendsButtonVariant] = useState("outline-success");
+
+    const medTableButtonSelected = "info";
+    const medTableButtonUnselected = "outline-info";
+    const adherenceButtonSelected = "primary";
+    const adherenceButtonUnselected = "outline-primary";
+    const trendsButtonSelected = "success";
+    const trendsButtonUnselected = "outline-success";
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -85,9 +97,30 @@ const InfoPane = (props) => {
 
         let date = new Date(mostRecentLog.logDate.date);
         setDate(date);
+    }
 
-        let datePicker = document.getElementById('datePicker');
-        datePicker.valueAsDate = date;
+    const displayMedicineTable = () => {
+        setInfoPaneTitle("Medicine Table");
+        setCardHeaderVariant("bg-info");
+        setMedTableButtonVariant(medTableButtonSelected);
+        setAdherenceButtonVariant(adherenceButtonUnselected);
+        setTrendsButtonVariant(trendsButtonUnselected);
+    }
+
+    const displayAdherenceChart = () => {
+        setInfoPaneTitle("Adherence");
+        setCardHeaderVariant("bg-primary");
+        setMedTableButtonVariant(medTableButtonUnselected);
+        setAdherenceButtonVariant(adherenceButtonSelected);
+        setTrendsButtonVariant(trendsButtonUnselected);
+    }
+
+    const displayTrendsChart = () => {
+        setInfoPaneTitle("Trends");
+        setCardHeaderVariant("bg-success");
+        setMedTableButtonVariant(medTableButtonUnselected);
+        setAdherenceButtonVariant(adherenceButtonUnselected);
+        setTrendsButtonVariant(trendsButtonSelected);
     }
 
     return (
@@ -95,9 +128,9 @@ const InfoPane = (props) => {
             {clickedAccount &&
                 <div>
                     <Card bg='light'>
-                        <Card.Header as="h5" className='bg-info cardheader'>{`Patient: ${clickedAccount.acctInfo.firstName} ${clickedAccount.acctInfo.lastName}`}</Card.Header>
+                        <Card.Header as="h5" className={`${cardHeaderVariant} cardheader`}>{`Patient: ${clickedAccount.acctInfo.firstName} ${clickedAccount.acctInfo.lastName}`}</Card.Header>
                         <Card.Body>
-                            <Card.Title>Drug Regimin</Card.Title>
+                            <Card.Title className="cardtitle">{infoPaneTitle}</Card.Title>
                             <Card.Text>Select a date below for corresponding list of medications and daily adherence.</Card.Text>
                             <Row>
                                 <Col xs={2}>
@@ -116,7 +149,18 @@ const InfoPane = (props) => {
                                 </Col>
                             </Row>
                             <Row className="medtable-button-row">
-                                <Button variant="primary" onClick={handleMostRecentClick}>Most Recent</Button>
+                                <Col xs={2}>
+                                    <Button className="medtable-buttons" variant="outline-secondary" onClick={handleMostRecentClick}>Most Recent</Button>
+                                </Col>
+                                <Col xs={2}>
+                                    <Button className="medtable-buttons" variant={medTableButtonVariant} onClick={displayMedicineTable}>Medicine Table</Button>
+                                </Col>
+                                <Col xs={2}>
+                                    <Button className="medtable-buttons" variant={adherenceButtonVariant} onClick={displayAdherenceChart}>Adherence</Button>
+                                </Col>
+                                <Col xs={2}>
+                                    <Button className="medtable-buttons" variant={trendsButtonVariant} onClick={displayTrendsChart}>Trends</Button>
+                                </Col>
                             </Row>
                         </Card.Body>
                     </Card>
