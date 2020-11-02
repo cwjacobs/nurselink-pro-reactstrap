@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
 import './AccountCard.css';
 
 const AccountCard = (props) => {
     const {
-        text,
         account,
         setClickedAccount,
+        sidebarButtonVariant,
     } = props;
 
-    const onClickHandler = () => {
+    const onClickHandler = (e) => {
         setClickedAccount(account);
     }
 
+    const getButtonText = () => {
+        return (`${account.acctInfo.firstName} ${account.acctInfo.lastName}`);
+    }
+
     return (
-        <Button variant="outline-info" className="bg-dark accountbtn" onClick={onClickHandler}>{text}</Button>
+        <Button id={`${account.acctInfo.firstName}-${account.acctInfo.lastName}`} variant={sidebarButtonVariant} className="accountbtn" onClick={(e) => onClickHandler(e)}>{getButtonText()}</Button>
     )
 }
 

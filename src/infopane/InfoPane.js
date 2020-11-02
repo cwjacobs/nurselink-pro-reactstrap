@@ -11,6 +11,8 @@ import { MedTable } from '../medtable/MedTable';
 const InfoPane = (props) => {
     const {
         clickedAccount,
+        setsidebarBackground,
+        setsidebarButtonVariant,
     } = props;
 
     const [date, setDate] = useState(new Date());
@@ -99,12 +101,24 @@ const InfoPane = (props) => {
         setDate(date);
     }
 
+    const setFocusColor = () => {
+        let id = `${clickedAccount.acctInfo.firstName}-${clickedAccount.acctInfo.lastName}`;
+        alert(`${id}`);
+
+        let button = document.getElementById(id);
+        button.disabled = true;
+    }
+
     const displayMedicineTable = () => {
         setInfoPaneTitle("Medicine Table");
         setCardHeaderVariant("bg-info");
         setMedTableButtonVariant(medTableButtonSelected);
         setAdherenceButtonVariant(adherenceButtonUnselected);
         setTrendsButtonVariant(trendsButtonUnselected);
+        setsidebarBackground("bg-info");
+        setsidebarButtonVariant(medTableButtonUnselected);
+
+        // setFocusColor();
     }
 
     const displayAdherenceChart = () => {
@@ -113,6 +127,8 @@ const InfoPane = (props) => {
         setMedTableButtonVariant(medTableButtonUnselected);
         setAdherenceButtonVariant(adherenceButtonSelected);
         setTrendsButtonVariant(trendsButtonUnselected);
+        setsidebarBackground("bg-primary");
+        setsidebarButtonVariant(adherenceButtonUnselected);
     }
 
     const displayTrendsChart = () => {
@@ -121,6 +137,8 @@ const InfoPane = (props) => {
         setMedTableButtonVariant(medTableButtonUnselected);
         setAdherenceButtonVariant(adherenceButtonUnselected);
         setTrendsButtonVariant(trendsButtonSelected);
+        setsidebarBackground("bg-success");
+        setsidebarButtonVariant(trendsButtonUnselected);
     }
 
     return (

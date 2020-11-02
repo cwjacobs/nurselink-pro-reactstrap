@@ -7,36 +7,22 @@ import { InfoPane } from '../infopane/InfoPane'
 import './ClientArea.css';
 
 const ClientArea = (props) => {
-    const { setAppHeight, signedInAccount } = props;
-
-    const navbarPadding = 30;
-    const { innerHeight } = window
+    const {
+        signedInAccount,
+    } = props;
 
     const [clickedAccount, setClickedAccount] = useState();
-    const [clientAreaHeight, setClientAreaHeight] = useState();
-
-    useEffect(() => {
-        let navbarElement = document.getElementById('navbar');
-        let minClientAreaHeight = innerHeight - (navbarElement.offsetHeight + navbarElement.offsetTop + navbarPadding);
-
-        let clientAreaElement = document.getElementById('clientarea');
-        let crntClientAreaHeight = clientAreaElement.clientHeight;
-
-        let clientAreaHeight = crntClientAreaHeight < minClientAreaHeight ? minClientAreaHeight : crntClientAreaHeight;
-        setClientAreaHeight(clientAreaHeight);
-
-        let crntAppHeight = clientAreaHeight + (navbarElement.offsetHeight + navbarElement.offsetTop + navbarPadding)
-        setAppHeight(crntAppHeight);
-    }, [innerHeight, setAppHeight, signedInAccount]);
+    const [sidebarBackground, setsidebarBackground] = useState("bg-info");
+    const [sidebarButtonVariant, setsidebarButtonVariant] = useState("outline-info");
 
     return (
         <div className="clientArea">
             <Row id="clientarea" className={"p-3"}>
                 <Col xs={2} className="bg-dark sidebar-layout">
-                    <Sidebar signedInAccount={signedInAccount} setClickedAccount={setClickedAccount}></Sidebar>
+                    <Sidebar signedInAccount={signedInAccount} setClickedAccount={setClickedAccount} sidebarButtonVariant={sidebarButtonVariant}></Sidebar>
                 </Col>
                 <Col xs={10} className="bg-dark infopane-layout">
-                    <InfoPane clickedAccount={clickedAccount}></InfoPane>
+                    <InfoPane clickedAccount={clickedAccount} setsidebarBackground={setsidebarBackground} setsidebarButtonVariant={setsidebarButtonVariant}></InfoPane>
                 </Col>
             </Row>
         </div>

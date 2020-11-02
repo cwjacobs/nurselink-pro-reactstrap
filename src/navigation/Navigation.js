@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 
 const Navigation = (props) => {
     return (
-        <Navbar id="navbar" bg="dark" variant="dark">
+        <Navbar id="navbar" bg="secondary" variant="dark">
             <Navbar.Brand href="#home">Medica360</Navbar.Brand>
             <Nav className="mr-auto">
                 <Nav.Link href="#home">Home</Nav.Link>
@@ -15,7 +15,7 @@ const Navigation = (props) => {
             </Nav>
             <Form inline>
                 {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-                <Button variant="outline-info">Search</Button>
+                <Button variant="outline-light">Search</Button>
             </Form>
         </Navbar>
     );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
+
 import { getNurseLinkAcct } from '../conn/nlFirestore'
 import { AccountCard } from '../accountcard/AccountCard';
 
@@ -9,6 +10,7 @@ const Sidebar = (props) => {
     const {
         signedInAccount,
         setClickedAccount,
+        sidebarButtonVariant,
     } = props;
 
     const sidebarAccounts = [];
@@ -57,7 +59,7 @@ const Sidebar = (props) => {
         <Row>
             <div className="sidebar-content">
                 {managedAccounts.map((currentValue, index) =>
-                    <AccountCard key={index} text={getAccountLabel(currentValue)} account={currentValue} setClickedAccount={setClickedAccount} />
+                    <AccountCard key={index} account={currentValue} setClickedAccount={setClickedAccount} sidebarButtonVariant={sidebarButtonVariant} />
                 )}
             </div>
         </Row>
