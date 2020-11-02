@@ -4,9 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import { Bar } from 'react-chartjs-2';
 
 import './InfoPane.css';
 import { MedTable } from '../medtable/MedTable';
+
+import * as utils from '../utilities/utils';
 
 const InfoPane = (props) => {
     const {
@@ -14,6 +17,7 @@ const InfoPane = (props) => {
         setsidebarBackground,
         setsidebarButtonVariant,
     } = props;
+
 
     const [date, setDate] = useState(new Date());
     const [dailyLog, setDailyLog] = useState();
@@ -23,6 +27,11 @@ const InfoPane = (props) => {
     const [medTableButtonVariant, setMedTableButtonVariant] = useState("info");
     const [adherenceButtonVariant, setAdherenceButtonVariant] = useState("outline-primary");
     const [trendsButtonVariant, setTrendsButtonVariant] = useState("outline-success");
+
+    const [dataSets, setDataSets] = useState({
+        labels: [],
+        datasets: [],
+    });
 
     const medTableButtonSelected = "info";
     const medTableButtonUnselected = "outline-info";
@@ -44,7 +53,16 @@ const InfoPane = (props) => {
         if (clickedAccount) {
             const dailyLog = getDailyLog(date);
             setDailyLog(dailyLog);
+
+            if (dailyLog) {
+                const dataSets = getChartData(date);
+                setDataSets({
+                    labels: dataSets.labels,
+                    datasets: dataSets.values,
+                });
+            }
         }
+
     }, [clickedAccount, date]);
 
     const sortDailyLogs = () => {
@@ -62,9 +80,9 @@ const InfoPane = (props) => {
         return sortedDailyLogs;
     }
 
-    const getDailyLog = (date) => {
+    const getDailyLog = (selectedDate = date) => {
         let matchingDailyLog = null;
-        let dc = getDateComponents(date);
+        let dc = getDateComponents(selectedDate);
 
         for (let dailyLog of clickedAccount.monthlyLog.dailyLogs) {
             if (dailyLog.logDate.day === dc.day
@@ -87,8 +105,26 @@ const InfoPane = (props) => {
         return dateComponents;
     }
 
-    const handleDateChange = (e) => {
-        let date = new Date(e.target.value);
+    /// Used when "Most Recent" btn is clicked
+    const getChartData = (selectedDate = date) => {
+        let dataSets = {
+            labels: [],
+            datasets: [],
+        }
+
+        let dailyLog = getDailyLog(selectedDate);
+        if (dailyLog) {
+            // let date = new Date(dailyLog.logDate.date);
+            // let doses = utils.getDailyDoses(dailyLog);
+
+            let sortedLogs = sortDailyLogs();
+            dataSets = utils.getDatasets(selectedDate, sortedLogs, 7 /*this.state.numRangeDays*/);
+        }
+        return dataSets;
+    }
+
+    const handleDateChange = (event) => {
+        let date = new Date(event.target.value);
         setDate(date);
     }
 
@@ -99,14 +135,9 @@ const InfoPane = (props) => {
 
         let date = new Date(mostRecentLog.logDate.date);
         setDate(date);
-    }
 
-    const setFocusColor = () => {
-        let id = `${clickedAccount.acctInfo.firstName}-${clickedAccount.acctInfo.lastName}`;
-        alert(`${id}`);
-
-        let button = document.getElementById(id);
-        button.disabled = true;
+        let datePicker = document.getElementById("datePicker");
+        datePicker.value = date;
     }
 
     const displayMedicineTable = () => {
@@ -129,6 +160,12 @@ const InfoPane = (props) => {
         setTrendsButtonVariant(trendsButtonUnselected);
         setsidebarBackground("bg-primary");
         setsidebarButtonVariant(adherenceButtonUnselected);
+
+        let dataSets = getChartData();
+        setDataSets({
+            labels: dataSets.labels,
+            datasets: dataSets.values,
+        });
     }
 
     const displayTrendsChart = () => {
@@ -154,7 +191,7 @@ const InfoPane = (props) => {
                                 <Col xs={2}>
                                     <Form.Group controlId="medListDate">
                                         <Form.Label>Select Date</Form.Label>
-                                        <Form.Control id="datePicker" type="date" onChange={(e) => handleDateChange(e)} />
+                                        <Form.Control id="datePicker" type="date" onChange={(event) => handleDateChange(event)} />
                                     </Form.Group>
                                 </Col>
                                 <Col xs={3}>
@@ -163,9 +200,19 @@ const InfoPane = (props) => {
                             </Row>
                             <Row className="medtable-container">
                                 <Col xs={12}>
-                                    <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>
+                                    {(medTableButtonVariant === medTableButtonSelected ? true : false) && <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>}
+                                    {(adherenceButtonVariant === adherenceButtonSelected ? true : false) && <Bar data={dataSets} options={{
+                                        maintainAspectRatio: false,
+                                    }}>
+                                    </Bar>}
+                                    {(trendsButtonVariant === trendsButtonSelected ? true : false) && <p>Trends</p>}
                                 </Col>
                             </Row>
+                            {/* <Row className="medtable-container">
+                                <Col xs={12}>
+                                    <Chart></Chart>
+                                </Col>
+                            </Row> */}
                             <Row className="medtable-button-row">
                                 <Col xs={2}>
                                     <Button className="medtable-buttons" variant="outline-secondary" onClick={handleMostRecentClick}>Most Recent</Button>
