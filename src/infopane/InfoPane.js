@@ -54,13 +54,11 @@ const InfoPane = (props) => {
             const dailyLog = getDailyLog(date);
             setDailyLog(dailyLog);
 
-            if (dailyLog) {
-                const dataSets = getChartData(date);
-                setDataSets({
-                    labels: dataSets.labels,
-                    datasets: dataSets.values,
-                });
-            }
+            const dataSets = getChartData(date, dailyLog);
+            setDataSets({
+                labels: dataSets.labels,
+                datasets: dataSets.values,
+            });
         }
 
     }, [clickedAccount, date]);
@@ -80,6 +78,7 @@ const InfoPane = (props) => {
         return sortedDailyLogs;
     }
 
+    // Returns requested date's daily log, or null if no matching log exists
     const getDailyLog = (selectedDate = date) => {
         let matchingDailyLog = null;
         let dc = getDateComponents(selectedDate);
@@ -106,17 +105,13 @@ const InfoPane = (props) => {
     }
 
     /// Used when "Most Recent" btn is clicked
-    const getChartData = (selectedDate = date) => {
+    const getChartData = (selectedDate, selectedLog) => {
         let dataSets = {
             labels: [],
             datasets: [],
         }
 
-        let dailyLog = getDailyLog(selectedDate);
-        if (dailyLog) {
-            // let date = new Date(dailyLog.logDate.date);
-            // let doses = utils.getDailyDoses(dailyLog);
-
+        if (selectedLog) {
             let sortedLogs = sortDailyLogs();
             dataSets = utils.getDatasets(selectedDate, sortedLogs, 7 /*this.state.numRangeDays*/);
         }
@@ -124,7 +119,8 @@ const InfoPane = (props) => {
     }
 
     const handleDateChange = (event) => {
-        let date = new Date(event.target.value);
+        let dc = getDateComponents(new Date(event.target.value)); // For some reason, if event.target.value is passed to new Date, the date returned is one day earlier
+        let date = new Date(dc.year, dc.month, dc.day);
         setDate(date);
     }
 
@@ -161,7 +157,7 @@ const InfoPane = (props) => {
         setsidebarBackground("bg-primary");
         setsidebarButtonVariant(adherenceButtonUnselected);
 
-        let dataSets = getChartData();
+        let dataSets = getChartData(date, dailyLog);
         setDataSets({
             labels: dataSets.labels,
             datasets: dataSets.values,
