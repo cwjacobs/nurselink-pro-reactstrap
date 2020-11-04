@@ -19,7 +19,6 @@ const InfoPane = (props) => {
         setsidebarButtonVariant,
     } = props;
 
-
     const [date, setDate] = useState(new Date());
     const [dailyLog, setDailyLog] = useState();
     const [dateComponents, setDateComponents] = useState();
@@ -28,6 +27,8 @@ const InfoPane = (props) => {
     const [medTableButtonVariant, setMedTableButtonVariant] = useState("info");
     const [adherenceButtonVariant, setAdherenceButtonVariant] = useState("outline-primary");
     const [trendsButtonVariant, setTrendsButtonVariant] = useState("outline-success");
+    const [yLower, setYLower] = useState(100);
+
 
     const [dataSets, setDataSets] = useState({
         labels: [],
@@ -119,6 +120,11 @@ const InfoPane = (props) => {
         return dataSets;
     }
 
+    const setLowerY = () => {
+        let lower = yLower === 100 ? 0 : 100;
+        setYLower(lower);
+    }
+
     const handleDateChange = (event) => {
         let dc = getDateComponents(new Date(event.target.value)); // For some reason, if event.target.value is passed to new Date, the date returned is one day earlier
         let date = new Date(dc.year, dc.month, dc.day);
@@ -208,7 +214,7 @@ const InfoPane = (props) => {
                                         </Bar>}
 
                                     {(trendsButtonVariant === trendsButtonSelected ? true : false)
-                                        && <Trends className="trends" chartData={dataSets}></Trends>}
+                                        && <Trends className="trends" chartData={dataSets} yLower={yLower}></Trends>}
                                 </Col>
                             </Row>
                             <Row className="medtable-button-row">
@@ -221,8 +227,15 @@ const InfoPane = (props) => {
                                 <Col xs={2}>
                                     <Button className="medtable-buttons" variant={adherenceButtonVariant} onClick={displayAdherenceChart}>Adherence</Button>
                                 </Col>
-                                <Col xs={2}>
-                                    <Button className="medtable-buttons" variant={trendsButtonVariant} onClick={displayTrendsChart}>Trends</Button>
+                                <Col xs={3}>
+                                    <Row>
+                                        <Col xs={8}>
+                                            <Button className="medtable-buttons" variant={trendsButtonVariant} onClick={displayTrendsChart}>Trends</Button>
+                                        </Col>
+                                        <Col xs={5} style={{ marginLeft: "-3.8vw" }}>
+                                            <Button disabled={trendsButtonVariant === trendsButtonUnselected ? true : false} variant={trendsButtonUnselected} onClick={setLowerY}> y </Button>
+                                        </Col>
+                                    </Row>
                                 </Col>
                             </Row>
                         </Card.Body>

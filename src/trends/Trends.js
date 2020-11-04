@@ -22,7 +22,6 @@ function Trends(props) {
   const standardize = 'Standardize';
   const standardized = 'Standardized';
 
-  const [yLower, setYLower] = useState(100);
   const [dataViewLabel, setDataViewlabel] = useState(normalized);
   const [dataViewBtnLabel, setDataViewBtnlabel] = useState(standardize);
 
@@ -228,7 +227,7 @@ function Trends(props) {
             yAxes: [{
               display: true,
               ticks: {
-                suggestedMin: yLower,
+                suggestedMin: props.yLower,
                 suggestedMax: 100,
               }
             }],
