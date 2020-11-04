@@ -5,7 +5,7 @@
   border-style   : outset;
 }
 
-.login-form {
+.signin-form {
   color              : black;
   background-color   : white;
   margin             : 20px;
@@ -14,6 +14,11 @@
   width              : 40%;
   /* min-width       : 30%; */
   border-radius      : 10px;
+}
+
+.signin-button {
+  margin-top   : 2vh;
+  margin-bottom: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {

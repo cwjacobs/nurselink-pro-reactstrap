@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import Spinner from 'react-bootstrap/Spinner';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 import { firebaseLogin, getNurseLinkAcct } from '../conn/nlFirestore'
 
@@ -11,6 +15,7 @@ const SignIn = (props) => {
   const [email, setEmail] = useState("holderman.john@gmail.com");
   const [password, setPassword] = useState("firebase");
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleShowPassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -28,6 +33,8 @@ const SignIn = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setIsLoggingIn(true);
+
     firebaseLogin(email, password)
       .then(() => {
         let key = email;
@@ -47,7 +54,7 @@ const SignIn = (props) => {
 
   return (
     <Jumbotron className="bg-info jumbo">
-      <div className="login-form mx-auto">
+      <div className="signin-form mx-auto">
         <h1 style={{ marginBottom: 0.5 + 'em' }}>Sign In</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="formBasicEmail">
@@ -64,7 +71,12 @@ const SignIn = (props) => {
           <Form.Group className="info" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Show Password" onClick={handleShowPassword} />
           </Form.Group>
-          <Button variant="outline-info" type="submit">Submit</Button>
+          <Row>
+            <Col xs={4}>
+              <Button variant="outline-info" className="signin-button" style={{ paddingLeft: "2vw", paddingRight: "2vw" }} type="submit" disabled={isLoggingIn}>Submit</Button>
+            </Col>
+            {isLoggingIn && <Spinner variant="info" className="signin-button" animation="border" size="md" />}
+          </Row>
         </Form>
       </div>
     </Jumbotron>
