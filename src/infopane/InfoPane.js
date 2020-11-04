@@ -8,6 +8,7 @@ import { Bar } from 'react-chartjs-2';
 
 import './InfoPane.css';
 import { MedTable } from '../medtable/MedTable';
+import { Trends } from '../trends/Trends';
 
 import * as utils from '../utilities/utils';
 
@@ -182,7 +183,7 @@ const InfoPane = (props) => {
                         <Card.Header as="h3" className={`${cardHeaderVariant} cardheader`}>{`Patient: ${clickedAccount.acctInfo.firstName} ${clickedAccount.acctInfo.lastName}`}</Card.Header>
                         <Card.Body>
                             <Card.Title as="h4" className="cardtitle">{infoPaneTitle}</Card.Title>
-                            <Card.Text style={{ textAlign: "left" }}>Select a date below for corresponding list of medications and daily adherence.</Card.Text>
+                            {/* <Card.Text style={{ textAlign: "left" }}>Select a date below for corresponding list of medications and daily adherence.</Card.Text> */}
                             <Row>
                                 <Col xs={2}>
                                     <Form.Group controlId="medListDate">
@@ -196,19 +197,20 @@ const InfoPane = (props) => {
                             </Row>
                             <Row className="medtable-container">
                                 <Col xs={12}>
-                                    {(medTableButtonVariant === medTableButtonSelected ? true : false) && <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>}
-                                    {(adherenceButtonVariant === adherenceButtonSelected ? true : false) && <Bar data={dataSets} options={{
-                                        maintainAspectRatio: false,
-                                    }}>
-                                    </Bar>}
-                                    {(trendsButtonVariant === trendsButtonSelected ? true : false) && <p>Trends</p>}
+                                    {(medTableButtonVariant === medTableButtonSelected ? true : false)
+                                        && <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>}
+
+                                    {(adherenceButtonVariant === adherenceButtonSelected ? true : false)
+                                        && <Bar data={dataSets} options={{
+                                            // responsive: true,
+                                            maintainAspectRatio: false,
+                                        }}>
+                                        </Bar>}
+
+                                    {(trendsButtonVariant === trendsButtonSelected ? true : false)
+                                        && <Trends className="trends" chartData={dataSets}></Trends>}
                                 </Col>
                             </Row>
-                            {/* <Row className="medtable-container">
-                                <Col xs={12}>
-                                    <Chart></Chart>
-                                </Col>
-                            </Row> */}
                             <Row className="medtable-button-row">
                                 <Col xs={2}>
                                     <Button className="medtable-buttons" variant="outline-secondary" onClick={handleMostRecentClick}>Most Recent</Button>

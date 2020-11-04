@@ -28,20 +28,6 @@ class App extends React.Component {
     })
   }
 
-  // componentDidUpdate = () => {
-  //   if (this.state.appHeight !== innerHeight) {
-  //     this.setState({
-  //       appHeight: innerHeight,
-  //     })
-  //   }
-  // }
-
-  setAppHeight = (value) => {
-    // this.setState({
-    //   appHeight: value,
-    // })
-  }
-
   setIsSignedIn = (value) => {
     this.setState({
       isSignedIn: value,
@@ -61,10 +47,6 @@ class App extends React.Component {
     })
   }
 
-  signOutHandler = () => {
-    this.setIsSignedIn(false);
-  }
-
   render() {
     return (
       <Container id="appcontainer" fluid className="p-3 bg-dark app">
@@ -74,9 +56,8 @@ class App extends React.Component {
         </div>
         }
         {this.state.isSignedIn && <div>
-          <Navigation></Navigation>
-          <ClientArea setAppHeight={this.setAppHeight} signedInAccount={this.state.signedInAccount} setClickedAccount={this.setClickedAccount}></ClientArea>
-          <Button variant="outline-info" type="button" onClick={this.signOutHandler}>Sign Out</Button>
+          <Navigation setIsSignedIn={this.setIsSignedIn}></Navigation>
+          <ClientArea signedInAccount={this.state.signedInAccount} setClickedAccount={this.setClickedAccount}></ClientArea>
         </div>
         }
       </Container>

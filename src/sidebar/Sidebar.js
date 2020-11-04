@@ -24,7 +24,17 @@ const Sidebar = (props) => {
     useEffect(() => {
         if (managedAccounts.length < accountKeys.length) {
             getAccounts(accountKeys).then(() => {
+                // let accounts = sidebarAccounts.concat(sidebarAccounts);
+                // accounts = sidebarAccounts.concat(accounts);
+                // accounts = sidebarAccounts.concat(accounts);
+                // accounts = sidebarAccounts.concat(accounts);
+                // accounts = sidebarAccounts.concat(accounts);
+                // accounts = sidebarAccounts.concat(accounts);
+                // accounts = sidebarAccounts.concat(accounts);
+                // accounts = sidebarAccounts.concat(accounts);
+                // accounts = sidebarAccounts.concat(accounts);
                 setManagedAccounts([...sidebarAccounts]);
+
             });
         }
     });
@@ -50,10 +60,6 @@ const Sidebar = (props) => {
             }
         });
     };
-
-    const getAccountLabel = (account) => {
-        return (`${account.acctInfo.firstName} ${account.acctInfo.lastName}`);
-    }
 
     return (
         <Row>
