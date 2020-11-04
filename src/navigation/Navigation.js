@@ -21,8 +21,8 @@ const Navigation = (props) => {
             </Nav>
             <Form inline>
                 {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
-                <Button className="nav-button" variant="outline-light">Search</Button>
-                <Button className="nav-button" style={{ marginRight: 0 }} variant="outline-warning" onClick={signOutHandler}>Sign Out</Button>
+                <Button style={{ paddingLeft: "2vw", paddingRight: "2vw", marginRight: "2vw" }} variant="outline-light">Search</Button>
+                <Button style={{ paddingLeft: "1.5vw", paddingRight: "1.5vw" }} variant="outline-warning" onClick={signOutHandler}>Sign Out</Button>
             </Form>
         </Navbar>
     );
