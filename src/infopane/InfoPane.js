@@ -4,6 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
+import Table from 'react-bootstrap/Table';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+
 import { Bar } from 'react-chartjs-2';
 
 import './InfoPane.css';
@@ -30,6 +35,7 @@ const InfoPane = (props) => {
     const [yLower, setYLower] = useState(100);
     const [numDays, setNumDays] = useState(7);
     const [durationLabel, setDurationLabel] = useState("View Month");
+    const [isAddingMed, setIsAddingMed] = useState(false);
     const [dataSets, setDataSets] = useState({
         labels: [],
         datasets: [],
@@ -118,6 +124,15 @@ const InfoPane = (props) => {
             dataSets = utils.getDatasets(selectedDate, sortedLogs, selectedDays);
         }
         return dataSets;
+    }
+
+    const addMedicine = () => {
+        // alert(`addMedicine`);
+        setIsAddingMed(true);
+    }
+
+    const closeModal = () => {
+        setIsAddingMed(false);
     }
 
     const setLowerY = () => {
@@ -232,12 +247,67 @@ const InfoPane = (props) => {
                                         && <Trends className="trends" chartData={dataSets} yLower={yLower}></Trends>}
                                 </Col>
                             </Row>
+                            <Modal size="xl" centered show={isAddingMed}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title>Add Medicine</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body>
+                                    {/* <h4>Centered Modal</h4> */}
+                                    <Table className="medtable" responsive="sm" striped bordered hover size="sm" variant="light">
+                                        <thead>
+                                            <tr style={{ textAlign: "center" }}>
+                                                <th style={{ textAlign: "center" }}>Id</th>
+                                                <th style={{ textAlign: "left", paddingLeft: "14px", width: "40%" }}>Medicine</th>
+                                                <th>Doses/Day</th>
+                                                <th>Qty/Dose</th>
+                                                <th>Form Factor</th>
+                                                <th>Strength</th>
+                                                <th>Units</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr style={{ textAlign: "center" }} className="data-row">
+                                                <td style={{ textAlign: "left", paddingLeft: "9px" }}>uuid</td>
+                                                <td style={{ textAlign: "left" }}>
+                                                    <InputGroup><FormControl placeholder="Medicine"></FormControl></InputGroup>
+                                                </td>
+                                                <td style={{ textAlign: "center" }}>
+                                                    <InputGroup><FormControl placeholder="Doses/Day"></FormControl></InputGroup>
+                                                </td>
+                                                <td style={{ textAlign: "center" }}>
+                                                    <InputGroup><FormControl placeholder="Qty/Dose"></FormControl></InputGroup>
+                                                </td>
+                                                <td style={{ textAlign: "center" }}>
+                                                    <InputGroup><FormControl placeholder="Form Factor"></FormControl></InputGroup>
+                                                </td>
+                                                <td style={{ textAlign: "center" }}>
+                                                    <InputGroup><FormControl placeholder="Strength"></FormControl></InputGroup>
+                                                </td>
+                                                <td style={{ textAlign: "center" }}>
+                                                    <InputGroup><FormControl placeholder="Units"></FormControl></InputGroup>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant={"outline-info"} onClick={closeModal}>Cancel</Button>
+                                    <Button variant={"info"} onClick={closeModal}>Save</Button>
+                                </Modal.Footer>
+                            </Modal>
                             <Row className="medtable-button-row">
                                 <Col xs={2}>
                                     <Button className="medtable-buttons" variant="outline-secondary" onClick={handleMostRecentClick}>Most Recent</Button>
                                 </Col>
-                                <Col xs={2}>
-                                    <Button className="medtable-buttons" variant={medTableButtonVariant} onClick={displayMedicineTable}>Medicine Table</Button>
+                                <Col xs={3}>
+                                    <Row>
+                                        <Col xs={8}>
+                                            <Button className="medtable-buttons" variant={medTableButtonVariant} onClick={displayMedicineTable}>Medicine Table</Button>
+                                        </Col>
+                                        <Col xs={5} style={{ marginLeft: "-3.8vw" }}>
+                                            <Button disabled={medTableButtonVariant === medTableButtonUnselected ? true : false} variant={medTableButtonUnselected} onClick={addMedicine}> + </Button>
+                                        </Col>
+                                    </Row>
                                 </Col>
                                 <Col xs={2}>
                                     <Button className="medtable-buttons" variant={adherenceButtonVariant} onClick={displayAdherenceChart}>Adherence</Button>
@@ -253,7 +323,7 @@ const InfoPane = (props) => {
                                     </Row>
                                 </Col>
                                 <Col xs={2}>
-                                    <Button className="medtable-buttons" variant={"outline-dark"} onClick={toggleDuration}>{durationLabel}</Button>
+                                    <Button className="medtable-buttons" variant={"warning"} onClick={toggleDuration} disabled={medTableButtonVariant === medTableButtonUnselected ? false : true} >{durationLabel}</Button>
                                 </Col>
                             </Row>
                         </Card.Body>
