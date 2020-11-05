@@ -171,32 +171,53 @@ export const getDailyDoses = (dailyLog) => {
 }
 
 /// Generate list of daily logs matching days in selected range
-const getRangeData = (selectedDate, sortedMonthlyLogs, numDaysSelected = 7) => {
-    // dataPoint = { label: null, dailyLog: {}, }
-
+const getWeekRangeData = (selectedDate, sortedMonthlyLogs, numDaysSelected) => {
     const weekDays = [`Sun`, `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`];
-    const monthDays = [`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`,
-        `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`, `31`,];
-
     let rangeData = [];
 
     const day = selectedDate.getDate();
     const year = selectedDate.getFullYear();
     const month = selectedDate.getMonth();
-    for (let i = 0; i < (numDaysSelected); i++) {
+    for (let i = day; i < (day + numDaysSelected); i++) {
         let dataPoint = {};
         let date = new Date(year, month, i);
         let weekDay = date.getDay();
-        if (numDaysSelected <= 7) {
-            dataPoint.label = `${weekDays[weekDay]} ${date.getMonth() + 1}-${date.getDate()}`;
-        }
-        else {
-            dataPoint.label = `${monthDays[i]}`;
-        }
+        dataPoint.label = `${weekDays[weekDay]} ${date.getMonth() + 1}-${date.getDate()}`;
+
         dataPoint.dailyLog = getDailyLog(sortedMonthlyLogs, date);
         rangeData.push(dataPoint);
     }
+    return rangeData;
+}
 
+const getMonthRangeData = (selectedDate, sortedMonthlyLogs, numDaysSelected) => {
+    const monthDays = [`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`,
+        `16`, `17`, `18`, `19`, `20`, `21`, `22`, `23`, `24`, `25`, `26`, `27`, `28`, `29`, `30`, `31`,];
+    let rangeData = [];
+
+    const day = selectedDate.getDate();
+    const year = selectedDate.getFullYear();
+    const month = selectedDate.getMonth();
+    for (let i = 0; i < numDaysSelected; i++) {
+        let dataPoint = {};
+        let date = new Date(year, month, i);
+        let weekDay = date.getDay();
+        dataPoint.label = `${monthDays[i]}`;
+
+        dataPoint.dailyLog = getDailyLog(sortedMonthlyLogs, date);
+        rangeData.push(dataPoint);
+    }
+    return rangeData;
+}
+
+const getRangeData = (selectedDate, sortedMonthlyLogs, numDaysSelected = 7) => {
+    let rangeData;
+    if (numDaysSelected <= 7) {
+        rangeData = getWeekRangeData(selectedDate, sortedMonthlyLogs, numDaysSelected);
+    }
+    else {
+        rangeData = getMonthRangeData(selectedDate, sortedMonthlyLogs, numDaysSelected);
+    }
     return rangeData;
 }
 
