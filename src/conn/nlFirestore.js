@@ -68,7 +68,7 @@ export function getNurseLinkAcct(key) {
     });
 }
 
-export function saveNurseLinkAcct(nlAccount) {
+export function saveNurseLinkAcctData(nlAccount) {
     return new Promise((resolve, reject) => {
         let nlAccountJson = JSON.stringify(nlAccount);
         firestore.collection(nlAccount.key).doc("account").set({ json: nlAccountJson })
@@ -81,7 +81,7 @@ export function saveNurseLinkAcct(nlAccount) {
     })
 };
 
-export function deleteNurseLinkAcct(key) {
+export function deleteNurseLinkAcctData(key) {
     return new Promise((resolve, reject) => {
         firestore.collection(key).doc("account").set({ json: "" })
             .then(() => {

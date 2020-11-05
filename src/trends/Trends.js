@@ -4,26 +4,14 @@ import { Line } from 'react-chartjs-2';
 import * as utils from '../utilities/utils';
 
 function Trends(props) {
-  // const {
-  //   setIsAdherence,
-  //   crntAccount,
-  //   chartData,
-  //   crntDate,
-  //   updateChartData,
-  //   setNumRangeDays,
-  //   handleDateChange,
-  // } = props;
 
-  const weekDayRange = 7;
-  const monthDayRange = 30;
+  // const normalize = 'Normalize';
+  // const normalized = 'Normalized';
+  // const standardize = 'Standardize';
+  // const standardized = 'Standardized';
 
-  const normalize = 'Normalize';
-  const normalized = 'Normalized';
-  const standardize = 'Standardize';
-  const standardized = 'Standardized';
-
-  const [dataViewLabel, setDataViewlabel] = useState(normalized);
-  const [dataViewBtnLabel, setDataViewBtnlabel] = useState(standardize);
+  // const [dataViewLabel, setDataViewlabel] = useState(normalized);
+  // const [dataViewBtnLabel, setDataViewBtnlabel] = useState(standardize);
 
   const Trend_Formula = {
     // Creates trend lines from the passed in adherence data
@@ -213,11 +201,6 @@ function Trends(props) {
       borderWidth: 2,
     },
   ]
-
-  const getTrendDurationLabel = () => {
-    let duration = props.chartData.labels.length === weekDayRange ? 'Week' : 'Month';
-    return duration;
-  }
 
   return (
     <div>

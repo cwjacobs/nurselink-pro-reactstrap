@@ -6,8 +6,8 @@ import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-
 import { firebaseLogin, getNurseLinkAcct } from '../conn/nlFirestore'
+import { deleteTestData, installTestData } from '../test/test-data'
 
 import './SignIn.css';
 
@@ -78,6 +78,23 @@ const SignIn = (props) => {
             {isLoggingIn && <Spinner variant="info" className="signin-button" animation="border" size="md" />}
           </Row>
         </Form>
+      </div>
+      <div style={{ border: "1px solid gray", padding: "6px", width: "22vw", marginTop: "10vh" }}>
+        <h5>Dev</h5>
+        <Row>
+          <Col xs={6}>
+            <Button variant={"outline-secondary"} onClick={async () => {
+              await deleteTestData();
+              alert(`Test Data Deleted`);
+            }}>Delete Test Data</Button>
+          </Col>
+          <Col xs={6}>
+            <Button variant={"outline-light"} onClick={async () => {
+              await installTestData();
+              alert(`Test Data Installed`);
+            }}>Install Test Data</Button>
+          </Col>
+        </Row>
       </div>
     </Jumbotron>
   );

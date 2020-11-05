@@ -1,0 +1,546 @@
+{
+    "acctInfo": {
+        "key": "cwjacobs@gmail.com",
+        "email": "cwjacobs@gmail.com",
+        "firstName": "Craig",
+        "lastName": "Jacobs",
+        "displayName": "Craig",
+        "phoneNumber": "646.919.0840",
+        "signUpDate": "2020-05-25T11: 44: 10.858Z"
+    },
+    "user": {
+        "acctInfo": {
+            "key": "cwjacobs@gmail.com",
+            "email": "cwjacobs@gmail.com",
+            "firstName": "Craig",
+            "lastName": "Jacobs",
+            "displayName": "Craig",
+            "phoneNumber": "646.919.0840",
+            "signUpDate": "2020-05-25T11: 44: 10.858Z"
+        },
+        "myCabinet": {
+            "dailyLog": null,
+            "medicineList": []
+        },
+        "myAccountSharedTo": [
+            {
+                "acctKey": "holderman.john@gmail.com",
+                "displayName": "Jonny",
+                "isAdmin": false
+            },
+            {
+                "acctKey": "dillig89@gmail.com",
+                "displayName": "Daniel",
+                "isAdmin": true
+            }
+        ],
+        "accountsSharedToMe": [
+            {
+                "acctKey": "holderman.john@gmail.com",
+                "displayName": "Jonny",
+                "isAdmin": true
+            },
+            {
+                "acctKey": "dillig89@gmail.com",
+                "displayName": "Daniel",
+                "isAdmin": true
+            }
+        ],
+        "acctKey": "cwjacobs@gmail.com",
+        "hasMedicineCabinet": true
+    },
+    "isModified": false,
+    "monthlyLog": {
+        "dailyLogs": [
+            {
+                "dosesTaken": [
+                    {
+                        "uuid": "6514",
+                        "timeStamp": "2020-04-21T04: 00: 00.000Z"
+                    },
+                    {
+                        "uuid": "1716",
+                        "timeStamp": "2020-04-21T04: 00: 00.000Z"
+                    }
+                ],
+                "dosesSkipped": [],
+                "dosesSnoozed": [],
+                "logDate": {
+                    "date": "2020-04-21T04: 00: 00.000Z",
+                    "day": 21,
+                    "month": 3,
+                    "year": "2020",
+                    "monthName": "April"
+                },
+                "logId": 757,
+                "medicineList": [
+                    {
+                        "name": "Lisinopril",
+                        "numDailyDoses": 1,
+                        "quantityPerDose": 2,
+                        "formFactor": 1,
+                        "strength": 20,
+                        "strengthUnits": 2,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                }
+                            ]
+                        },
+                        "uuid": "6514",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Metformin",
+                        "numDailyDoses": 3,
+                        "quantityPerDose": 1,
+                        "formFactor": 2,
+                        "strength": 115,
+                        "strengthUnits": 8,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "12",
+                                    "mins": "00",
+                                    "ampm": "PM"
+                                },
+                                {
+                                    "hrs": "8",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "1716",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Atorvastatin",
+                        "numDailyDoses": 2,
+                        "quantityPerDose": 3,
+                        "formFactor": 4,
+                        "strength": 0.5,
+                        "strengthUnits": 1,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "8",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "1108",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Levothyroxine",
+                        "numDailyDoses": 4,
+                        "quantityPerDose": 9,
+                        "formFactor": 5,
+                        "strength": 15,
+                        "strengthUnits": 3,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "11",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "5",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                },
+                                {
+                                    "hrs": "10",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "5732",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    }
+                ]
+            },
+            {
+                "dosesTaken": [
+                    {
+                        "uuid": "6514",
+                        "timeStamp": "2020-04-22T04: 00: 00.000Z"
+                    },
+                    {
+                        "uuid": "1716",
+                        "timeStamp": "2020-04-22T04: 00: 00.000Z"
+                    }
+                ],
+                "dosesSkipped": [],
+                "dosesSnoozed": [],
+                "logDate": {
+                    "date": "2020-04-22T04: 00: 00.000Z",
+                    "day": 22,
+                    "month": 3,
+                    "year": "2020",
+                    "monthName": "April"
+                },
+                "logId": 152,
+                "medicineList": [
+                    {
+                        "name": "Lisinopril",
+                        "numDailyDoses": 1,
+                        "quantityPerDose": 2,
+                        "formFactor": 1,
+                        "strength": 20,
+                        "strengthUnits": 2,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                }
+                            ]
+                        },
+                        "uuid": "6514",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Metformin",
+                        "numDailyDoses": 3,
+                        "quantityPerDose": 1,
+                        "formFactor": 2,
+                        "strength": 115,
+                        "strengthUnits": 8,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "12",
+                                    "mins": "00",
+                                    "ampm": "PM"
+                                },
+                                {
+                                    "hrs": "8",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "1716",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Atorvastatin",
+                        "numDailyDoses": 2,
+                        "quantityPerDose": 3,
+                        "formFactor": 4,
+                        "strength": 0.5,
+                        "strengthUnits": 1,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "8",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "1108",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Levothyroxine",
+                        "numDailyDoses": 4,
+                        "quantityPerDose": 9,
+                        "formFactor": 5,
+                        "strength": 15,
+                        "strengthUnits": 3,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "11",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "5",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                },
+                                {
+                                    "hrs": "10",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "5732",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    }
+                ]
+            },
+            {
+                "dosesTaken": [
+                    {
+                        "uuid": "6514",
+                        "timeStamp": "2020-04-23T04: 00: 00.000Z"
+                    },
+                    {
+                        "uuid": "1716",
+                        "timeStamp": "2020-04-23T04: 00: 00.000Z"
+                    }
+                ],
+                "dosesSkipped": [],
+                "dosesSnoozed": [],
+                "logDate": {
+                    "date": "2020-04-23T04: 00: 00.000Z",
+                    "day": 23,
+                    "month": 3,
+                    "year": "2020",
+                    "monthName": "April"
+                },
+                "logId": 902,
+                "medicineList": [
+                    {
+                        "name": "Lisinopril",
+                        "numDailyDoses": 1,
+                        "quantityPerDose": 2,
+                        "formFactor": 1,
+                        "strength": 20,
+                        "strengthUnits": 2,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                }
+                            ]
+                        },
+                        "uuid": "6514",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Metformin",
+                        "numDailyDoses": 3,
+                        "quantityPerDose": 1,
+                        "formFactor": 2,
+                        "strength": 115,
+                        "strengthUnits": 8,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "12",
+                                    "mins": "00",
+                                    "ampm": "PM"
+                                },
+                                {
+                                    "hrs": "8",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "1716",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Atorvastatin",
+                        "numDailyDoses": 2,
+                        "quantityPerDose": 3,
+                        "formFactor": 4,
+                        "strength": 0.5,
+                        "strengthUnits": 1,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "8",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "1108",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    },
+                    {
+                        "name": "Levothyroxine",
+                        "numDailyDoses": 4,
+                        "quantityPerDose": 9,
+                        "formFactor": 5,
+                        "strength": 15,
+                        "strengthUnits": 3,
+                        "doseSchedule": {
+                            "scheduledDoseTimes": [
+                                {
+                                    "hrs": "6",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "11",
+                                    "mins": "30",
+                                    "ampm": "AM"
+                                },
+                                {
+                                    "hrs": "5",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                },
+                                {
+                                    "hrs": "10",
+                                    "mins": "30",
+                                    "ampm": "PM"
+                                }
+                            ]
+                        },
+                        "uuid": "5732",
+                        "dateAdded": {
+                            "day": 25,
+                            "month": 4,
+                            "year": "2020",
+                            "monthName": "May"
+                        },
+                        "numDosesTaken": 0,
+                        "numDosesSkipped": 0,
+                        "numDosesSnoozed": 0
+                    }
+                ]
+            }
+        ],
+        "acctKey": "cwjacobs@gmail.com",
+        "month": "May"
+    },
+    "key": "cwjacobs@gmail.com"
+}
