@@ -8,6 +8,8 @@ import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import { Bar } from 'react-chartjs-2';
 
@@ -210,6 +212,11 @@ const InfoPane = (props) => {
         setsidebarButtonVariant(trendsButtonUnselected);
     }
 
+    const getUUID = () => {
+        let uuid = Math.round(Math.random() * 10000).toString();
+        return uuid;
+    }
+
     return (
         <div className="infopane-content">
             {clickedAccount &&
@@ -248,8 +255,8 @@ const InfoPane = (props) => {
                                 </Col>
                             </Row>
                             <Modal size="xl" centered show={isAddingMed}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Add Medicine</Modal.Title>
+                                <Modal.Header className="bg-info">
+                                    <Modal.Title className="text-white">Add Medicine</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
                                     {/* <h4>Centered Modal</h4> */}
@@ -260,14 +267,14 @@ const InfoPane = (props) => {
                                                 <th style={{ textAlign: "left", paddingLeft: "14px", width: "40%" }}>Medicine</th>
                                                 <th>Doses/Day</th>
                                                 <th>Qty/Dose</th>
-                                                <th>Form Factor</th>
+                                                <th style={{ width: "12%" }}>Form Factor</th>
                                                 <th>Strength</th>
-                                                <th>Units</th>
+                                                <th style={{ width: "12%" }}>Units</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr style={{ textAlign: "center" }} className="data-row">
-                                                <td style={{ textAlign: "left", paddingLeft: "9px" }}>uuid</td>
+                                                <td style={{ textAlign: "left", paddingLeft: ".5vw", paddingTop: "10px" }}>{getUUID()}</td>
                                                 <td style={{ textAlign: "left" }}>
                                                     <InputGroup><FormControl placeholder="Medicine"></FormControl></InputGroup>
                                                 </td>
@@ -278,13 +285,37 @@ const InfoPane = (props) => {
                                                     <InputGroup><FormControl placeholder="Qty/Dose"></FormControl></InputGroup>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl placeholder="Form Factor"></FormControl></InputGroup>
+                                                    <Form.Group controlId="exampleForm.ControlSelect1">
+                                                        {/* <Form.Label>Select</Form.Label> */}
+                                                        <Form.Control as="select">
+                                                            <option>Pill</option>
+                                                            <option>Powder</option>
+                                                            <option>Solution</option>
+                                                            <option>Drops</option>
+                                                            <option>Inhaler</option>
+                                                            <option>Injection</option>
+                                                            <option>Other</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
                                                     <InputGroup><FormControl placeholder="Strength"></FormControl></InputGroup>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl placeholder="Units"></FormControl></InputGroup>
+                                                    <Form.Group controlId="exampleForm.ControlSelect1">
+                                                        {/* <Form.Label>Select</Form.Label> */}
+                                                        <Form.Control as="select">
+                                                            <option>g</option>
+                                                            <option>mg</option>
+                                                            <option>ml</option>
+                                                            <option>iu</option>
+                                                            <option>mcg</option>
+                                                            <option>meq</option>
+                                                            <option>mgml</option>
+                                                            <option>mcgml</option>
+                                                            <option>percent</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
                                                 </td>
                                             </tr>
                                         </tbody>
