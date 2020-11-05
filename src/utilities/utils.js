@@ -200,8 +200,7 @@ const getMonthRangeData = (selectedDate, sortedMonthlyLogs, numDaysSelected) => 
     const month = selectedDate.getMonth();
     for (let i = 0; i < numDaysSelected; i++) {
         let dataPoint = {};
-        let date = new Date(year, month, i);
-        let weekDay = date.getDay();
+        let date = new Date(year, month, i + 1);
         dataPoint.label = `${monthDays[i]}`;
 
         dataPoint.dailyLog = getDailyLog(sortedMonthlyLogs, date);
