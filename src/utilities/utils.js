@@ -183,7 +183,7 @@ const getRangeData = (selectedDate, sortedMonthlyLogs, numDaysSelected = 7) => {
     const day = selectedDate.getDate();
     const year = selectedDate.getFullYear();
     const month = selectedDate.getMonth();
-    for (let i = day; i < (day + numDaysSelected); i++) {
+    for (let i = 0; i < (numDaysSelected); i++) {
         let dataPoint = {};
         let date = new Date(year, month, i);
         let weekDay = date.getDay();

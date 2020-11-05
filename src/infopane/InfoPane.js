@@ -28,8 +28,8 @@ const InfoPane = (props) => {
     const [adherenceButtonVariant, setAdherenceButtonVariant] = useState("outline-primary");
     const [trendsButtonVariant, setTrendsButtonVariant] = useState("outline-success");
     const [yLower, setYLower] = useState(100);
-
-
+    const [numDays, setNumDays] = useState(7);
+    const [durationLabel, setDurationLabel] = useState("View Month");
     const [dataSets, setDataSets] = useState({
         labels: [],
         datasets: [],
@@ -107,7 +107,7 @@ const InfoPane = (props) => {
     }
 
     /// Used when "Most Recent" btn is clicked
-    const getChartData = (selectedDate, selectedLog) => {
+    const getChartData = (selectedDate, selectedLog, selectedDays = numDays) => {
         let dataSets = {
             labels: [],
             datasets: [],
@@ -115,7 +115,7 @@ const InfoPane = (props) => {
 
         if (selectedLog) {
             let sortedLogs = sortDailyLogs();
-            dataSets = utils.getDatasets(selectedDate, sortedLogs, 7 /*this.state.numRangeDays*/);
+            dataSets = utils.getDatasets(selectedDate, sortedLogs, selectedDays);
         }
         return dataSets;
     }
@@ -143,6 +143,20 @@ const InfoPane = (props) => {
         datePicker.value = date;
     }
 
+    const toggleDuration = () => {
+        let days = numDays === 7 ? 31 : 7;
+        setNumDays(days);
+
+        let label = days === 7 ? "View Month" : "View Week";
+        setDurationLabel(label);
+
+        let chartData = getChartData(date, dailyLog, days);
+        setDataSets({
+            labels: chartData.labels,
+            datasets: chartData.values,
+        });
+    }
+
     const displayMedicineTable = () => {
         setInfoPaneTitle("Medicine Table");
         setCardHeaderVariant("bg-info");
@@ -164,10 +178,10 @@ const InfoPane = (props) => {
         setsidebarBackground("bg-primary");
         setsidebarButtonVariant(adherenceButtonUnselected);
 
-        let dataSets = getChartData(date, dailyLog);
+        let chartData = getChartData(date, dailyLog);
         setDataSets({
-            labels: dataSets.labels,
-            datasets: dataSets.values,
+            labels: chartData.labels,
+            datasets: chartData.values,
         });
     }
 
@@ -192,7 +206,7 @@ const InfoPane = (props) => {
                             {/* <Card.Text style={{ textAlign: "left" }}>Select a date below for corresponding list of medications and daily adherence.</Card.Text> */}
                             <Row>
                                 <Col xs={2}>
-                                    <Form.Group controlId="medListDate">
+                                    <Form.Group>
                                         <Form.Label>Select Date</Form.Label>
                                         <Form.Control id="datePicker" type="date" onChange={(event) => handleDateChange(event)} />
                                     </Form.Group>
@@ -202,6 +216,7 @@ const InfoPane = (props) => {
                                 </Col>
                             </Row>
                             <Row className="medtable-container">
+                                {/* property passed to Bar/Line charts must be named "data" */}
                                 <Col xs={12}>
                                     {(medTableButtonVariant === medTableButtonSelected ? true : false)
                                         && <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>}
@@ -236,6 +251,9 @@ const InfoPane = (props) => {
                                             <Button disabled={trendsButtonVariant === trendsButtonUnselected ? true : false} variant={trendsButtonUnselected} onClick={setLowerY}> y </Button>
                                         </Col>
                                     </Row>
+                                </Col>
+                                <Col xs={2}>
+                                    <Button className="medtable-buttons" variant={"outline-dark"} onClick={toggleDuration}>{durationLabel}</Button>
                                 </Col>
                             </Row>
                         </Card.Body>
