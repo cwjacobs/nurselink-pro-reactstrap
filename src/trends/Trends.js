@@ -157,10 +157,12 @@ function Trends(props) {
 
   const getTrendLineDataSets = () => {
     let trendLineDataSets = [];
-    props.chartData.datasets.forEach((med) => {
-      let trendLineDataSet = getTrendLineDataSet(med);
-      trendLineDataSets.push(trendLineDataSet);
-    })
+    if (props.chartData.datasets) {
+      props.chartData.datasets.forEach((med) => {
+        let trendLineDataSet = getTrendLineDataSet(med);
+        trendLineDataSets.push(trendLineDataSet);
+      })
+    }
     return trendLineDataSets;
   }
 
