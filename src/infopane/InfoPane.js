@@ -4,18 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import Table from 'react-bootstrap/Table';
-import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import { Bar } from 'react-chartjs-2';
 
 import './InfoPane.css';
-import { MedTable } from '../medtable/MedTable';
 import { Trends } from '../trends/Trends';
+import { MedTable } from '../medtable/MedTable';
+import { AddMedicineModal } from '../addmedicine/AddMedicineModal';
 
 import * as utils from '../utilities/utils';
 
@@ -28,6 +23,7 @@ const InfoPane = (props) => {
 
     const [date, setDate] = useState(new Date());
     const [dailyLog, setDailyLog] = useState();
+    const [medicineList, setMedicineList] = useState();
     const [dateComponents, setDateComponents] = useState();
     const [infoPaneTitle, setInfoPaneTitle] = useState("Medicine Table");
     const [cardHeaderVariant, setCardHeaderVariant] = useState("bg-info");
@@ -38,8 +34,6 @@ const InfoPane = (props) => {
     const [numDays, setNumDays] = useState(7);
     const [durationLabel, setDurationLabel] = useState("View Month");
     const [isAddingMed, setIsAddingMed] = useState(false);
-    const [addMedFormFactor, setAddMedFormFactor] = useState();
-    const [addMedStrengthUnits, setAddMedStrengthUnits] = useState();
     const [dataSets, setDataSets] = useState({
         labels: [],
         datasets: [],
@@ -65,6 +59,9 @@ const InfoPane = (props) => {
         if (clickedAccount) {
             const dailyLog = getDailyLog(date);
             setDailyLog(dailyLog);
+            if (dailyLog) {
+                setMedicineList(dailyLog.medicineList);
+            }
 
             const dataSets = getChartData(date, dailyLog);
             setDataSets({
@@ -184,8 +181,6 @@ const InfoPane = (props) => {
         setTrendsButtonVariant(trendsButtonUnselected);
         setsidebarBackground("bg-info");
         setsidebarButtonVariant(medTableButtonUnselected);
-
-        // setFocusColor();
     }
 
     const displayAdherenceChart = () => {
@@ -214,85 +209,13 @@ const InfoPane = (props) => {
         setsidebarButtonVariant(trendsButtonUnselected);
     }
 
-    const getUUID = () => {
-        let uuid = Math.round(Math.random() * 10000).toString();
-        return uuid;
-    }
+    const addNewMedicine = (medicineInfo) => {
+        let updatedList = [...medicineList, medicineInfo];
+        setMedicineList(updatedList);
 
-    const saveMedicine = () => {
-        let uuidNameElement = document.getElementById("addmed-uuid");
-        let medicineNameElement = document.getElementById("addmed-medicineName");
-        let numDailyDosesElement = document.getElementById("addmed-numDailyDoses");
-        let quantityPerDoseElement = document.getElementById("addmed-quantityPerDose");
-        let strengthElement = document.getElementById("addmed-strength");
-
-        // let dosesPerDay;
-        // if (!isNumeric(selectedDosesPerDay)) {
-        //     alert(`Doses/Day '${selectedDosesPerDay}' is not a number, please use only digits`);
-        //     return;
-        // }
-        // else {
-        //     dosesPerDay = Number(selectedDosesPerDay);
-        //     setSelectedDosesPerDay(dosesPerDay);
-        // }
-
-        // let quantityPerDose;
-        // if (!isNumeric(selectedQuantityPerDose)) {
-        //     alert(`Qty/Dose '${selectedQuantityPerDose}' is not a number, please use only digits`);
-        //     return;
-        // }
-        // else {
-        //     quantityPerDose = Number(selectedQuantityPerDose);
-        //     setSelectedQuantityPerDose(quantityPerDose);
-        // }
-
-        // let strength;
-        // if (!isNumeric(selectedStrength)) {
-        //     alert(`Strength '${selectedStrength}' is not a number, please use only digits`);
-        //     return;
-        // }
-        // else {
-        //     strength = Number(selectedStrength);
-        //     setSelectedStrength(strength);
-        // }
-
-        // if (!selectedFormFactor) {
-        //     alert(`Please select a value for 'Form Factor'`);
-        //     return;
-        // }
-
-        // if (!selectedUnits) {
-        //     alert(`Please select a value for 'Units'`);
-        //     return;
-        // }
-
-        let medicineInfo = {
-            uuid: uuidNameElement.innerText,
-            name: medicineNameElement.value,
-            numDailyDoses: numDailyDosesElement.value,
-            quantityPerDose: quantityPerDoseElement.value,
-            formFactor: addMedFormFactor,
-            strength: strengthElement.value,
-            strengthUnits: addMedStrengthUnits,
-            numDosesTaken: 0,
-            numDosesSkipped: 0,
-            numDosesSnoozed: 0,
-            doseSchedule: [],
-            dateAdded: utils.parseDate(new Date()),
-        }
-        // let updatedList = [...editedList, medicineInfo]
-
-        // setEditedList(updatedList);
-        // isAdding = true;
-        setIsAddingMed(false);
-    }
-
-    const handleFormFactorChange = (event) => {
-        setAddMedFormFactor(event.target.value);
-    }
-
-    const handleStrengthUnitsChange = (event) => {
-        setAddMedStrengthUnits(event.target.value);
+        let updatedDailyLog = dailyLog;
+        updatedDailyLog.medicineList = updatedList;
+        setDailyLog(updatedDailyLog);
     }
 
     return (
@@ -319,7 +242,9 @@ const InfoPane = (props) => {
                                 {/* property passed to Bar/Line charts must be named "data" */}
                                 <Col xs={12}>
                                     {(medTableButtonVariant === medTableButtonSelected ? true : false)
-                                        && <MedTable medicineList={dailyLog ? dailyLog.medicineList : []}></MedTable>}
+                                        && <MedTable medicineList={dailyLog ? medicineList : []}></MedTable>}
+
+                                    {isAddingMed && <AddMedicineModal setIsAddingMed={setIsAddingMed} addNewMedicine={addNewMedicine}></AddMedicineModal>}
 
                                     {(adherenceButtonVariant === adherenceButtonSelected ? true : false)
                                         && <Bar data={dataSets} options={{
@@ -332,82 +257,6 @@ const InfoPane = (props) => {
                                         && <Trends className="trends" chartData={dataSets} yLower={yLower}></Trends>}
                                 </Col>
                             </Row>
-
-                            {/***  Modal dialog to add medicine to Medicine Table ***/}
-                            <Modal size="xl" centered show={isAddingMed}>
-                                <Modal.Header className="bg-info">
-                                    <Modal.Title className="text-white">Add Medicine</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    {/* <h4>Centered Modal</h4> */}
-                                    <Table className="medtable" responsive="sm" striped bordered hover size="sm" variant="light">
-                                        <thead>
-                                            <tr style={{ textAlign: "center" }}>
-                                                <th style={{ textAlign: "center" }}>Id</th>
-                                                <th style={{ textAlign: "left", paddingLeft: "14px", width: "40%" }}>Medicine</th>
-                                                <th>Doses/Day</th>
-                                                <th>Qty/Dose</th>
-                                                <th style={{ width: "12%" }}>Form Factor</th>
-                                                <th>Strength</th>
-                                                <th style={{ width: "12%" }}>Units</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr style={{ textAlign: "center" }} className="data-row">
-                                                <td id="addmed-uuid" style={{ textAlign: "left", paddingLeft: ".5vw", paddingTop: "10px" }}>{getUUID()}</td>
-                                                <td style={{ textAlign: "left" }}>
-                                                    <InputGroup><FormControl id="addmed-medicineName" placeholder="Medicine"></FormControl></InputGroup>
-                                                </td>
-                                                <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl id="addmed-numDailyDoses" placeholder="Doses/Day"></FormControl></InputGroup>
-                                                </td>
-                                                <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl id="addmed-quantityPerDose" placeholder="Qty/Dose"></FormControl></InputGroup>
-                                                </td>
-                                                <td style={{ textAlign: "center" }}>
-                                                    <Form.Group controlId="addmed-formfactor">
-                                                        {/* <Form.Label>Select</Form.Label> */}
-                                                        <Form.Control as="select" onChange={handleFormFactorChange}>
-                                                            <option>Select...</option>
-                                                            <option>Pill</option>
-                                                            <option>Powder</option>
-                                                            <option>Solution</option>
-                                                            <option>Drops</option>
-                                                            <option>Inhaler</option>
-                                                            <option>Injection</option>
-                                                            <option>Other</option>
-                                                        </Form.Control>
-                                                    </Form.Group>
-                                                </td>
-                                                <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl id="addmed-strength" placeholder="Strength"></FormControl></InputGroup>
-                                                </td>
-                                                <td style={{ textAlign: "center" }}>
-                                                    <Form.Group controlId="addmed-units">
-                                                        {/* <Form.Label>Select</Form.Label> */}
-                                                        <Form.Control as="select" onChange={handleStrengthUnitsChange}>
-                                                            <option>Select...</option>
-                                                            <option>g</option>
-                                                            <option>mg</option>
-                                                            <option>ml</option>
-                                                            <option>iu</option>
-                                                            <option>mcg</option>
-                                                            <option>meq</option>
-                                                            <option>mgml</option>
-                                                            <option>mcgml</option>
-                                                            <option>percent</option>
-                                                        </Form.Control>
-                                                    </Form.Group>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button variant={"outline-info"} onClick={closeModal}>Cancel</Button>
-                                    <Button variant={"info"} onClick={saveMedicine}>Save</Button>
-                                </Modal.Footer>
-                            </Modal>
                             <Row className="medtable-button-row">
                                 <Col xs={2}>
                                     <Button className="medtable-buttons" variant="outline-secondary" onClick={handleMostRecentClick}>Most Recent</Button>
