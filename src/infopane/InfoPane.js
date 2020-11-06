@@ -38,6 +38,8 @@ const InfoPane = (props) => {
     const [numDays, setNumDays] = useState(7);
     const [durationLabel, setDurationLabel] = useState("View Month");
     const [isAddingMed, setIsAddingMed] = useState(false);
+    const [addMedFormFactor, setAddMedFormFactor] = useState();
+    const [addMedStrengthUnits, setAddMedStrengthUnits] = useState();
     const [dataSets, setDataSets] = useState({
         labels: [],
         datasets: [],
@@ -217,6 +219,82 @@ const InfoPane = (props) => {
         return uuid;
     }
 
+    const saveMedicine = () => {
+        let uuidNameElement = document.getElementById("addmed-uuid");
+        let medicineNameElement = document.getElementById("addmed-medicineName");
+        let numDailyDosesElement = document.getElementById("addmed-numDailyDoses");
+        let quantityPerDoseElement = document.getElementById("addmed-quantityPerDose");
+        let strengthElement = document.getElementById("addmed-strength");
+
+        // let dosesPerDay;
+        // if (!isNumeric(selectedDosesPerDay)) {
+        //     alert(`Doses/Day '${selectedDosesPerDay}' is not a number, please use only digits`);
+        //     return;
+        // }
+        // else {
+        //     dosesPerDay = Number(selectedDosesPerDay);
+        //     setSelectedDosesPerDay(dosesPerDay);
+        // }
+
+        // let quantityPerDose;
+        // if (!isNumeric(selectedQuantityPerDose)) {
+        //     alert(`Qty/Dose '${selectedQuantityPerDose}' is not a number, please use only digits`);
+        //     return;
+        // }
+        // else {
+        //     quantityPerDose = Number(selectedQuantityPerDose);
+        //     setSelectedQuantityPerDose(quantityPerDose);
+        // }
+
+        // let strength;
+        // if (!isNumeric(selectedStrength)) {
+        //     alert(`Strength '${selectedStrength}' is not a number, please use only digits`);
+        //     return;
+        // }
+        // else {
+        //     strength = Number(selectedStrength);
+        //     setSelectedStrength(strength);
+        // }
+
+        // if (!selectedFormFactor) {
+        //     alert(`Please select a value for 'Form Factor'`);
+        //     return;
+        // }
+
+        // if (!selectedUnits) {
+        //     alert(`Please select a value for 'Units'`);
+        //     return;
+        // }
+
+        let medicineInfo = {
+            uuid: uuidNameElement.innerText,
+            name: medicineNameElement.value,
+            numDailyDoses: numDailyDosesElement.value,
+            quantityPerDose: quantityPerDoseElement.value,
+            formFactor: addMedFormFactor,
+            strength: strengthElement.value,
+            strengthUnits: addMedStrengthUnits,
+            numDosesTaken: 0,
+            numDosesSkipped: 0,
+            numDosesSnoozed: 0,
+            doseSchedule: [],
+            dateAdded: utils.parseDate(new Date()),
+        }
+        // let updatedList = [...editedList, medicineInfo]
+
+        // setEditedList(updatedList);
+        // isAdding = true;
+        setIsAddingMed(false);
+    }
+
+    const handleFormFactorChange = (event) => {
+        setAddMedFormFactor(event.target.value);
+    }
+
+    const handleStrengthUnitsChange = (event) => {
+        setAddMedStrengthUnits(event.target.value);
+    }
+
     return (
         <div className="infopane-content">
             {clickedAccount &&
@@ -254,6 +332,8 @@ const InfoPane = (props) => {
                                         && <Trends className="trends" chartData={dataSets} yLower={yLower}></Trends>}
                                 </Col>
                             </Row>
+
+                            {/***  Modal dialog to add medicine to Medicine Table ***/}
                             <Modal size="xl" centered show={isAddingMed}>
                                 <Modal.Header className="bg-info">
                                     <Modal.Title className="text-white">Add Medicine</Modal.Title>
@@ -274,20 +354,21 @@ const InfoPane = (props) => {
                                         </thead>
                                         <tbody>
                                             <tr style={{ textAlign: "center" }} className="data-row">
-                                                <td style={{ textAlign: "left", paddingLeft: ".5vw", paddingTop: "10px" }}>{getUUID()}</td>
+                                                <td id="addmed-uuid" style={{ textAlign: "left", paddingLeft: ".5vw", paddingTop: "10px" }}>{getUUID()}</td>
                                                 <td style={{ textAlign: "left" }}>
-                                                    <InputGroup><FormControl placeholder="Medicine"></FormControl></InputGroup>
+                                                    <InputGroup><FormControl id="addmed-medicineName" placeholder="Medicine"></FormControl></InputGroup>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl placeholder="Doses/Day"></FormControl></InputGroup>
+                                                    <InputGroup><FormControl id="addmed-numDailyDoses" placeholder="Doses/Day"></FormControl></InputGroup>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl placeholder="Qty/Dose"></FormControl></InputGroup>
+                                                    <InputGroup><FormControl id="addmed-quantityPerDose" placeholder="Qty/Dose"></FormControl></InputGroup>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
-                                                    <Form.Group controlId="exampleForm.ControlSelect1">
+                                                    <Form.Group controlId="addmed-formfactor">
                                                         {/* <Form.Label>Select</Form.Label> */}
-                                                        <Form.Control as="select">
+                                                        <Form.Control as="select" onChange={handleFormFactorChange}>
+                                                            <option>Select...</option>
                                                             <option>Pill</option>
                                                             <option>Powder</option>
                                                             <option>Solution</option>
@@ -299,12 +380,13 @@ const InfoPane = (props) => {
                                                     </Form.Group>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
-                                                    <InputGroup><FormControl placeholder="Strength"></FormControl></InputGroup>
+                                                    <InputGroup><FormControl id="addmed-strength" placeholder="Strength"></FormControl></InputGroup>
                                                 </td>
                                                 <td style={{ textAlign: "center" }}>
-                                                    <Form.Group controlId="exampleForm.ControlSelect1">
+                                                    <Form.Group controlId="addmed-units">
                                                         {/* <Form.Label>Select</Form.Label> */}
-                                                        <Form.Control as="select">
+                                                        <Form.Control as="select" onChange={handleStrengthUnitsChange}>
+                                                            <option>Select...</option>
                                                             <option>g</option>
                                                             <option>mg</option>
                                                             <option>ml</option>
@@ -323,7 +405,7 @@ const InfoPane = (props) => {
                                 </Modal.Body>
                                 <Modal.Footer>
                                     <Button variant={"outline-info"} onClick={closeModal}>Cancel</Button>
-                                    <Button variant={"info"} onClick={closeModal}>Save</Button>
+                                    <Button variant={"info"} onClick={saveMedicine}>Save</Button>
                                 </Modal.Footer>
                             </Modal>
                             <Row className="medtable-button-row">
@@ -354,7 +436,7 @@ const InfoPane = (props) => {
                                     </Row>
                                 </Col>
                                 <Col xs={2}>
-                                    <Button className="medtable-buttons" variant={"warning"} onClick={toggleDuration} disabled={medTableButtonVariant === medTableButtonUnselected ? false : true} >{durationLabel}</Button>
+                                    <Button className="medtable-buttons" variant={"warning"} disabled={medTableButtonVariant === medTableButtonUnselected ? true : false} onClick={toggleDuration} disabled={medTableButtonVariant === medTableButtonUnselected ? false : true} >{durationLabel}</Button>
                                 </Col>
                             </Row>
                         </Card.Body>
