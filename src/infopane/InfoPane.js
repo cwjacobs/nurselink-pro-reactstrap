@@ -4,13 +4,15 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import Spinner from 'react-bootstrap/Spinner';
 
 import { Bar } from 'react-chartjs-2';
 
 import './InfoPane.css';
 import { Trends } from '../trends/Trends';
 import { MedTable } from '../medtable/MedTable';
-import { AddMedicineModal } from '../addmedicine/AddMedicineModal';
+import { AddMedicineModal } from '../modals/AddMedicineModal';
+import { saveNurseLinkAcctData } from '../conn/nlFirestore'
 
 import * as utils from '../utilities/utils';
 
@@ -34,6 +36,7 @@ const InfoPane = (props) => {
     const [numDays, setNumDays] = useState(7);
     const [durationLabel, setDurationLabel] = useState("View Month");
     const [isAddingMed, setIsAddingMed] = useState(false);
+    const [isDeletingMed, setIsDeletingMed] = useState(false);
     const [dataSets, setDataSets] = useState({
         labels: [],
         datasets: [],
@@ -128,12 +131,7 @@ const InfoPane = (props) => {
     }
 
     const addMedicine = () => {
-        // alert(`addMedicine`);
         setIsAddingMed(true);
-    }
-
-    const closeModal = () => {
-        setIsAddingMed(false);
     }
 
     const setLowerY = () => {
@@ -218,6 +216,24 @@ const InfoPane = (props) => {
         setDailyLog(updatedDailyLog);
     }
 
+    const deleteMedicine = (medicineName) => {
+        setIsDeletingMed(true);
+
+        let updatedList = medicineList.filter((el) => {
+            return (el.name !== medicineName);
+        });
+        setMedicineList(updatedList);
+
+        let updatedDailyLog = dailyLog;
+        updatedDailyLog.medicineList = updatedList;
+        setDailyLog(updatedDailyLog);
+
+        saveNurseLinkAcctData(clickedAccount)
+            .then(() => {
+                setIsDeletingMed(false);
+            })
+    }
+
     return (
         <div className="infopane-content">
             {clickedAccount &&
@@ -227,6 +243,7 @@ const InfoPane = (props) => {
                         <Card.Body>
                             <Card.Title as="h4" className="cardtitle">{infoPaneTitle}</Card.Title>
                             {/* <Card.Text style={{ textAlign: "left" }}>Select a date below for corresponding list of medications and daily adherence.</Card.Text> */}
+                            {/* {isDeletingMed && <Spinner variant="danger" className="signin-button" animation="border" size="lg" />} */}
                             <Row>
                                 <Col xs={2}>
                                     <Form.Group>
@@ -242,9 +259,10 @@ const InfoPane = (props) => {
                                 {/* property passed to Bar/Line charts must be named "data" */}
                                 <Col xs={12}>
                                     {(medTableButtonVariant === medTableButtonSelected ? true : false)
-                                        && <MedTable medicineList={dailyLog ? medicineList : []}></MedTable>}
+                                        && <MedTable medicineList={dailyLog ? medicineList : []} deleteMedicine={deleteMedicine}></MedTable>}
 
                                     {isAddingMed && <AddMedicineModal setIsAddingMed={setIsAddingMed} addNewMedicine={addNewMedicine}></AddMedicineModal>}
+                                    {/* {isDeletingMed && <DeleteMedicineModal setIsDeletingMed={setIsDeletingMed} addNewMedicine={addNewMedicine}></DeleteMedicineModal>} */}
 
                                     {(adherenceButtonVariant === adherenceButtonSelected ? true : false)
                                         && <Bar data={dataSets} options={{
