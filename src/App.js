@@ -1,6 +1,5 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
 
 import './App.css';
 import { SignIn } from './signIn/SignIn';
@@ -55,10 +54,20 @@ class App extends React.Component {
           <SignIn setSignedInAccount={this.setSignedInAccount}></SignIn>
         </div>
         }
-        {this.state.isSignedIn && <div>
-          <Navigation setIsSignedIn={this.setIsSignedIn}></Navigation>
-          <ClientArea signedInAccount={this.state.signedInAccount} setClickedAccount={this.setClickedAccount}></ClientArea>
-        </div>
+        {this.state.isSignedIn
+          &&
+          <>
+            <div id="home">
+              <Navigation setIsSignedIn={this.setIsSignedIn}></Navigation>
+              <ClientArea signedInAccount={this.state.signedInAccount} setClickedAccount={this.setClickedAccount}></ClientArea>
+            </div>
+            <div id="features">
+              <Container fluid className="p-3">
+                <h1 className="header">features</h1>
+                <div>We now have Toasts</div>
+              </Container>
+            </div>
+          </>
         }
       </Container>
     );

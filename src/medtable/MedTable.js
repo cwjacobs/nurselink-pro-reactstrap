@@ -45,7 +45,7 @@ const MedTable = (props) => {
                     isDeletingMed &&
                     <Modal.Dialog>
                         <Modal.Header show={true}>
-                            <Modal.Title>Deleting Medication</Modal.Title>
+                            <Modal.Title>Deleting {deletingMedName}</Modal.Title>
                         </Modal.Header>
 
                         <Modal.Body>
