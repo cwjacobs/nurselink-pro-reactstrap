@@ -1,0 +1,20 @@
+/* .clientArea {
+    height    : 90vw;
+    max-height: 90vw;
+} */
+
+.sidebar-layout {
+    border-width: 1px;
+    border-style: solid;
+    margin-top  : 3px;
+    border-color: white;
+    height      : 98%;
+}
+
+.infopane-layout {
+    border-width   : 1px;
+    border-style   : solid;
+    margin-top     : 3px;
+    border-color   : white;
+    /* height      : 88%; */
+}

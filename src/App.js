@@ -5,6 +5,7 @@ import './App.css';
 import { SignIn } from './signIn/SignIn';
 import { Navigation } from './navigation/Navigation';
 import { ClientArea } from './clientarea/ClientArea';
+import { AdminArea } from './adminarea/AdminArea';
 
 // const appName = "Medica360";
 // const appName = "Nurse Link";
@@ -16,6 +17,8 @@ class App extends React.Component {
     this.state = {
       appHeight: 0,
       isSignedIn: false,
+      isHome: true,
+      isAdmin: false,
       signedInAccount: null,
       clickedAccount: null,
     };
@@ -46,6 +49,20 @@ class App extends React.Component {
     })
   }
 
+  setIsHome = () => {
+    this.setState({
+      isHome: true,
+      isAdmin: false,
+    })
+  }
+
+  setIsAdmin = () => {
+    this.setState({
+      isHome: false,
+      isAdmin: true,
+    })
+  }
+
   render() {
     return (
       <Container id="appcontainer" fluid className="p-3 bg-dark app">
@@ -57,16 +74,13 @@ class App extends React.Component {
         {this.state.isSignedIn
           &&
           <>
-            <div id="home">
-              <Navigation setIsSignedIn={this.setIsSignedIn}></Navigation>
+            <Navigation setIsSignedIn={this.setIsSignedIn} setIsHome={this.setIsHome} setIsAdmin={this.setIsAdmin}></Navigation>
+            {this.state.isHome && <div id="home">
               <ClientArea signedInAccount={this.state.signedInAccount} setClickedAccount={this.setClickedAccount}></ClientArea>
-            </div>
-            <div id="features">
-              <Container fluid className="p-3">
-                <h1 className="header">features</h1>
-                <div>We now have Toasts</div>
-              </Container>
-            </div>
+            </div>}
+            {this.state.isAdmin && <div id="admin">
+              <AdminArea signedInAccount={this.state.signedInAccount} setClickedAccount={this.setClickedAccount}></AdminArea>
+            </div>}
           </>
         }
       </Container>
