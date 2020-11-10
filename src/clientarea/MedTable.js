@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Spinner from 'react-bootstrap/Spinner';
 
-import '../infopane/InfoPane.css';
+import './InfoPane.css';
 
 const MedTable = (props) => {
     const {

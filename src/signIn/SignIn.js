@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { firebaseLogin, getNurseLinkAcct } from '../conn/nlFirestore'
-import { deleteTestData, installTestData } from '../test/test-data'
+import { deleteTestData, installTestData } from '../test/patient-test-data'
 
 import './SignIn.css';
 

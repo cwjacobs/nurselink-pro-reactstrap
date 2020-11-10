@@ -4,13 +4,12 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
-import Spinner from 'react-bootstrap/Spinner';
 
 import { Bar } from 'react-chartjs-2';
 
 import './InfoPane.css';
-import { Trends } from '../trends/Trends';
-import { MedTable } from '../medtable/MedTable';
+import { Trends } from './Trends';
+import { MedTable } from './MedTable';
 import { AddMedicineModal } from '../modals/AddMedicineModal';
 import { saveNurseLinkAcctData } from '../conn/nlFirestore'
 

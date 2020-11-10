@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { Sidebar } from '../sidebar/Sidebar';
-import { InfoPane } from '../infopane/InfoPane'
+import { Sidebar } from './Sidebar';
+import { InfoPane } from './InfoPane'
 import './ClientArea.css';
 
 const ClientArea = (props) => {

@@ -1,0 +1,43 @@
+
+export const employeeList = [
+    {
+        acctKey: "ljacobs@medica360.com",
+        email: "ljacobs@medica360.com",
+        firstName: "Lynn",
+        lastName: "Jacobs",
+        patientList: [],
+        title: "Nurse Practitioner",
+        credentials: "Nurse Practitioner",
+        startDate: "06/20/1985",
+    },
+    {
+        acctKey: "jweisser@medica360.com",
+        email: "jweisser@medica360.com",
+        firstName: "Jane",
+        lastName: "Weisser",
+        credentials: "Nurse Practitioner",
+        title: "Nurse Practitioner",
+        startDate: "08/01/1982",
+        patientList: [],
+    },
+    {
+        acctKey: "jweisser@medica360.com",
+        email: "jweisser@medica360.com",
+        firstName: "Mildred",
+        lastName: "Ratched",
+        credentials: "Nurse Psycho",
+        title: "Nurse Psycho",
+        startDate: "08/01/1884",
+        patientList: [],
+    },
+    {
+        acctKey: "cblanchard@medica360.com",
+        email: "cblanchard@medica360.com",
+        firstName: "Carol",
+        lastName: "Blanchard",
+        title: "Nurse",
+        credentials: "Nurse",
+        startDate: "09/01/1996",
+        patientList: [],
+    },
+]

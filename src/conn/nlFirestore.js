@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
-// import 'firebase/firestore';
 import { firestore } from '../index';
+import { employeeList } from '../test/company-test-data';
 
 
 /** Implemeted as a singleton */
@@ -91,4 +91,8 @@ export function deleteNurseLinkAcctData(key) {
                 reject(err);
             });
     })
+};
+
+export function getEmployeeList(key) {
+    return employeeList
 };

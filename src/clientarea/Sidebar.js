@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
 
 import { getNurseLinkAcct } from '../conn/nlFirestore'
-import { AccountCard } from '../accountcard/AccountCard';
+import { AccountCard } from './AccountCard';
 
 import './Sidebar.css';
 

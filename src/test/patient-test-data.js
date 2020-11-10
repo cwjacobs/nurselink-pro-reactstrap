@@ -1,8 +1,3 @@
-// import { IConnection } from '~/interfaces/iconnection';
-// import { DataSource } from '~/conn/dataSource';
-// let dataSource = DataSource.getInstance();
-
-// import { User } from '~/models/user';
 import { NLDate } from '../models/nldate';
 import { FormFactor, StrengthUnits } from '../models/enums';
 import { Medicine } from '../models/medicine';
