@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import { getEmployeeList } from '../conn/nlFirestore'
 import { EmployeeCard } from './EmployeeCard';
@@ -13,17 +15,16 @@ const Sidebar = (props) => {
         sidebarButtonVariant,
     } = props;
 
-    let sidebarAccounts = [];
-    const [managedAccounts, setManagedAccounts] = useState([]);
+    let sidebarFunctions = ["Employees", "Patients"];
 
     // const accountKeys = signedInAccount.user.accountsSharedToMe.map((currentValue) => {
     //     return currentValue.acctKey;
     // })
 
-    useEffect(() => {
-        sidebarAccounts = getEmployeeList(signedInAccount);
-        setManagedAccounts([...sidebarAccounts]);
-    }, [sidebarAccounts]);
+    // useEffect(() => {
+    //     sidebarFunctions = getEmployeeList(signedInAccount);
+    //     setManagedAccounts([...sidebarFunctions]);
+    // }, [sidebarFunctions]);
 
     // const getAccount = (key) => {
     //     return new Promise((resolve) => {
@@ -48,13 +49,13 @@ const Sidebar = (props) => {
     // };
 
     return (
-        <Row>
-            <div className="sidebar-content">
-                {managedAccounts.map((currentValue, index) =>
-                    <EmployeeCard key={index} employee={currentValue} />
-                )}
-            </div>
-        </Row>
+        <Col>
+            {/* <div className="sidebar-content"> */}
+            {sidebarFunctions.map((currentValue, index) =>
+                <Button variant="outline-dark" style={{ width: "100%", margin: "5px" }} key={index}>{currentValue}</Button>
+            )}
+            {/* </div> */}
+        </Col>
     )
 }
 
