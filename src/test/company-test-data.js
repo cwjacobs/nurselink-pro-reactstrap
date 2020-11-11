@@ -13,6 +13,7 @@ export const employeeList = [
         city: "Patterson",
         state: "New York",
         zip: "12563",
+        status: "Active",
         patientList: [],
     },
     {
@@ -28,6 +29,7 @@ export const employeeList = [
         city: "Riverdale",
         state: "New York",
         zip: "10020",
+        status: "Active",
         patientList: [],
     },
     {
@@ -43,6 +45,7 @@ export const employeeList = [
         city: "Bullship View",
         state: "New York",
         zip: "14450",
+        status: "Active",
         patientList: [],
     },
     {
@@ -58,6 +61,7 @@ export const employeeList = [
         city: "Patterson",
         state: "New York",
         zip: "12563",
+        status: "Active",
         patientList: [],
     },
     {
@@ -73,6 +77,7 @@ export const employeeList = [
         city: "Patterson",
         state: "New York",
         zip: "12563",
+        status: "Active",
         patientList: [],
     },
     {
@@ -88,6 +93,7 @@ export const employeeList = [
         city: "Patterson",
         state: "New York",
         zip: "12563",
+        status: "Active",
         patientList: [],
     },
     {
@@ -103,6 +109,7 @@ export const employeeList = [
         city: "Patterson",
         state: "New York",
         zip: "12563",
+        status: "Active",
         patientList: [],
     },
     {
@@ -118,7 +125,23 @@ export const employeeList = [
         city: "Patterson",
         state: "New York",
         zip: "12563",
+        status: "Active",
         patientList: [],
     },
-
+    {
+        employeeId: Math.round(Math.random() * 10000).toString(),
+        acctKey: "sjBiden@medica360.com",
+        email: "sjBiden@medica360.com",
+        firstName: "Sleepy Joe",
+        lastName: "Biden",
+        title: "Gopher",
+        credentials: "No Short-term memory",
+        startDate: "07/01/1943",
+        address: "439 Cmon Man Avenue",
+        city: "GetAShotgun",
+        state: "Delaware",
+        zip: "00102",
+        status: "Terminated",
+        patientList: [],
+    },
 ]
