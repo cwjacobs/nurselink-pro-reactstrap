@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -9,20 +9,17 @@ import './EmployeeCard.css';
 const EmployeeCard = (props) => {
     const {
         employee,
+        handleEmployeeEdit,
     } = props;
 
     const getEmployeeName = () => {
         return (`${employee.firstName} ${employee.lastName}`);
     }
 
-    const onHandleEmployeeEdit = (event) => {
-        alert(`Employee: ${event.target.id}`)
-    }
-
     return (
         <Card>
             <Card.Body>
-                <Card.Title>{getEmployeeName()}</Card.Title>
+                <Card.Title className={"text-info"}>{getEmployeeName()}</Card.Title>
                 <Card.Subtitle>{`${employee.title}`}</Card.Subtitle>
                 <Card.Text style={{ marginTop: "20px" }}>
                     <h6>{`Patient Count: 8`}</h6>
@@ -35,7 +32,7 @@ const EmployeeCard = (props) => {
                         <small className="text-muted">{`Start Date: ${employee.startDate}`}</small>
                     </Col>
                     <Col xs={5}>
-                        <Button style={{ width: "6vw" }} onClick={onHandleEmployeeEdit}>Edit</Button>
+                        <Button id={employee.email} style={{ width: "6vw" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(employee)}>Edit</Button>
                     </Col>
                 </Row>
             </Card.Footer>
