@@ -28,11 +28,11 @@ const EmployeeCard = (props) => {
             </Card.Body>
             <Card.Footer style={{ marginTop: "-30px" }}>
                 <Row>
-                    <Col xs={7}>
+                    <Col xs={8}>
                         <small className="text-muted">{`Start Date: ${employee.startDate}`}</small>
                     </Col>
-                    <Col xs={5}>
-                        <Button id={employee.email} style={{ width: "6vw" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(employee)}>Edit</Button>
+                    <Col xs={4}>
+                        <Button size="sm" id={employee.email} style={{ width: "4.5vw" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(employee)}>Edit</Button>
                     </Col>
                 </Row>
             </Card.Footer>

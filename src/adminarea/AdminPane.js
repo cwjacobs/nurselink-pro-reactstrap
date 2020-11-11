@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CardDeck from 'react-bootstrap/CardDeck';
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { EmployeeCard } from './EmployeeCard';
@@ -37,19 +37,24 @@ const AdminPane = (props) => {
 
     return (
         <div className="adminpane-content">
-            <Row className="adminpane-content">
-                {
-                    managedAccounts.map((currentValue, index) =>
-                        <Col xs={3} style={{ marginTop: "1vw" }}>
-                            <EmployeeCard key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
-                        </Col>
-                    )
-                }
-            </Row>
-            {isEditingEmployee
-                &&
-                <EditEmployeeModal employee={crntEmployee} handleEmployeeSave={handleEmployeeSave}></EditEmployeeModal>
-            }
+            <Card bg='light'>
+                <Card.Header as="h3" className={'text-white bg-secondary'}>Employees</Card.Header>
+                <Card.Body>
+                    <Row className="adminpane-content">
+                        {
+                            managedAccounts.map((currentValue, index) =>
+                                <Col xs={3} style={{ marginTop: "1vw" }}>
+                                    <EmployeeCard key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
+                                </Col>
+                            )
+                        }
+                    </Row>
+                    {isEditingEmployee
+                        &&
+                        <EditEmployeeModal employee={crntEmployee} handleEmployeeSave={handleEmployeeSave}></EditEmployeeModal>
+                    }
+                </Card.Body>
+            </Card>
         </div>
     )
 }

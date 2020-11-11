@@ -15,7 +15,7 @@ const Sidebar = (props) => {
         sidebarButtonVariant,
     } = props;
 
-    let sidebarFunctions = ["Employees", "Patients"];
+    let sidebarFunctions = ["Employees", "Patient Assignment"];
 
     // const accountKeys = signedInAccount.user.accountsSharedToMe.map((currentValue) => {
     //     return currentValue.acctKey;
