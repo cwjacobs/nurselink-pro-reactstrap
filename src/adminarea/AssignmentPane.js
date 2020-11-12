@@ -22,6 +22,29 @@ const AssignmentPane = (props) => {
 
     const [employeeList, setEmployeeList] = useState();
 
+    const dragStart = (e) => {
+        const target = e.target;
+        e.dataTransfer.setData('card_id', target.id);
+
+        setTimeout(() => {
+            target.style.display = "none";
+        }, 0)
+    }
+
+    const drop = (e) => {
+        e.preventDefault();
+        const card_id = e.dataTransfer.getData('card_id')
+
+        const card = document.getElementById(card_id);
+        card.style.display = 'block';
+
+        e.target.appendChild(card);
+    }
+
+    const dragOver = (e) => {
+        e.preventDefault();
+    }
+
     const getFilteredEmploymentList = (status) => {
         let allEmployeeList = getAllEmployeesList();
         if (status === 'All') {

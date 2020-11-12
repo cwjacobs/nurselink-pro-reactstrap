@@ -14,7 +14,18 @@ export const employeeList = [
         state: "New York",
         zip: "12563",
         status: "Enrolled",
-        patientList: ["cwjacobs@gmail.com", "dilig89@gmail.com"],
+        patientList: [
+            {
+                firstName: "Craig",
+                lastName: "Jacobs",
+                email: "cwjacobs@gmail.com"
+            },
+            {
+                firstName: "Daniel",
+                lastName: "Illig",
+                email: "dillit89@gmail.com"
+            },
+        ]
     },
     {
         employeeId: Math.round(Math.random() * 10000).toString(),

@@ -53,7 +53,7 @@ const EmployeeAccordion = (props) => {
                                 {employee.patientList.map((patient) => (
                                     <Accordion defaultActiveKey="1">
                                         <Card>
-                                            <Accordion.Toggle as={Card.Header} className="text-primary" eventKey="0">{patient}</Accordion.Toggle>
+                                            <Accordion.Toggle as={Card.Header} className="text-primary" eventKey="0">{`${patient.firstName} ${patient.lastName}`}</Accordion.Toggle>
                                             <Accordion.Collapse eventKey="0">
                                                 <Row>
                                                     <Button size="sm" variant="outline-primary" style={{ borderColor: "white", width: "100%" }}>Remove</Button>
