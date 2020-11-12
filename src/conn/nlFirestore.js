@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
 import { firestore } from '../index';
 import { employeeList } from '../test/company-test-data';
+import { patientList } from '../test/patient-test-data';
 
 
 /** Implemeted as a singleton */
@@ -93,6 +94,10 @@ export function deleteNurseLinkAcctData(key) {
     })
 };
 
-export function getAllEmployeesList(key) {
+export function getAllEmployeesList() {
     return employeeList
+};
+
+export function getAllPatientsList() {
+    return patientList
 };

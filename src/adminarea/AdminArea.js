@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 
 import { Sidebar } from './Sidebar';
 import { EmployeePane } from './EmployeePane'
+import { PatientPane } from './PatientPane'
 import { AssignmentPane } from './AssignmentPane'
 import './AdminArea.css';
 
@@ -13,17 +14,30 @@ const AdminArea = (props) => {
     } = props;
 
     const [clickedAccount, setClickedAccount] = useState();
-    const [isEmployeeAdmin, setIsEmployeeAdmin] = useState(true);
-    const [isPatientAllocation, setIsPatientAllocation] = useState(false);
+    const [isEmployeeEnrollment, setIsEmployeeEnrollment] = useState(true);
+    const [isPatientEnrollment, setIsPatientEnrollment] = useState(false);
+    const [isPatientAssignment, setIsPatientAssignment] = useState(false);
 
     const setCurrentAdminPane = (selectedPane) => {
-        if (selectedPane === 'enrollment') {
-            setIsEmployeeAdmin(true);
-            setIsPatientAllocation(false);
-        }
-        else {
-            setIsEmployeeAdmin(false);
-            setIsPatientAllocation(true);
+
+        switch (selectedPane) {
+            case 'employee-enrollment':
+                setIsEmployeeEnrollment(true);
+                setIsPatientEnrollment(false);
+                setIsPatientAssignment(false);
+                break;
+
+            case 'patient-enrollment':
+                setIsEmployeeEnrollment(false);
+                setIsPatientEnrollment(true);
+                setIsPatientAssignment(false);
+                break;
+
+            case 'patient-assignment':
+                setIsEmployeeEnrollment(false);
+                setIsPatientEnrollment(false);
+                setIsPatientAssignment(true);
+                break;
         }
     }
 
@@ -33,9 +47,10 @@ const AdminArea = (props) => {
                 <Col xs={2} className="bg-info sidebar-layout">
                     <Sidebar setCurrentAdminPane={setCurrentAdminPane}></Sidebar>
                 </Col>
-                <Col xs={10} className="bg-info infopane-layout">
-                    {isEmployeeAdmin && <EmployeePane clickedAccount={clickedAccount}></EmployeePane>}
-                    {isPatientAllocation && <AssignmentPane clickedAccount={clickedAccount}></AssignmentPane>}
+                <Col xs={10} className="bg-secondary infopane-layout">
+                    {isEmployeeEnrollment && <EmployeePane clickedAccount={clickedAccount}></EmployeePane>}
+                    {isPatientEnrollment && <PatientPane clickedAccount={clickedAccount}></PatientPane>}
+                    {isPatientAssignment && <AssignmentPane clickedAccount={clickedAccount}></AssignmentPane>}
                 </Col>
             </Row>
         </div>

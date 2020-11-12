@@ -9,6 +9,47 @@ import { saveNurseLinkAcctData, deleteNurseLinkAcctData } from '../conn/nlFirest
 
 const accounts = ["cwjacobs@gmail.com", "holderman.john@gmail.com", "dillig89@gmail.com"];
 
+export const patientList = [
+    {
+        employeeId: Math.round(Math.random() * 10000).toString(),
+        acctKey: "cjacobs@medica360.com",
+        email: "cjacobs@medica360.com",
+        firstName: "Craig",
+        lastName: "Jacobs",
+        startDate: "06/20/1985",
+        address: "77 Boulderbrook Lane",
+        city: "Patterson",
+        state: "New York",
+        zip: "12563",
+        status: "Enrolled",
+    },
+    {
+        employeeId: Math.round(Math.random() * 10000).toString(),
+        acctKey: "dillig89@medica360.com",
+        email: "dillig89@medica360.com",
+        firstName: "Daniel",
+        lastName: "Illig",
+        startDate: "06/20/1985",
+        address: "46 Main Street",
+        city: "Beach-Head",
+        state: "Rhode Island",
+        zip: "12563",
+        status: "Enrolled",
+    },
+    {
+        employeeId: Math.round(Math.random() * 10000).toString(),
+        acctKey: "holderman.john@medica360.com",
+        email: "holderman.john@medica360.com",
+        firstName: "John",
+        lastName: "Holderman",
+        startDate: "06/20/1985",
+        address: "46 Main Street",
+        city: "Beach-Head",
+        state: "Rhode Island",
+        zip: "12563",
+        status: "Enrolled",
+    },
+]
 const cjAcctInfo = new AccountInfo("cwjacobs@gmail.com", "cwjacobs@gmail.com", "Craig", "Jacobs", "Craig", "646.919.0840");
 const diAcctInfo = new AccountInfo("dillig89@gmail.com", "dillig89@gmail.com", "Daniel", "Illig", "Daniel", "347.501.0881");
 const jhAcctInfo = new AccountInfo("holderman.john@gmail.com", "holderman.john@gmail.com", "John", "Holderman", "Jonny", "347.501.0881");
