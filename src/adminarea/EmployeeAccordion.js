@@ -40,7 +40,7 @@ const EmployeeAccordion = (props) => {
                             <Col xs={12}>
                                 <Row>
                                     <Col xs={6}>
-                                        <Button size="sm" id={employee.email} style={{ width: "100%" }} variant={"outline-danger"} onClick={() => handleEmployeeEdit(employee)}>Remove All</Button>
+                                        <Button size="sm" id={employee.email} style={{ width: "100%" }} variant={"outline-primary"} onClick={() => handleEmployeeEdit(employee)}>Remove All</Button>
                                     </Col>
                                     <Col xs={6}>
                                         <Button size="sm" id={employee.email} style={{ width: "100%" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(employee)}>Add</Button>
@@ -56,7 +56,7 @@ const EmployeeAccordion = (props) => {
                                             <Accordion.Toggle as={Card.Header} className="text-primary" eventKey="0">{patient}</Accordion.Toggle>
                                             <Accordion.Collapse eventKey="0">
                                                 <Row>
-                                                    <Button size="sm" variant="outline-danger" style={{ borderColor: "white", width: "100%" }}>Remove</Button>
+                                                    <Button size="sm" variant="outline-primary" style={{ borderColor: "white", width: "100%" }}>Remove</Button>
                                                 </Row>
                                             </Accordion.Collapse>
                                         </Card>
