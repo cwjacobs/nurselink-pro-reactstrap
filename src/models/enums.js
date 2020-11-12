@@ -32,3 +32,10 @@ export const vrStates = {
     editingMedicineDose: 3,
     complete: 4,
 }
+
+export const enrollmentStatus = [
+    { label: 'All', value: 'All' },
+    { label: 'Enrolled', value: 'Enrolled' },
+    { label: 'Not Enrolled', value: 'Not Enrolled' },
+    { label: 'Account Removed', value: 'Account Removed' },
+];

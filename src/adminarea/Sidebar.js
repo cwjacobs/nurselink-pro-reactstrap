@@ -3,58 +3,30 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
-import { getEmployeeList } from '../conn/nlFirestore'
+import { getAllEmployeesList } from '../conn/nlFirestore'
 import { EmployeeCard } from './EmployeeCard';
 
 import './Sidebar.css';
 
 const Sidebar = (props) => {
     const {
-        signedInAccount,
-        setClickedAccount,
-        sidebarButtonVariant,
+        setCurrentAdminPane,
     } = props;
 
-    let sidebarFunctions = ["Employees", "Patient Assignment"];
+    let sidebarFunctions = ["Enrollment", "Patient Assignment"];
 
-    // const accountKeys = signedInAccount.user.accountsSharedToMe.map((currentValue) => {
-    //     return currentValue.acctKey;
-    // })
-
-    // useEffect(() => {
-    //     sidebarFunctions = getEmployeeList(signedInAccount);
-    //     setManagedAccounts([...sidebarFunctions]);
-    // }, [sidebarFunctions]);
-
-    // const getAccount = (key) => {
-    //     return new Promise((resolve) => {
-    //         getNurseLinkAcct(key)
-    //             .then((result) => {
-    //                 sidebarAccounts.push(result);
-    //                 resolve();
-    //             });
-    //     });
-    // };
-
-    // const getAccounts = (accountKeys) => {
-    //     return new Promise((resolve) => {
-    //         for (const [i, value] of accountKeys.entries()) {
-    //             getAccount(value).then(() => {
-    //                 if (i === accountKeys.length - 1) {
-    //                     resolve();
-    //                 }
-    //             });
-    //         }
-    //     });
-    // };
+    const handleClick = (event) => {
+        let selectedPane = event.target.id.toLowerCase();
+        setCurrentAdminPane(selectedPane);
+    }
 
     return (
         <Col>
-            {/* <div className="sidebar-content"> */}
-            {sidebarFunctions.map((currentValue, index) =>
-                <Button variant="outline-dark" style={{ width: "100%", margin: "5px" }} key={index}>{currentValue}</Button>
-            )}
-            {/* </div> */}
+            <div className="sidebar-content">
+                {sidebarFunctions.map((currentValue, index) =>
+                    <Button variant="outline-secondary" id={currentValue} style={{ width: "100%", height: "60px", margin: "5px", color: "white" }} key={index} onClick={handleClick}>{currentValue}</Button>
+                )}
+            </div>
         </Col>
     )
 }

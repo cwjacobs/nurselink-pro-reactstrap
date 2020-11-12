@@ -93,6 +93,6 @@ export function deleteNurseLinkAcctData(key) {
     })
 };
 
-export function getEmployeeList(key) {
+export function getAllEmployeesList(key) {
     return employeeList
 };

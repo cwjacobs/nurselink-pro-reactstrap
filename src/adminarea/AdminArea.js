@@ -3,7 +3,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import { Sidebar } from './Sidebar';
-import { AdminPane } from './AdminPane'
+import { EmployeePane } from './EmployeePane'
+import { AssignmentPane } from './AssignmentPane'
 import './AdminArea.css';
 
 const AdminArea = (props) => {
@@ -12,17 +13,29 @@ const AdminArea = (props) => {
     } = props;
 
     const [clickedAccount, setClickedAccount] = useState();
-    const [sidebarBackground, setsidebarBackground] = useState("bg-info");
-    const [sidebarButtonVariant, setsidebarButtonVariant] = useState("outline-info");
+    const [isEmployeeAdmin, setIsEmployeeAdmin] = useState(true);
+    const [isPatientAllocation, setIsPatientAllocation] = useState(false);
+
+    const setCurrentAdminPane = (selectedPane) => {
+        if (selectedPane === 'enrollment') {
+            setIsEmployeeAdmin(true);
+            setIsPatientAllocation(false);
+        }
+        else {
+            setIsEmployeeAdmin(false);
+            setIsPatientAllocation(true);
+        }
+    }
 
     return (
         <div>
             <Row id="adminarea" className={"p-3"}>
                 <Col xs={2} className="bg-info sidebar-layout">
-                    <Sidebar signedInAccount={signedInAccount} setClickedAccount={setClickedAccount} sidebarButtonVariant={sidebarButtonVariant}></Sidebar>
+                    <Sidebar setCurrentAdminPane={setCurrentAdminPane}></Sidebar>
                 </Col>
                 <Col xs={10} className="bg-info infopane-layout">
-                    <AdminPane clickedAccount={clickedAccount} setsidebarBackground={setsidebarBackground} setsidebarButtonVariant={setsidebarButtonVariant}></AdminPane>
+                    {isEmployeeAdmin && <EmployeePane clickedAccount={clickedAccount}></EmployeePane>}
+                    {isPatientAllocation && <AssignmentPane clickedAccount={clickedAccount}></AssignmentPane>}
                 </Col>
             </Row>
         </div>

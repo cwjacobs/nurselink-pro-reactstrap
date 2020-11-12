@@ -21,15 +21,15 @@ const EmployeeCard = (props) => {
             <Card.Body>
                 <Card.Title className={"text-info"}>{getEmployeeName()}</Card.Title>
                 <Card.Subtitle>{`${employee.title}`}</Card.Subtitle>
-                <Card.Text style={{ marginTop: "20px" }}>
-                    <h6>{`Patient Count: 8`}</h6>
-                    <p>{`${employee.email}`}</p>
+                <Card.Text style={{ marginTop: "10px" }}>
+                    <h6>{`Patient Count: ${employee.patientList.length}`}</h6>
+                    {/* <p>{`${employee.email}`}</p> */}
                 </Card.Text>
             </Card.Body>
-            <Card.Footer style={{ marginTop: "-30px" }}>
+            <Card.Footer style={{ marginTop: "-10px" }}>
                 <Row>
                     <Col xs={8}>
-                        <small className="text-muted">{`Start Date: ${employee.startDate}`}</small>
+                        <small className="text-muted">{`${employee.status}`}</small>
                     </Col>
                     <Col xs={4}>
                         <Button size="sm" id={employee.email} style={{ width: "4.5vw" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(employee)}>Edit</Button>

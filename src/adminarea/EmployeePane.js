@@ -3,13 +3,15 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import { EmployeeCard } from './EmployeeCard';
 
-import { getEmployeeList } from '../conn/nlFirestore'
 import { Container } from 'react-bootstrap';
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
+import { enrollmentStatus } from '../models/enums';
+import { getAllEmployeesList } from '../conn/nlFirestore'
 
-const AdminPane = (props) => {
+const EmployeePane = (props) => {
     const {
     } = props;
 
@@ -23,22 +25,42 @@ const AdminPane = (props) => {
 
     useEffect(() => {
         let statusElement = document.getElementById('status-filter');
-        let filteredList = getFilterEmploymentStatus(statusElement.value);
+        let filteredList = getFilterEmploymentList(statusElement.value);
         setEmployeeAccounts(filteredList);
     }, []);
 
-    const getFilterEmploymentStatus = (status) => {
-        let allEmployeeList = getEmployeeList();
+    const getFilterEmploymentList = (status) => {
+        let allEmployeeList = getAllEmployeesList();
         if (status === 'All') {
             return (allEmployeeList);
         }
         else {
-            // alert(`Employment Status Changed: ${event.target.value}`);
             let filteredList = allEmployeeList.filter((el) => {
                 return (el.status === status);
             });
             return (filteredList);
         }
+    }
+
+    const handleAddEmployee = () => {
+        let employee = {
+            employeeId: Math.round(Math.random() * 10000).toString(),
+            acctKey: "",
+            email: "",
+            firstName: "",
+            lastName: "",
+            title: "",
+            credentials: "",
+            startDate: "",
+            address: "",
+            city: "",
+            state: "",
+            zip: "",
+            status: "Not Enrolled",
+            patientList: [],
+        }
+        setCrntEmployee(employee);
+        setIsEditingEmployee(true);
     }
 
     const handleEmployeeEdit = (employee) => {
@@ -51,7 +73,7 @@ const AdminPane = (props) => {
     }
 
     const handleStatusChange = (event) => {
-        let filteredList = getFilterEmploymentStatus(event.target.value);
+        let filteredList = getFilterEmploymentList(event.target.value);
         setEmployeeAccounts(filteredList);
     }
 
@@ -60,19 +82,18 @@ const AdminPane = (props) => {
             <Card bg='light'>
                 <Card.Header className={'text-white bg-dark'}>
                     <Row>
-                        <Col xs={5}>
+                        <Col xs={2}>
                             <h3>Employees</h3>
                         </Col>
                         <Col xs={3}>
-                            <Form.Label as="h5" style={{ marginTop: "1vh", textAlign: "right" }}>Employment Status</Form.Label>
+                            <Button variant="outline-light" style={{ fontWeight: "bolder" }} onClick={handleAddEmployee}>+</Button>
+                        </Col>
+                        <Col xs={3}>
+                            <Form.Label as="h5" style={{ marginTop: "1vh", textAlign: "right" }}>Enrollment Status</Form.Label>
                         </Col>
                         <Col xs={4}>
-                            <Form.Control id='status-filter' as="select" defaultValue="Active" onChange={handleStatusChange}>
-                                <option value="All">All</option>
-                                <option value="Active">Active</option>
-                                <option value="Terminated">Terminated</option>
-                                <option value="Short-Term-Disability">Short-Term Disability</option>
-                                <option value="Lont-Term-Disability">Long-Term Disability</option>
+                            <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleStatusChange}>
+                                {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
                             </Form.Control>
                         </Col>
                     </Row>
@@ -97,4 +118,4 @@ const AdminPane = (props) => {
     )
 }
 
-export { AdminPane };
+export { EmployeePane };
