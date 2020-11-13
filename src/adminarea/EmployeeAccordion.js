@@ -6,13 +6,11 @@ import Row from 'react-bootstrap/Row';
 import Accordion from 'react-bootstrap/Accordion';
 
 const EmployeeAccordion = (props) => {
-    const {
-        employee,
-        handleEmployeeEdit,
-    } = props;
+
+    const [myEmployee, setMyEmployee] = useState(props.employee);
 
     const getEmployeeName = () => {
-        return (`${employee.firstName} ${employee.lastName}`);
+        return (`${myEmployee.firstName} ${myEmployee.lastName}`);
     }
 
     return (
@@ -21,9 +19,9 @@ const EmployeeAccordion = (props) => {
                 <Accordion.Toggle as={Card.Header} eventKey="0">
                     <Card.Body>
                         <Card.Title className={"text-info"}>{getEmployeeName()}</Card.Title>
-                        <Card.Subtitle>{`${employee.title}`}</Card.Subtitle>
+                        <Card.Subtitle>{`${myEmployee.title}`}</Card.Subtitle>
                         <Card.Text style={{ marginTop: "10px" }}>
-                            <h6>{`Patient Count: ${employee.patientList.length}`}</h6>
+                            <h6>{`Patient Count: ${myEmployee.patientList.length}`}</h6>
                         </Card.Text>
                     </Card.Body>
                 </Accordion.Toggle>
@@ -38,23 +36,24 @@ const EmployeeAccordion = (props) => {
                             <Col xs={12}>
                                 <Row>
                                     <Col xs={6}>
-                                        <Button size="sm" id={employee.email} style={{ width: "100%" }} variant={"outline-primary"} onClick={() => handleEmployeeEdit(employee)}>Remove All</Button>
+                                        <Button size="sm" id={myEmployee.email} style={{ width: "100%" }} variant={"outline-primary"} onClick={() => props.removeAllPatientAssignments(myEmployee)}>Remove All</Button>
                                     </Col>
                                     <Col xs={6}>
-                                        <Button size="sm" id={employee.email} style={{ width: "100%" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(employee)}>Add</Button>
+                                        <Button size="sm" id={myEmployee.email} style={{ width: "100%" }} variant={"outline-info"} onClick={() => props.addEmployeeAssignment(myEmployee)}>Add</Button>
                                     </Col>
                                 </Row>
                             </Col>
                         </Row>
                         <Row style={{ marginTop: "1vh" }}>
                             <Col xs={12}>
-                                {employee.patientList.map((patient) => (
+                                {myEmployee.patientList.map((patient) => (
                                     <Accordion defaultActiveKey="1">
                                         <Card>
                                             <Accordion.Toggle as={Card.Header} className="text-primary" eventKey="0">{`${patient.firstName} ${patient.lastName}`}</Accordion.Toggle>
                                             <Accordion.Collapse eventKey="0">
                                                 <Row>
-                                                    <Button size="sm" variant="outline-primary" style={{ borderColor: "white", width: "100%" }}>Remove</Button>
+                                                    <Button id={`${patient.email}`} size="sm" variant="outline-primary" style={{ borderColor: "white", width: "100%" }}
+                                                        onClick={(event) => props.removePatientAssignment(myEmployee, event.target.id)}>Remove</Button>
                                                 </Row>
                                             </Accordion.Collapse>
                                         </Card>

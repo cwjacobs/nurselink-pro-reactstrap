@@ -23,7 +23,7 @@ export const employeeList = [
             {
                 firstName: "Daniel",
                 lastName: "Illig",
-                email: "dillit89@gmail.com"
+                email: "dillig89@gmail.com"
             },
         ]
     },

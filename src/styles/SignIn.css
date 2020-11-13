@@ -1,0 +1,30 @@
+.jumbo {
+  color       : white;
+  border-width: 3px;
+  border-style: outset;
+  min-height  : 83vh;
+}
+
+.signin-form {
+  color           : black;
+  background-color: white;
+  margin          : 10px;
+  padding         : 5px 30px 30px 30px;
+  padding-right   : 50px;
+  width           : 40%;
+  border-radius   : 10px;
+  border-color    : #00b0f0;
+  border-width    : 8px;
+  border-style    : solid;
+}
+
+.signin-button {
+  margin-top   : 2vh;
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}

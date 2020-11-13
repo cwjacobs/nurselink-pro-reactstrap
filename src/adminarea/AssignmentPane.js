@@ -11,8 +11,8 @@ import { enrollmentStatus } from '../models/enums';
 import { getAllEmployeesList } from '../conn/nlFirestore'
 
 const AssignmentPane = (props) => {
-    const {
-    } = props;
+    // const {
+    // } = props;
 
     useEffect(() => {
         let statusElement = document.getElementById('status-filter');
@@ -69,6 +69,31 @@ const AssignmentPane = (props) => {
     const handleEmployeeSave = (event) => {
     }
 
+    const addEmployeeAssignment = () => { }
+
+    const removeAllPatientAssignments = (employee) => {
+        employee.patientList.length = 0;
+
+        let editiedList = employeeList.filter((el) => {
+            return el.email !== el.email;
+        });
+        editiedList = [...employeeList, employee];
+        setEmployeeList(editiedList);
+    }
+
+    const removePatientAssignment = (employee, patientId) => {
+        let filteredPatientList = employee.patientList.filter((el) => {
+            return el.email !== patientId;
+        });
+        employee.patientList = [...filteredPatientList];
+
+        let editedEmployeeList = employeeList.filter((el) => {
+            return el.email !== employee.email;
+        });
+        editedEmployeeList = [...editedEmployeeList, employee];
+        setEmployeeList(editedEmployeeList);
+    }
+
     return (
         <div>
             <Card bg='light'>
@@ -93,7 +118,11 @@ const AssignmentPane = (props) => {
                             {
                                 employeeList.map((currentValue, index) =>
                                     <Col xs={3} style={{ marginTop: "1vw" }}>
-                                        <EmployeeAccordion key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
+                                        <EmployeeAccordion key={index} employee={currentValue}
+                                            addEmployeeAssignment={addEmployeeAssignment}
+                                            removePatientAssignment={removePatientAssignment}
+                                            removeAllPatientAssignments={removeAllPatientAssignments}
+                                        />
                                     </Col>
                                 )
                             }
