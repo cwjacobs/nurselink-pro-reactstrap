@@ -87,7 +87,7 @@ const AssignmentPane = (props) => {
                         </Col>
                     </Row>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
                     {employeeList &&
                         <Row className="adminpane-content">
                             {

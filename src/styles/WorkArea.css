@@ -1,0 +1,17 @@
+.workarea {
+    min-height: 88vh;
+}
+
+.sidebar-layout {
+    border-width: 1px;
+    border-style: solid;
+    margin-top  : 3px;
+    border-color: white;
+}
+
+.infopane-layout {
+    border-width: 1px;
+    border-style: solid;
+    margin-top  : 3px;
+    border-color: white;
+}

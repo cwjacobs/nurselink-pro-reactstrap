@@ -18,7 +18,6 @@ import * as utils from '../utilities/utils';
 const InfoPane = (props) => {
     const {
         clickedAccount,
-        setsidebarBackground,
         setsidebarButtonVariant,
     } = props;
 
@@ -176,7 +175,6 @@ const InfoPane = (props) => {
         setMedTableButtonVariant(medTableButtonSelected);
         setAdherenceButtonVariant(adherenceButtonUnselected);
         setTrendsButtonVariant(trendsButtonUnselected);
-        setsidebarBackground("bg-info");
         setsidebarButtonVariant(medTableButtonUnselected);
     }
 
@@ -186,7 +184,6 @@ const InfoPane = (props) => {
         setMedTableButtonVariant(medTableButtonUnselected);
         setAdherenceButtonVariant(adherenceButtonSelected);
         setTrendsButtonVariant(trendsButtonUnselected);
-        setsidebarBackground("bg-primary");
         setsidebarButtonVariant(adherenceButtonUnselected);
 
         let chartData = getChartData(date, dailyLog);
@@ -202,7 +199,6 @@ const InfoPane = (props) => {
         setMedTableButtonVariant(medTableButtonUnselected);
         setAdherenceButtonVariant(adherenceButtonUnselected);
         setTrendsButtonVariant(trendsButtonSelected);
-        setsidebarBackground("bg-success");
         setsidebarButtonVariant(trendsButtonUnselected);
     }
 

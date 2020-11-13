@@ -98,7 +98,7 @@ const PatientPane = (props) => {
                         </Col>
                     </Row>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
                     <Row className="adminpane-content">
                         {
                             employeeAccounts.map((currentValue, index) =>

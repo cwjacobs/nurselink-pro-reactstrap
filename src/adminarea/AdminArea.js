@@ -6,7 +6,7 @@ import { Sidebar } from './Sidebar';
 import { EmployeePane } from './EmployeePane'
 import { PatientPane } from './PatientPane'
 import { AssignmentPane } from './AssignmentPane'
-import './AdminArea.css';
+import '../styles/WorkArea.css';
 
 const AdminArea = (props) => {
     const {
@@ -42,8 +42,8 @@ const AdminArea = (props) => {
     }
 
     return (
-        <div>
-            <Row id="adminarea" className={"p-3"}>
+        <div className="workarea">
+            <Row id="adminarea" className="workarea p-3">
                 <Col xs={2} className="bg-info sidebar-layout">
                     <Sidebar setCurrentAdminPane={setCurrentAdminPane}></Sidebar>
                 </Col>
