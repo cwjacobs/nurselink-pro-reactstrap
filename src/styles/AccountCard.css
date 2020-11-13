@@ -1,0 +1,8 @@
+.accountbtn {
+    width      : 98%;
+    height     : 8vh;
+    margin     : 3px;
+    font-size  : large !important;
+    font-weight: 500 !important;
+    font-style : normal !important;
+}

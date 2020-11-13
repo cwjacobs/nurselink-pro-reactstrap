@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { getAllEmployeesList } from '../conn/nlFirestore'
 import { EmployeeCard } from './EmployeeCard';
 
-import './Sidebar.css';
+import '../styles/WorkArea.css';
 import { Accordion } from 'react-bootstrap';
 
 const Sidebar = (props) => {
@@ -25,7 +25,7 @@ const Sidebar = (props) => {
             <div className="sidebar-content">
                 <Accordion defaultActiveKey="1">
                     <Card>
-                        <Accordion.Toggle as={Card.Header} className="bg-info" style={{ fontSize: "1.5em", color: "white" }} eventKey="0">{`Enrollment`}</Accordion.Toggle>
+                        <Accordion.Toggle as={Card.Header} className="bg-info" style={{ fontSize: "1.5em", color: "white" }} eventKey="0">Enrollment</Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
                             <Row style={{ alignContent: "left" }}>
                                 <Button size="lg" id={"employee-enrollment"} variant="outline-secondary" style={{ width: "100%", textAlign: "left", paddingLeft: "1.5vw" }} onClick={handleClick}>Employees</Button>

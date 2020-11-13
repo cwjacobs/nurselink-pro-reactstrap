@@ -9,6 +9,13 @@
     border-color: white;
 }
 
+.sidebar-content {
+    margin         : 6px;
+    width          : 100%;
+    align-items    : center;
+    justify-content: center;
+}
+
 .infopane-layout {
     border-width: 1px;
     border-style: solid;

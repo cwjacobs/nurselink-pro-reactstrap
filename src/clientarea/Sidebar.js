@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import { getNurseLinkAcct } from '../conn/nlFirestore'
 import { AccountCard } from './AccountCard';
 
-import './Sidebar.css';
+import '../styles/WorkArea.css';
 
 const Sidebar = (props) => {
     const {

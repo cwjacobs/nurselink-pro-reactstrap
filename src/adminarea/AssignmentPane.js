@@ -89,7 +89,7 @@ const AssignmentPane = (props) => {
                 </Card.Header>
                 <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
                     {employeeList &&
-                        <Row className="adminpane-content">
+                        <Row>
                             {
                                 employeeList.map((currentValue, index) =>
                                     <Col xs={3} style={{ marginTop: "1vw" }}>

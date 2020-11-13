@@ -5,8 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Accordion from 'react-bootstrap/Accordion';
 
-import './EmployeeCard.css';
-
 const EmployeeAccordion = (props) => {
     const {
         employee,

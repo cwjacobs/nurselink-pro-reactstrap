@@ -78,7 +78,7 @@ const PatientPane = (props) => {
     }
 
     return (
-        <div className="adminpane-content">
+        <div>
             <Card bg='light'>
                 <Card.Header className={'text-white bg-dark'}>
                     <Row>
@@ -99,7 +99,7 @@ const PatientPane = (props) => {
                     </Row>
                 </Card.Header>
                 <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
-                    <Row className="adminpane-content">
+                    <Row>
                         {
                             employeeAccounts.map((currentValue, index) =>
                                 <Col xs={3} style={{ marginTop: "1vw" }}>

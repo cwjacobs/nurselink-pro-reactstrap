@@ -1,11 +1,11 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 
-import './App.css';
 import { SignIn } from './signIn/SignIn';
 import { Navigation } from './navigation/Navigation';
 import { ClientArea } from './clientarea/ClientArea';
 import { AdminArea } from './adminarea/AdminArea';
+import './styles/App.css';
 
 // const appName = "Medica360";
 // const appName = "Nurse Link";

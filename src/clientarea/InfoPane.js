@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 
 import { Bar } from 'react-chartjs-2';
 
-import './InfoPane.css';
+import '../styles/InfoPane.css';
 import { Trends } from './Trends';
 import { MedTable } from './MedTable';
 import { AddMedicineModal } from '../modals/AddMedicineModal';

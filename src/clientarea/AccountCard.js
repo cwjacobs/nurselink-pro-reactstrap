@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 
-import './AccountCard.css';
+import '../styles/AccountCard.css';
 
 const AccountCard = (props) => {
     const {
