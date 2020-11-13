@@ -53,8 +53,11 @@ const SignIn = (props) => {
       })
   }
 
+  // #00b0f0 // Light Blue
+  // #0070c0 // Dark Blue
+
   return (
-    <Jumbotron className="bg-info jumbo">
+    <Jumbotron className="jumbo bg-dark">
       <div className="signin-form mx-auto">
         <h1 style={{ marginBottom: 0.5 + 'em' }}>Sign In</h1>
         <Form onSubmit={submitHandler}>
@@ -89,7 +92,7 @@ const SignIn = (props) => {
         <h5>Dev</h5>
         <Row>
           <Col xs={6}>
-            <Button variant={"outline-secondary"} onClick={async () => {
+            <Button variant={"outline-warning"} onClick={async () => {
               await deleteTestData();
               alert(`Test Data Deleted`);
             }}>Delete Test Data</Button>

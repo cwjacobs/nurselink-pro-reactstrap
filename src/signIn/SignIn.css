@@ -8,12 +8,15 @@
 .signin-form {
   color              : black;
   background-color   : white;
-  margin             : 20px;
+  margin             : 10px;
   padding            : 5px 30px 30px 30px;
   padding-right      : 50px;
   width              : 40%;
   /* min-width       : 30%; */
   border-radius      : 10px;
+  border-color       : #00b0f0;
+  border-width       : 8px;
+  border-style       : solid;
 }
 
 .signin-button {
