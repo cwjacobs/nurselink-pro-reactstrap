@@ -12,7 +12,7 @@ const Navigation = (props) => {
 
     return (
         <Navbar id="navbar" bg="secondary" variant="dark" sticky="top" role="navigation">
-            <Navbar.Brand href="#home">Medica360</Navbar.Brand>
+            <Navbar.Brand href="#home">NurseLink</Navbar.Brand>
             <Nav className="mr-auto">
                 <Nav.Link href="#home" onClick={props.setIsHome}>Home</Nav.Link>
                 <Nav.Link href="#admin" onClick={props.setIsAdmin}>Admin</Nav.Link>

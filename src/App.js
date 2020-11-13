@@ -63,11 +63,14 @@ class App extends React.Component {
     })
   }
 
+  // #00b0f0
+  // #0070c0
+
   render() {
     return (
       <Container id="appcontainer" fluid className="p-3 bg-dark app">
         {!this.state.isSignedIn && <div>
-          <h1 className="header">Welcome To Medica360</h1>
+          <h1 className="header" style={{ backgroundColor: "#0070c0" }}>Welcome To NurseLink</h1>
           <SignIn setSignedInAccount={this.setSignedInAccount}></SignIn>
         </div>
         }

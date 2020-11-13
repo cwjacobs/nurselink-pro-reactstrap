@@ -5,6 +5,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 
 import { firebaseLogin, getNurseLinkAcct } from '../conn/nlFirestore'
 import { deleteTestData, installTestData } from '../test/patient-test-data'
@@ -72,10 +73,15 @@ const SignIn = (props) => {
             <Form.Check type="checkbox" label="Show Password" onClick={handleShowPassword} />
           </Form.Group>
           <Row>
-            <Col xs={4}>
+            <Col xs={7}>
               <Button variant="outline-info" className="signin-button" style={{ paddingLeft: "2vw", paddingRight: "2vw" }} type="submit" disabled={isLoggingIn}>Submit</Button>
             </Col>
-            {isLoggingIn && <Spinner variant="info" className="signin-button" animation="border" size="md" />}
+            <Col xs={2}>
+              {isLoggingIn && <Spinner variant="info" className="signin-button" animation="border" size="md" />}
+            </Col>
+            <Col xs={3}>
+              <Image src="nllogo.png" alt="Can't load image" width="150px" height="130px" />
+            </Col>
           </Row>
         </Form>
       </div>
