@@ -70,7 +70,7 @@ const AssignmentPane = (props) => {
     }
 
     return (
-        <div className="adminpane-content">
+        <div>
             <Card bg='light'>
                 <Card.Header className={'text-white bg-dark'}>
                     <Row>
