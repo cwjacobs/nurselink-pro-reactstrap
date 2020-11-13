@@ -10,13 +10,16 @@ import Image from 'react-bootstrap/Image';
 import { firebaseLogin, getNurseLinkAcct } from '../conn/nlFirestore'
 import { deleteTestData, installTestData } from '../test/patient-test-data'
 
-import './SignIn.css';
+import '../styles/SignIn.css';
+import '../styles/WorkArea.css';
 
 const SignIn = (props) => {
   const [email, setEmail] = useState("holderman.john@gmail.com");
   const [password, setPassword] = useState("firebase");
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const isDev = true;
 
   const handleShowPassword = () => {
     setIsShowPassword(!isShowPassword);
@@ -88,7 +91,7 @@ const SignIn = (props) => {
           </Row>
         </Form>
       </div>
-      <div style={{ border: "1px solid gray", padding: "6px", width: "22vw", marginTop: "10vh" }}>
+      {isDev && <div style={{ border: "1px solid gray", padding: "6px", width: "22vw", marginTop: "10vh" }}>
         <h5>Dev</h5>
         <Row>
           <Col xs={6}>
@@ -105,6 +108,7 @@ const SignIn = (props) => {
           </Col>
         </Row>
       </div>
+      }
     </Jumbotron>
   );
 }
