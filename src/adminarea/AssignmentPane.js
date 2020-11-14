@@ -76,22 +76,60 @@ const AssignmentPane = (props) => {
     const handleEmployeeSave = (event) => {
     }
 
-    const addEmployeeAssignment = (employee) => {
+    const removePatientFromListOptions = (element, list) => {
+        let filteredList = list.filter(el => {
+            return el.email !== element.email;
+        })
+        return filteredList
+    }
+
+    const initializeEmployeeAssignment = (employee) => {
         let filteredList = employeeList.filter((el) => {
             return (el.email === employee.email);
         });
         setEmployeeList(filteredList);
+
+        let employeePatientList = filteredList[0].patientList;
+
+        filteredList = [...patientList];
+        employeePatientList.forEach(element => {
+            filteredList = removePatientFromListOptions(element, filteredList)
+        });
+        setPatientList(filteredList);
         setIsAddingPatient(true);
     }
 
-    const closeAddingPatient = () => {
-        setIsAddingPatient(false);
+    const addEmployeeAssignment = (patient) => {
+        let employee = employeeList[0];
+        employee.patientList = [...employee.patientList, patient];
 
+        // remove old version of employee from employee list
+        let filteredEmployeeList = employeeList.filter((el) => {
+            return (el.email !== employee.email);
+        });
+
+        // add updated version of employee back to employee list
+        let updatedEmployeeList = [...filteredEmployeeList, employee];
+        setEmployeeList(updatedEmployeeList);
+
+        let filteredPatientList = [...patientList];
+        employee.patientList.forEach(element => {
+            filteredPatientList = removePatientFromListOptions(element, filteredPatientList)
+        });
+        setPatientList(filteredPatientList);
+    }
+
+    const closeAddingPatient = () => {
         let element = document.getElementById('status-filter');
         let value = element.value;
 
         let filteredList = getFilteredEmploymentList(value);
         setEmployeeList(filteredList);
+
+        let allPatients = getAllPatientsList();
+        setPatientList(allPatients);
+
+        setIsAddingPatient(false);
     }
 
     const removeAllPatientAssignments = (employee) => {
@@ -142,7 +180,7 @@ const AssignmentPane = (props) => {
                                 employeeList.map((currentValue, index) =>
                                     <Col xs={3} style={{ marginTop: "1vw" }}>
                                         <EmployeeAccordion key={index} employee={currentValue}
-                                            addEmployeeAssignment={addEmployeeAssignment}
+                                            addEmployeeAssignment={initializeEmployeeAssignment}
                                             removePatientAssignment={removePatientAssignment}
                                             removeAllPatientAssignments={removeAllPatientAssignments}
                                         />
@@ -154,7 +192,7 @@ const AssignmentPane = (props) => {
                             <Button onClick={closeAddingPatient}>Close</Button>
                             {patientList.map((currentValue, index) =>
                                 <Col xs={3} style={{ marginTop: "1vw" }}>
-                                    <PatientCard key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
+                                    <PatientCard key={index} patient={currentValue} footerButtonText={`Add`} handleOnClick={addEmployeeAssignment} />
                                 </Col>
                             )}
                         </Row>}

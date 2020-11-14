@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { PatientCard } from './PatientCard';
 
 import { Container } from 'react-bootstrap';
-import { EditEmployeeModal } from '../modals/EditEmployeeModal';
+import { EditPatientModal } from '../modals/EditPatientModal';
 import { enrollmentStatus } from '../models/enums';
 import { getAllPatientsList } from '../conn/nlFirestore'
 
@@ -15,9 +15,9 @@ const PatientPane = (props) => {
     const {
     } = props;
 
-    const [employeeAccounts, setEmployeeAccounts] = useState([]);
-    const [crntEmployee, setCrntEmployee] = useState();
-    const [isEditingEmployee, setIsEditingEmployee] = useState(false);
+    const [patientAccounts, setPatientAccounts] = useState([]);
+    const [crntPatient, setCrntPatient] = useState();
+    const [isEditingPatient, setIsEditingPatient] = useState(false);
 
     // const accountKeys = signedInAccount.user.accountsSharedToMe.map((currentValue) => {
     //     return currentValue.acctKey;
@@ -25,11 +25,11 @@ const PatientPane = (props) => {
 
     useEffect(() => {
         let statusElement = document.getElementById('status-filter');
-        let filteredList = getFilterEmploymentList(statusElement.value);
-        setEmployeeAccounts(filteredList);
+        let filteredList = getFilterPatientList(statusElement.value);
+        setPatientAccounts(filteredList);
     }, []);
 
-    const getFilterEmploymentList = (status) => {
+    const getFilterPatientList = (status) => {
         let allPatientsList = getAllPatientsList();
         if (status === 'All') {
             return (allPatientsList);
@@ -42,39 +42,37 @@ const PatientPane = (props) => {
         }
     }
 
-    const handleAddEmployee = () => {
-        let employee = {
-            employeeId: Math.round(Math.random() * 10000).toString(),
+    const handleAddPatient = () => {
+        let patient = {
+            patientId: Math.round(Math.random() * 10000).toString(),
             acctKey: "",
             email: "",
             firstName: "",
             lastName: "",
             title: "",
-            credentials: "",
             startDate: "",
             address: "",
             city: "",
             state: "",
             zip: "",
             status: "Not Enrolled",
-            patientList: [],
         }
-        setCrntEmployee(employee);
-        setIsEditingEmployee(true);
+        setCrntPatient(patient);
+        setIsEditingPatient(true);
     }
 
-    const handleEmployeeEdit = (employee) => {
-        setIsEditingEmployee(true);
-        setCrntEmployee(employee);
+    const handlePatientEdit = (patient) => {
+        setIsEditingPatient(true);
+        setCrntPatient(patient);
     }
 
-    const handleEmployeeSave = (employee) => {
-        setIsEditingEmployee(false);
+    const handlePatientSave = (patient) => {
+        setIsEditingPatient(false);
     }
 
     const handleStatusChange = (event) => {
-        let filteredList = getFilterEmploymentList(event.target.value);
-        setEmployeeAccounts(filteredList);
+        let filteredList = getFilterPatientList(event.target.value);
+        setPatientAccounts(filteredList);
     }
 
     return (
@@ -86,7 +84,7 @@ const PatientPane = (props) => {
                             <h3>Patients</h3>
                         </Col>
                         <Col xs={3}>
-                            <Button variant="outline-light" style={{ fontWeight: "bolder" }} onClick={handleAddEmployee}>+</Button>
+                            <Button variant="outline-light" style={{ fontWeight: "bolder" }} onClick={handleAddPatient}>+</Button>
                         </Col>
                         <Col xs={3}>
                             <Form.Label as="h5" style={{ marginTop: "1vh", textAlign: "right" }}>Enrollment Status</Form.Label>
@@ -101,16 +99,16 @@ const PatientPane = (props) => {
                 <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
                     <Row>
                         {
-                            employeeAccounts.map((currentValue, index) =>
+                            patientAccounts.map((currentValue, index) =>
                                 <Col xs={3} style={{ marginTop: "1vw" }}>
-                                    <PatientCard key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
+                                    <PatientCard key={index} patient={currentValue} footerButtonText={`Edit`} handleOnClick={handlePatientEdit} />
                                 </Col>
                             )
                         }
                     </Row>
-                    {isEditingEmployee
+                    {isEditingPatient
                         &&
-                        <EditEmployeeModal employee={crntEmployee} handleEmployeeSave={handleEmployeeSave}></EditEmployeeModal>
+                        <EditPatientModal patient={crntPatient} handleEmployeeSave={handlePatientSave}></EditPatientModal>
                     }
                 </Card.Body>
             </Card>

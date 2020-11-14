@@ -12,8 +12,8 @@ const accounts = ["cwjacobs@gmail.com", "holderman.john@gmail.com", "dillig89@gm
 export const patientList = [
     {
         employeeId: Math.round(Math.random() * 10000).toString(),
-        acctKey: "cjacobs@medica360.com",
-        email: "cjacobs@medica360.com",
+        acctKey: "cwjacobs@gmail.com",
+        email: "cwjacobs@gmail.com",
         firstName: "Craig",
         lastName: "Jacobs",
         startDate: "06/20/1985",
@@ -25,8 +25,8 @@ export const patientList = [
     },
     {
         employeeId: Math.round(Math.random() * 10000).toString(),
-        acctKey: "dillig89@medica360.com",
-        email: "dillig89@medica360.com",
+        acctKey: "dillig89@gmail.com",
+        email: "dillig89@gmail.com",
         firstName: "Daniel",
         lastName: "Illig",
         startDate: "06/20/1985",
@@ -38,8 +38,8 @@ export const patientList = [
     },
     {
         employeeId: Math.round(Math.random() * 10000).toString(),
-        acctKey: "holderman.john@medica360.com",
-        email: "holderman.john@medica360.com",
+        acctKey: "holderman.john@gmail.com",
+        email: "holderman.john@gmail.com",
         firstName: "John",
         lastName: "Holderman",
         startDate: "06/20/1985",

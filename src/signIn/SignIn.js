@@ -68,7 +68,7 @@ const SignIn = (props) => {
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => { handleEmailChange(e) }} />
             <Form.Text className="text-muted">
-              Use of this workstation falls under the Medica360 Code of Conduct Policy and your acceptance of that policy.
+              Use of this workstation falls under the NurseLink Code of Conduct Policy and your acceptance of that policy.
             </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
@@ -79,13 +79,13 @@ const SignIn = (props) => {
             <Form.Check type="checkbox" label="Show Password" onClick={handleShowPassword} />
           </Form.Group>
           <Row>
-            <Col xs={7}>
+            <Col xs={6}>
               <Button variant="outline-info" className="signin-button" style={{ paddingLeft: "2vw", paddingRight: "2vw" }} type="submit" disabled={isLoggingIn}>Submit</Button>
             </Col>
             <Col xs={2}>
               {isLoggingIn && <Spinner variant="info" className="signin-button" animation="border" size="md" />}
             </Col>
-            <Col xs={3}>
+            <Col xs={4}>
               <Image src="nllogo.png" alt="Can't load image" width="150px" height="130px" />
             </Col>
           </Row>

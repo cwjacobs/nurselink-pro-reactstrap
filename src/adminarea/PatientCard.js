@@ -6,18 +6,19 @@ import Row from 'react-bootstrap/Row';
 
 const PatientCard = (props) => {
     const {
-        employee,
-        handleEmployeeEdit,
+        patient,
+        handleOnClick,
+        footerButtonText,
     } = props;
 
-    const getEmployeeName = () => {
-        return (`${employee.firstName} ${employee.lastName}`);
+    const getPatientName = () => {
+        return (`${patient.firstName} ${patient.lastName}`);
     }
 
     return (
         <Card>
             <Card.Body>
-                <Card.Title className={"text-info"}>{getEmployeeName()}</Card.Title>
+                <Card.Title className={"text-info"}>{getPatientName()}</Card.Title>
                 <Card.Text style={{ marginTop: "10px" }}>
                     {/* <p>{`${employee.email}`}</p> */}
                 </Card.Text>
@@ -25,10 +26,10 @@ const PatientCard = (props) => {
             <Card.Footer style={{ marginTop: "-10px" }}>
                 <Row>
                     <Col xs={8}>
-                        <small className="text-muted">{`${employee.status}`}</small>
+                        <small className="text-muted">{`${patient.status}`}</small>
                     </Col>
                     <Col xs={4}>
-                        <Button size="sm" id={employee.email} style={{ width: "4.5vw" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(employee)}>Edit</Button>
+                        <Button size="sm" id={patient.email} style={{ width: "4.5vw" }} variant={"outline-info"} onClick={() => handleOnClick(patient)}>{footerButtonText}</Button>
                     </Col>
                 </Row>
             </Card.Footer>
