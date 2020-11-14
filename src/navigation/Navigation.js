@@ -18,7 +18,7 @@ const Navigation = (props) => {
             <Col xs={1}>
                 <Navbar.Brand href="#home">NurseLink</Navbar.Brand>
             </Col>
-            <Col xs={4}>
+            <Col xs={5}>
                 <Nav className="mr-auto">
                     <Nav.Link href="#home" onClick={props.setIsHome}>Home</Nav.Link>
                     <Nav.Link href="#admin" onClick={props.setIsAdmin}>Admin</Nav.Link>
@@ -34,7 +34,7 @@ const Navigation = (props) => {
                             </Form.Group>
                         </Col>
                         <Col xs={4}>
-                            <Button variant="outline-light" style={{ marginLeft: '-1vw', marginRight: '5vw', width: '6vw' }}>Search</Button>
+                            <Button variant="outline-light" style={{ marginLeft: '-1vw', marginRight: '2vw', width: '6vw' }}>Search</Button>
                             <Button variant="outline-warning" style={{ width: '6vw' }} onClick={signOutHandler}>Sign Out</Button>
                         </Col>
                     </Form>

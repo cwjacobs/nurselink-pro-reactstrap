@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -8,6 +8,10 @@ import Accordion from 'react-bootstrap/Accordion';
 const EmployeeAccordion = (props) => {
 
     const [myEmployee, setMyEmployee] = useState(props.employee);
+
+    useEffect(() => {
+        setMyEmployee(props.employee)
+    }, [props.employee])
 
     const getEmployeeName = () => {
         return (`${myEmployee.firstName} ${myEmployee.lastName}`);

@@ -3,24 +3,31 @@ import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import { EmployeeAccordion } from './EmployeeAccordion';
+import { PatientCard } from './PatientCard';
 import { Container } from 'react-bootstrap';
 
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
 import { enrollmentStatus } from '../models/enums';
-import { getAllEmployeesList } from '../conn/nlFirestore'
+import { getAllEmployeesList, getAllPatientsList } from '../conn/nlFirestore'
 
 const AssignmentPane = (props) => {
     // const {
     // } = props;
 
+    const [patientList, setPatientList] = useState();
+    const [employeeList, setEmployeeList] = useState();
+    const [isAddingPatient, setIsAddingPatient] = useState(false);
+
     useEffect(() => {
         let statusElement = document.getElementById('status-filter');
         let filteredList = getFilteredEmploymentList(statusElement.value);
         setEmployeeList(filteredList);
-    }, []);
 
-    const [employeeList, setEmployeeList] = useState();
+        let allPatientsList = getAllPatientsList();
+        setPatientList(allPatientsList);
+    }, []);
 
     const dragStart = (e) => {
         const target = e.target;
@@ -69,7 +76,23 @@ const AssignmentPane = (props) => {
     const handleEmployeeSave = (event) => {
     }
 
-    const addEmployeeAssignment = () => { }
+    const addEmployeeAssignment = (employee) => {
+        let filteredList = employeeList.filter((el) => {
+            return (el.email === employee.email);
+        });
+        setEmployeeList(filteredList);
+        setIsAddingPatient(true);
+    }
+
+    const closeAddingPatient = () => {
+        setIsAddingPatient(false);
+
+        let element = document.getElementById('status-filter');
+        let value = element.value;
+
+        let filteredList = getFilteredEmploymentList(value);
+        setEmployeeList(filteredList);
+    }
 
     const removeAllPatientAssignments = (employee) => {
         employee.patientList.length = 0;
@@ -113,7 +136,7 @@ const AssignmentPane = (props) => {
                     </Row>
                 </Card.Header>
                 <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
-                    {employeeList &&
+                    {employeeList && <div>
                         <Row>
                             {
                                 employeeList.map((currentValue, index) =>
@@ -127,6 +150,15 @@ const AssignmentPane = (props) => {
                                 )
                             }
                         </Row>
+                        {isAddingPatient && <Row>
+                            <Button onClick={closeAddingPatient}>Close</Button>
+                            {patientList.map((currentValue, index) =>
+                                <Col xs={3} style={{ marginTop: "1vw" }}>
+                                    <PatientCard key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
+                                </Col>
+                            )}
+                        </Row>}
+                    </div>
                     }
                 </Card.Body>
             </Card>
