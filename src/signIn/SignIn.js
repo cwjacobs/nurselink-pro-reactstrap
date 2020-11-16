@@ -80,10 +80,10 @@ const SignIn = (props) => {
           </Form.Group>
           <Row>
             <Col xs={6}>
-              <Button variant="outline-info" className="signin-button" style={{ paddingLeft: "2vw", paddingRight: "2vw" }} type="submit" disabled={isLoggingIn}>Submit</Button>
+              <Button variant="outline-primary" className="signin-button" style={{ paddingLeft: "2vw", paddingRight: "2vw" }} type="submit" disabled={isLoggingIn}>Submit</Button>
             </Col>
             <Col xs={2}>
-              {isLoggingIn && <Spinner variant="info" className="signin-button" animation="border" size="md" />}
+              {isLoggingIn && <Spinner variant="primary" className="signin-button" animation="border" size="md" />}
             </Col>
             <Col xs={4}>
               <Image src="nllogo.png" alt="Can't load image" width="150px" height="130px" />
