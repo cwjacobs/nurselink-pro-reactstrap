@@ -10,24 +10,36 @@ import { Container } from 'react-bootstrap';
 
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
 import { enrollmentStatus } from '../models/enums';
-import { getAllEmployeesList, getAllPatientsList } from '../conn/nlFirestore'
+import { getSortedAllEmployeesList, getSortedAllPatientsList } from '../conn/nlFirestore'
+import { ScrollablePane } from '../components/ScrollablePane'
 
 const AssignmentPane = (props) => {
     // const {
     // } = props;
 
-    const [patientList, setPatientList] = useState();
-    const [employeeList, setEmployeeList] = useState();
+    const [patientList, setPatientList] = useState(getSortedAllPatientsList());
+    const [employeeList, setEmployeeList] = useState(getSortedAllEmployeesList());
     const [isAddingPatient, setIsAddingPatient] = useState(false);
 
     useEffect(() => {
         let statusElement = document.getElementById('status-filter');
-        let filteredList = getFilteredEmploymentList(statusElement.value);
-        setEmployeeList(filteredList);
 
-        let allPatientsList = getAllPatientsList();
-        setPatientList(allPatientsList);
+        let filteredList = getFilteredList(statusElement.value, patientList);
+        setPatientList(sortByLastName(filteredList));
+
+        filteredList = getFilteredList(statusElement.value, employeeList);
+        setEmployeeList(sortByLastName(filteredList));
     }, []);
+
+    const sortByLastName = (list) => {
+        let sortedList;
+        if (list) {
+            sortedList = list.sort((x, y) => {
+                return (x.lastName < y.lastName ? -1 : 1);
+            })
+        }
+        return sortedList;
+    }
 
     const dragStart = (e) => {
         const target = e.target;
@@ -52,21 +64,33 @@ const AssignmentPane = (props) => {
         e.preventDefault();
     }
 
-    const getFilteredEmploymentList = (status) => {
-        let allEmployeeList = getAllEmployeesList();
+    const getFilteredPatientList = (status) => {
+        let allPatientsList = getSortedAllPatientsList();
         if (status === 'All') {
-            return (allEmployeeList);
+            return (allPatientsList);
         }
         else {
-            let filteredList = allEmployeeList.filter((el) => {
+            let filteredList = allPatientsList.filter((el) => {
                 return (el.status === status);
             });
             return (filteredList);
         }
     }
 
-    const handleStatusChange = (event) => {
-        let filteredList = getFilteredEmploymentList(event.target.value);
+    const getFilteredList = (status, list) => {
+        if (status === 'All') {
+            return (list);
+        }
+        else {
+            let filteredList = list.filter((el) => {
+                return (el.status === status);
+            });
+            return (filteredList);
+        }
+    }
+
+    const handleEmployeeFilterChange = (event) => {
+        let filteredList = getFilteredList(event.target.value, getSortedAllEmployeesList());
         setEmployeeList(filteredList);
     }
 
@@ -87,15 +111,15 @@ const AssignmentPane = (props) => {
         let filteredList = employeeList.filter((el) => {
             return (el.email === employee.email);
         });
-        setEmployeeList(filteredList);
+        setEmployeeList(sortByLastName(filteredList));
 
         let employeePatientList = filteredList[0].patientList;
 
         filteredList = [...patientList];
-        employeePatientList.forEach(element => {
-            filteredList = removePatientFromListOptions(element, filteredList)
+        employeePatientList.forEach(el => {
+            filteredList = removePatientFromListOptions(el, filteredList)
         });
-        setPatientList(filteredList);
+        setPatientList(sortByLastName(filteredList));
         setIsAddingPatient(true);
     }
 
@@ -110,24 +134,25 @@ const AssignmentPane = (props) => {
 
         // add updated version of employee back to employee list
         let updatedEmployeeList = [...filteredEmployeeList, employee];
-        setEmployeeList(updatedEmployeeList);
+        setEmployeeList(sortByLastName(updatedEmployeeList));
 
         let filteredPatientList = [...patientList];
         employee.patientList.forEach(element => {
             filteredPatientList = removePatientFromListOptions(element, filteredPatientList)
         });
-        setPatientList(filteredPatientList);
+        setPatientList(sortByLastName(filteredPatientList));
     }
 
     const closeAddingPatient = () => {
         let element = document.getElementById('status-filter');
         let value = element.value;
 
-        let filteredList = getFilteredEmploymentList(value);
+        let filteredList = getFilteredList(value, getSortedAllEmployeesList());
         setEmployeeList(filteredList);
 
-        let allPatients = getAllPatientsList();
-        setPatientList(allPatients);
+        // let allPatients = getAllPatientsList();
+        filteredList = getFilteredList(value, getSortedAllPatientsList());
+        setPatientList(filteredList);
 
         setIsAddingPatient(false);
     }
@@ -136,10 +161,10 @@ const AssignmentPane = (props) => {
         employee.patientList.length = 0;
 
         let editiedList = employeeList.filter((el) => {
-            return el.email !== el.email;
+            return el.email !== employee.email;
         });
-        editiedList = [...employeeList, employee];
-        setEmployeeList(editiedList);
+        setEmployeeList(sortByLastName([...editiedList, employee]));
+        setPatientList(getSortedAllPatientsList());
     }
 
     const removePatientAssignment = (employee, patientId) => {
@@ -151,8 +176,13 @@ const AssignmentPane = (props) => {
         let editedEmployeeList = employeeList.filter((el) => {
             return el.email !== employee.email;
         });
-        editedEmployeeList = [...editedEmployeeList, employee];
-        setEmployeeList(editedEmployeeList);
+        setEmployeeList(sortByLastName([...editedEmployeeList, employee]));
+
+        let patient = getSortedAllPatientsList().find((el) => {
+            return el.email === patientId;
+        })
+        let availablePatientList = [...patientList, patient];
+        setPatientList(sortByLastName(availablePatientList));
     }
 
     return (
@@ -167,7 +197,7 @@ const AssignmentPane = (props) => {
                             <Form.Label as="h5" style={{ marginTop: "1vh", textAlign: "right" }}>Patient Status</Form.Label>
                         </Col>
                         <Col xs={4}>
-                            <Form.Control id='status-filter' as="select" defaultValue="Active" onChange={handleStatusChange}>
+                            <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleEmployeeFilterChange}>
                                 {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
                             </Form.Control>
                         </Col>
@@ -187,15 +217,17 @@ const AssignmentPane = (props) => {
                                     </Col>
                                 )
                             }
+                            {isAddingPatient && <Col>
+                                <Button onClick={closeAddingPatient}>Close</Button>
+                                <ScrollablePane displayList={patientList} entityButtonHandler={addEmployeeAssignment}></ScrollablePane>
+
+                                {/* {patientList.map((currentValue, index) =>
+                                    <Col xs={3} style={{ marginTop: "1vw" }}>
+                                        <PatientCard key={index} patient={currentValue} footerButtonText={`Add`} handleOnClick={addEmployeeAssignment} />
+                                    </Col>
+                                )} */}
+                            </Col>}
                         </Row>
-                        {isAddingPatient && <Row>
-                            <Button onClick={closeAddingPatient}>Close</Button>
-                            {patientList.map((currentValue, index) =>
-                                <Col xs={3} style={{ marginTop: "1vw" }}>
-                                    <PatientCard key={index} patient={currentValue} footerButtonText={`Add`} handleOnClick={addEmployeeAssignment} />
-                                </Col>
-                            )}
-                        </Row>}
                     </div>
                     }
                 </Card.Body>

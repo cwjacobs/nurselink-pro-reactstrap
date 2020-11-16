@@ -94,10 +94,17 @@ export function deleteNurseLinkAcctData(key) {
     })
 };
 
-export function getAllEmployeesList() {
-    return employeeList
+const sortByLastName = (list) => {
+    let sortedList = list.sort((x, y) => {
+        return (x.lastName < y.lastName ? -1 : 1);
+    })
+    return sortedList;
+}
+
+export function getSortedAllPatientsList() {
+    return sortByLastName(patientList);
 };
 
-export function getAllPatientsList() {
-    return patientList
+export function getSortedAllEmployeesList() {
+    return sortByLastName(employeeList);
 };

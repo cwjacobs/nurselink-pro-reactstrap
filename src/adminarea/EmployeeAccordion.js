@@ -40,10 +40,19 @@ const EmployeeAccordion = (props) => {
                             <Col xs={12}>
                                 <Row>
                                     <Col xs={6}>
-                                        <Button size="sm" id={myEmployee.email} style={{ width: "100%" }} variant={"outline-primary"} onClick={() => props.removeAllPatientAssignments(myEmployee)}>Remove All</Button>
+                                        <Button size="sm"
+                                            disabled={myEmployee.patientList.length === 0 ? true : false}
+                                            id={myEmployee.email}
+                                            style={{ width: "100%" }}
+                                            variant={"outline-primary"}
+                                            onClick={() => props.removeAllPatientAssignments(myEmployee)}>Remove All</Button>
                                     </Col>
                                     <Col xs={6}>
-                                        <Button size="sm" id={myEmployee.email} style={{ width: "100%" }} variant={"outline-info"} onClick={() => props.addEmployeeAssignment(myEmployee)}>Add</Button>
+                                        <Button size="sm"
+                                            id={myEmployee.email}
+                                            style={{ width: "100%" }}
+                                            variant={"outline-info"}
+                                            onClick={() => props.addEmployeeAssignment(myEmployee)}>Add</Button>
                                     </Col>
                                 </Row>
                             </Col>

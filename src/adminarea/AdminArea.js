@@ -7,7 +7,7 @@ import { EmployeePane } from './EmployeePane'
 import { PatientPane } from './PatientPane'
 import { AssignmentPane } from './AssignmentPane'
 import { ScrollablePane } from '../components/ScrollablePane'
-import { getAllPatientsList } from '../conn/nlFirestore'
+import { getSortedAllPatientsList, getSortedAllEmployeesList } from '../conn/nlFirestore'
 
 import '../styles/WorkArea.css';
 
@@ -64,8 +64,8 @@ const AdminArea = (props) => {
                 <Col xs={10} className="bg-secondary infopane-layout">
                     {isEmployeeEnrollment && <EmployeePane clickedAccount={clickedAccount}></EmployeePane>}
                     {isPatientEnrollment && <PatientPane clickedAccount={clickedAccount}></PatientPane>}
-                    {isPatientAssignment && <AssignmentPane clickedAccount={clickedAccount}></AssignmentPane>}
-                    {isSettings && <ScrollablePane displayList={getAllPatientsList()}></ScrollablePane>}
+                    {isPatientAssignment && <AssignmentPane></AssignmentPane>}
+                    {isSettings && <ScrollablePane displayList={getSortedAllPatientsList()}></ScrollablePane>}
                 </Col>
             </Row>
         </div>

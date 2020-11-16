@@ -3,34 +3,36 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { Collapse } from 'react-bootstrap';
 
 const EntityCard = (props) => {
     const {
         entity,
-        handleEmployeeEdit,
+        buttonText,
+        handleButtonClick,
     } = props;
 
-    const getEmployeeName = () => {
+    const getEntityName = () => {
         return (`${entity.firstName} ${entity.lastName}`);
     }
 
     return (
-        <Card>
+        <Card className="d-flex justify-content-left align-items-left flex-column">
             <Card.Body>
-                <Card.Title className={"text-info"}>{getEmployeeName()}</Card.Title>
-                <Card.Subtitle>{`${entity.title}`}</Card.Subtitle>
-                {/* <Card.Text style={{ marginTop: "10px" }}>
+                <Card.Title className={"text-info"}>{getEntityName()}</Card.Title>
+                {entity.title && <Card.Subtitle>{`${entity.title}`}</Card.Subtitle>}
+                {entity.patientList && <Card.Text style={{ marginTop: "10px" }}>
                     <h6>{`Patient Count: ${entity.patientList.length}`}</h6>
-                    <p>{`${employee.email}`}</p>
-                </Card.Text> */}
+                    <p>{`${entity.email}`}</p>
+                </Card.Text>}
             </Card.Body>
             <Card.Footer style={{ marginTop: "-10px" }}>
                 <Row>
-                    <Col xs={8}>
+                    <Col xs={6}>
                         <small className="text-muted">{`${entity.status}`}</small>
                     </Col>
-                    <Col xs={4}>
-                        <Button size="sm" id={entity.email} style={{ width: "4.5vw" }} variant={"outline-info"} onClick={() => handleEmployeeEdit(entity)}>Edit</Button>
+                    <Col xs={6}>
+                        <Button size="sm" id={entity.email} variant={"outline-info"} style={{ marginLeft: "1vw" }} onClick={() => handleButtonClick(entity)}>{buttonText}</Button>
                     </Col>
                 </Row>
             </Card.Footer>

@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-import { getAllEmployeesList } from '../conn/nlFirestore'
+import { getSortedAllEmployeesList } from '../conn/nlFirestore'
 import { EmployeeCard } from './EmployeeCard';
 
 import '../styles/WorkArea.css';

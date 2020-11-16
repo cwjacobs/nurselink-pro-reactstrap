@@ -4,27 +4,22 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
 
-import { Container } from 'react-bootstrap';
-import { EditPatientModal } from '../modals/EditPatientModal';
 import { enrollmentStatus } from '../models/enums';
-import { getAllPatientsList } from '../conn/nlFirestore'
 import { EntityCard } from './EntityCard';
 
-
-const ScrollablePane = (props) => {
-    const {
-        headerText,
-        isDisplayHeader,
-        isDisplayAddButton,
-        addButtonHandler,
-        isDisplayFilter,
-        filterSelectHandler,
-        displayList,
-    } = props;
-
-    useEffect(() => {
-    }, []);
+const ScrollablePane = ({
+    headerText,
+    isDisplayHeader,
+    isDisplayAddButton,
+    isDisplayFilter,
+    filterSelectHandler,
+    addButtonHandler,
+    entityButtonHandler,
+    displayList,
+    ...restProps
+}) => {
 
     return (
         <div>
@@ -54,16 +49,29 @@ const ScrollablePane = (props) => {
                         {
                             displayList.map((currentValue, index) =>
                                 <Col xs={3} style={{ marginTop: "1vw" }}>
-                                    <EntityCard key={index} entity={currentValue} footerButtonText={`Edit`} handleOnClick={addButtonHandler} />
+                                    <EntityCard key={index} entity={currentValue} buttonText={`Add`} handleButtonClick={entityButtonHandler} />
                                 </Col>
                             )
                         }
                     </Row>
-
                 </Card.Body>
             </Card>
         </div>
     )
 }
+
+ScrollablePane.propTypes = {
+    // avatar: PropTypes.string,
+    // avatarSize: PropTypes.number,
+    // title: PropTypes.string,
+    // subtitle: PropTypes.string,
+    // text: PropTypes.string,
+    // className: PropTypes.string,
+    // displayList: PropTypes.array,
+};
+
+ScrollablePane.defaultProps = {
+    // displayList: [],
+};
 
 export { ScrollablePane };
