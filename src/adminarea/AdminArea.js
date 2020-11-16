@@ -6,6 +6,9 @@ import { Sidebar } from './Sidebar';
 import { EmployeePane } from './EmployeePane'
 import { PatientPane } from './PatientPane'
 import { AssignmentPane } from './AssignmentPane'
+import { ScrollablePane } from '../components/ScrollablePane'
+import { getAllPatientsList } from '../conn/nlFirestore'
+
 import '../styles/WorkArea.css';
 
 const AdminArea = (props) => {
@@ -17,6 +20,7 @@ const AdminArea = (props) => {
     const [isEmployeeEnrollment, setIsEmployeeEnrollment] = useState(true);
     const [isPatientEnrollment, setIsPatientEnrollment] = useState(false);
     const [isPatientAssignment, setIsPatientAssignment] = useState(false);
+    const [isSettings, setIsSettings] = useState(false);
 
     const setCurrentAdminPane = (selectedPane) => {
 
@@ -25,18 +29,28 @@ const AdminArea = (props) => {
                 setIsEmployeeEnrollment(true);
                 setIsPatientEnrollment(false);
                 setIsPatientAssignment(false);
+                setIsSettings(false);
                 break;
 
             case 'patient-enrollment':
                 setIsEmployeeEnrollment(false);
                 setIsPatientEnrollment(true);
                 setIsPatientAssignment(false);
+                setIsSettings(false);
                 break;
 
             case 'patient-assignment':
                 setIsEmployeeEnrollment(false);
                 setIsPatientEnrollment(false);
                 setIsPatientAssignment(true);
+                setIsSettings(false);
+                break;
+
+            case 'settings':
+                setIsEmployeeEnrollment(false);
+                setIsPatientEnrollment(false);
+                setIsPatientAssignment(false);
+                setIsSettings(true);
                 break;
         }
     }
@@ -51,6 +65,7 @@ const AdminArea = (props) => {
                     {isEmployeeEnrollment && <EmployeePane clickedAccount={clickedAccount}></EmployeePane>}
                     {isPatientEnrollment && <PatientPane clickedAccount={clickedAccount}></PatientPane>}
                     {isPatientAssignment && <AssignmentPane clickedAccount={clickedAccount}></AssignmentPane>}
+                    {isSettings && <ScrollablePane displayList={getAllPatientsList()}></ScrollablePane>}
                 </Col>
             </Row>
         </div>

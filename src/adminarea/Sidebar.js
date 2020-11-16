@@ -39,6 +39,11 @@ const Sidebar = (props) => {
                         <Accordion.Toggle as={Card.Header} id={"patient-assignment"} className="bg-info" style={{ fontSize: "1.5em", color: "white" }} eventKey="0" onClick={handleClick}>{`Assignment`}</Accordion.Toggle>
                     </Card>
                 </Accordion >
+                <Accordion style={{ marginTop: "10px" }}>
+                    <Card>
+                        <Accordion.Toggle as={Card.Header} id={"settings"} className="bg-info" style={{ fontSize: "1.5em", color: "white" }} eventKey="0" onClick={handleClick}>{`Settings`}</Accordion.Toggle>
+                    </Card>
+                </Accordion >
             </div>
         </Col>
     )
