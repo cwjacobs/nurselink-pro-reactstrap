@@ -100,7 +100,7 @@ const AssignmentPane = (props) => {
     const handleEmployeeSave = (event) => {
     }
 
-    const removePatientFromListOptions = (element, list) => {
+    const removeElementFromListOptions = (element, list) => {
         let filteredList = list.filter(el => {
             return el.email !== element.email;
         })
@@ -117,7 +117,7 @@ const AssignmentPane = (props) => {
 
         filteredList = [...patientList];
         employeePatientList.forEach(el => {
-            filteredList = removePatientFromListOptions(el, filteredList)
+            filteredList = removeElementFromListOptions(el, filteredList)
         });
         setPatientList(sortByLastName(filteredList));
         setIsAddingPatient(true);
@@ -138,7 +138,7 @@ const AssignmentPane = (props) => {
 
         let filteredPatientList = [...patientList];
         employee.patientList.forEach(element => {
-            filteredPatientList = removePatientFromListOptions(element, filteredPatientList)
+            filteredPatientList = removeElementFromListOptions(element, filteredPatientList)
         });
         setPatientList(sortByLastName(filteredPatientList));
     }

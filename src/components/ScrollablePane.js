@@ -48,7 +48,7 @@ const ScrollablePane = ({
                     <Row>
                         {
                             displayList.map((currentValue, index) =>
-                                <Col xs={3} style={{ marginTop: "1vw" }}>
+                                <Col xs={3} style={{ marginTop: "1vh" }}>
                                     <EntityCard key={index} entity={currentValue} buttonText={`Add`} handleButtonClick={entityButtonHandler} />
                                 </Col>
                             )
