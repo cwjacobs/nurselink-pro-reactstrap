@@ -85,6 +85,12 @@ const EmployeePane = (props) => {
         padding: "6px",
     }
 
+    const BUTTON_STYLE = {
+        width: "3%",
+        fontWeight: "bolder",
+        margin: "8px",
+    }
+
     const CONTENT_STYLE = {
         borderWidth: "1px",
         borderStyle: "solid",
@@ -100,17 +106,13 @@ const EmployeePane = (props) => {
     const LABEL_STYLE = {
         width: "60%",
         fontWeight: "bolder",
-    }
-
-    const BUTTON_STYLE = {
-        width: "3%",
-        fontWeight: "bolder",
-        margin: "8px",
+        marginTop: "1vh",
     }
 
     const FILTER_STYLE = {
         display: "flex",
         width: "50%",
+        marginTop: "1vh",
     }
 
     return (

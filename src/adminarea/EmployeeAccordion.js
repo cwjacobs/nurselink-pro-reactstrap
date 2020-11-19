@@ -44,14 +44,14 @@ const EmployeeAccordion = (props) => {
                                             disabled={myEmployee.patientList.length === 0 ? true : false}
                                             id={myEmployee.email}
                                             style={{ width: "100%" }}
-                                            variant={"outline-primary"}
+                                            variant={"outline-danger"}
                                             onClick={() => props.removeAllPatientAssignments(myEmployee)}>Remove All</Button>
                                     </Col>
                                     <Col xs={6}>
                                         <Button size="sm"
                                             id={myEmployee.email}
                                             style={{ width: "100%" }}
-                                            variant={"outline-info"}
+                                            variant={"outline-primary"}
                                             onClick={() => props.addEmployeeAssignment(myEmployee)}>Add</Button>
                                     </Col>
                                 </Row>
@@ -65,7 +65,7 @@ const EmployeeAccordion = (props) => {
                                             <Accordion.Toggle as={Card.Header} className="text-primary" eventKey="0">{`${patient.firstName} ${patient.lastName}`}</Accordion.Toggle>
                                             <Accordion.Collapse eventKey="0">
                                                 <Row>
-                                                    <Button id={`${patient.email}`} size="sm" variant="outline-primary" style={{ borderColor: "white", width: "100%" }}
+                                                    <Button id={`${patient.email}`} size="sm" variant="outline-danger" style={{ borderColor: "white", width: "100%" }}
                                                         onClick={(event) => props.removePatientAssignment(myEmployee, event.target.id)}>Remove</Button>
                                                 </Row>
                                             </Accordion.Collapse>

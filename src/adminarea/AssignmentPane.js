@@ -193,6 +193,12 @@ const AssignmentPane = (props) => {
         padding: "6px",
     }
 
+    const BUTTON_STYLE = {
+        width: "3%",
+        fontWeight: "bolder",
+        margin: "8px",
+    }
+
     const CONTENT_STYLE = {
         borderWidth: "1px",
         borderStyle: "solid",
@@ -206,17 +212,23 @@ const AssignmentPane = (props) => {
     }
 
     const LABEL_STYLE = {
-        width: "65%",
+        width: "60%",
+        fontWeight: "bolder",
+        marginTop: "1vh",
+        margin: "8px",
+
     }
 
     const FILTER_STYLE = {
         display: "flex",
-        width: "35%",
+        width: "50%",
+        marginTop: "1vh",
     }
 
     return (
         <div>
             <div className="bg-secondary" style={BANNER_STYLE}>
+                {/* <Button variant="outline-light" style={BUTTON_STYLE}>+</Button> */}
                 <h3 style={LABEL_STYLE}>Patient Assignment</h3>
                 <div style={FILTER_STYLE}>
                     <Form.Label as="h5" className="mt-1" style={LABEL_STYLE}>Employee Status:</Form.Label>

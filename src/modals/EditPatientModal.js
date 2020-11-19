@@ -114,7 +114,7 @@ const EditPatientModal = (props) => {
     return (
         <div>
             <Modal size="xl" centered show={true}>
-                <Modal.Header className="bg-info">
+                <Modal.Header className="bg-primary">
                     <Modal.Title className="text-white">Edit Patient</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -161,14 +161,11 @@ const EditPatientModal = (props) => {
                                 </Form.Group>
                             </Col>
                         </Form.Row>
-                        {/* <Form.Group id="formGridCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group> */}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button size="sm" variant="outline-danger" style={{ width: "6vw" }} onClick={(event) => props.handleEmployeeSave(event)}>Cancel</Button>
-                    <Button size="sm" variant="outline-info" style={{ width: "6vw" }} onClick={(event) => props.handleEmployeeSave(event)}>Save</Button>
+                    <Button size="sm" variant="outline-primary" style={{ width: "6vw" }} onClick={(event) => props.handleEmployeeSave(event)}>Save</Button>
                 </Modal.Footer>
             </Modal >
         </div >

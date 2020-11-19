@@ -98,6 +98,7 @@ const PatientPane = (props) => {
     const LABEL_STYLE = {
         width: "60%",
         fontWeight: "bolder",
+        marginTop: "1vh",
     }
 
     const BUTTON_STYLE = {
@@ -109,6 +110,7 @@ const PatientPane = (props) => {
     const FILTER_STYLE = {
         display: "flex",
         width: "50%",
+        marginTop: "1vh",
     }
 
     return (
