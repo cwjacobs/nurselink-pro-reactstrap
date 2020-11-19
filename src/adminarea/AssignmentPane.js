@@ -14,8 +14,9 @@ import { getSortedAllEmployeesList, getSortedAllPatientsList } from '../conn/nlF
 import { ScrollablePane } from '../components/ScrollablePane'
 
 const AssignmentPane = (props) => {
-    // const {
-    // } = props;
+    const {
+        isAddButtonDisplayed = false,
+    } = props;
 
     const [patientList, setPatientList] = useState(getSortedAllPatientsList());
     const [employeeList, setEmployeeList] = useState(getSortedAllEmployeesList());
@@ -62,19 +63,6 @@ const AssignmentPane = (props) => {
 
     const dragOver = (e) => {
         e.preventDefault();
-    }
-
-    const getFilteredPatientList = (status) => {
-        let allPatientsList = getSortedAllPatientsList();
-        if (status === 'All') {
-            return (allPatientsList);
-        }
-        else {
-            let filteredList = allPatientsList.filter((el) => {
-                return (el.status === status);
-            });
-            return (filteredList);
-        }
     }
 
     const getFilteredList = (status, list) => {
@@ -185,18 +173,44 @@ const AssignmentPane = (props) => {
         setPatientList(sortByLastName(availablePatientList));
     }
 
-    const BANNER_STYLE = {
+    const HEADER = {
         color: "white",
         display: "flex",
         justifyContent: "flex-start",
         margin: "0px 3px",
         padding: "6px",
-    }
 
-    const BUTTON_STYLE = {
-        width: "3%",
-        fontWeight: "bolder",
-        margin: "8px",
+        // BANNER: {
+        //     color: "white",
+        //     display: "flex",
+        //     justifyContent: "flex-start",
+        //     margin: "0px 3px",
+        //     padding: "6px",
+        // },
+
+        SPAN: {
+            width: "0.3%",
+            margin: "8px",
+        },
+
+        BUTTON: {
+            width: "3%",
+            fontWeight: "bolder",
+            margin: "8px",
+        },
+
+        SELECT: {
+            display: "flex",
+            width: "50%",
+            marginTop: "1vh",
+        },
+
+        TEXT: {
+            width: "60%",
+            fontWeight: "bolder",
+            marginTop: "1vh",
+            margin: "8px",
+        },
     }
 
     const CONTENT_STYLE = {
@@ -211,27 +225,14 @@ const AssignmentPane = (props) => {
         height: "78vh"
     }
 
-    const LABEL_STYLE = {
-        width: "60%",
-        fontWeight: "bolder",
-        marginTop: "1vh",
-        margin: "8px",
-
-    }
-
-    const FILTER_STYLE = {
-        display: "flex",
-        width: "50%",
-        marginTop: "1vh",
-    }
-
     return (
         <div>
-            <div className="bg-secondary" style={BANNER_STYLE}>
-                {/* <Button variant="outline-light" style={BUTTON_STYLE}>+</Button> */}
-                <h3 style={LABEL_STYLE}>Patient Assignment</h3>
-                <div style={FILTER_STYLE}>
-                    <Form.Label as="h5" className="mt-1" style={LABEL_STYLE}>Employee Status:</Form.Label>
+            <div className="bg-secondary" style={HEADER}>
+                {isAddButtonDisplayed && <Button variant="outline-light" style={HEADER.BUTTON}>+</Button>}
+                <h3 style={HEADER.TEXT}>Patient Assignment</h3>
+                {!isAddButtonDisplayed && <div style={HEADER.SPAN}></div>}
+                <div style={HEADER.SELECT}>
+                    <Form.Label as="h5" className="mt-1" style={HEADER.TEXT}>Employee Status:</Form.Label>
                     <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleEmployeeFilterChange}>
                         {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
                     </Form.Control>
