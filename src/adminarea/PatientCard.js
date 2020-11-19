@@ -18,7 +18,7 @@ const PatientCard = (props) => {
     return (
         <Card>
             <Card.Body>
-                <Card.Title className={"text-info"}>{getPatientName()}</Card.Title>
+                <Card.Title className={"text-primary"}>{getPatientName()}</Card.Title>
                 <Card.Text style={{ marginTop: "10px" }}>
                     {/* <p>{`${employee.email}`}</p> */}
                 </Card.Text>
@@ -29,7 +29,7 @@ const PatientCard = (props) => {
                         <small className="text-muted">{`${patient.status}`}</small>
                     </Col>
                     <Col xs={4}>
-                        <Button size="sm" id={patient.email} style={{ width: "4.5vw" }} variant={"outline-info"} onClick={() => handleOnClick(patient)}>{footerButtonText}</Button>
+                        <Button size="sm" id={patient.email} style={{ width: "4.5vw" }} variant={"outline-primary"} onClick={() => handleOnClick(patient)}>{footerButtonText}</Button>
                     </Col>
                 </Row>
             </Card.Footer>

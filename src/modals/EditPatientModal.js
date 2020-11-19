@@ -115,33 +115,33 @@ const EditPatientModal = (props) => {
         <div>
             <Modal size="xl" centered show={true}>
                 <Modal.Header className="bg-info">
-                    <Modal.Title className="text-white">Edit Employee</Modal.Title>
+                    <Modal.Title className="text-white">Edit Patient</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Row>
                             <Col xs={2}>
                                 <Form.Group as={Col} controlId="employeeId">
-                                    <Form.Label>Employee Id</Form.Label>
-                                    <Form.Control disabled="true" value={props.employee.employeeId} />
+                                    <Form.Label>Patient Id</Form.Label>
+                                    <Form.Control disabled="true" value={props.patient.employeeId} />
                                 </Form.Group>
                             </Col>
                             <Col xs={4}>
                                 <Form.Group as={Col} controlId="employeeFN">
                                     <Form.Label>First Name</Form.Label>
-                                    <Form.Control value={props.employee.firstName} />
+                                    <Form.Control value={props.patient.firstName} />
                                 </Form.Group>
                             </Col>
                             <Col xs={4}>
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Last Name</Form.Label>
-                                    <Form.Control value={props.employee.lastName} />
+                                    <Form.Control value={props.patient.lastName} />
                                 </Form.Group>
                             </Col>
                             <Col xs={2}>
                                 <Form.Group as={Col} controlId="employeeMN">
                                     <Form.Label>Middle Initial</Form.Label>
-                                    <Form.Control value={props.employee.middle} />
+                                    <Form.Control value={props.patient.middle} />
                                 </Form.Group>
                             </Col>
                         </Form.Row>
@@ -149,13 +149,13 @@ const EditPatientModal = (props) => {
                             <Col xs={6}>
                                 <Form.Group as={Col} controlId="employeeId">
                                     <Form.Label>Title</Form.Label>
-                                    <Form.Control defaultValue={props.employee.title} />
+                                    <Form.Control defaultValue={props.patient.title} />
                                 </Form.Group>
                             </Col>
                             <Col xs={4}>
                                 <Form.Group as={Col} controlId="formGridEmploymentStatus">
                                     <Form.Label>Enrollment Status</Form.Label>
-                                    <Form.Control as="select" defaultValue={props.employee.status}>
+                                    <Form.Control as="select" defaultValue={props.patient.status}>
                                         {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
                                     </Form.Control>
                                 </Form.Group>

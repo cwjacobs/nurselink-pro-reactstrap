@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { EmployeeCard } from './EmployeeCard';
+import { EmployeeCard } from '../adminarea/EmployeeCard';
 
 import { Container } from 'react-bootstrap';
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
@@ -77,69 +77,43 @@ const EmployeePane = (props) => {
         setEmployeeAccounts(filteredList);
     }
 
-    const BANNER_STYLE = {
-        color: "white",
-        display: "flex",
-        justifyContent: "flex-start",
-        margin: "0px 3px",
-        padding: "6px",
-    }
-
-    const CONTENT_STYLE = {
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "white",
-        borderRadius: "20px",
-        borderRight: "none",
-        margin: "0px 3px",
-        padding: "6px",
-        overflowY: "scroll",
-        height: "78vh"
-    }
-
-    const LABEL_STYLE = {
-        width: "60%",
-        fontWeight: "bolder",
-    }
-
-    const BUTTON_STYLE = {
-        width: "3%",
-        fontWeight: "bolder",
-        margin: "8px",
-    }
-
-    const FILTER_STYLE = {
-        display: "flex",
-        width: "50%",
-    }
-
     return (
         <div>
-            <div className="bg-secondary" style={BANNER_STYLE}>
-                <Button variant="outline-light" style={BUTTON_STYLE} onClick={handleAddEmployee}>+</Button>
-                <h3 style={LABEL_STYLE}>Employees</h3>
-                <div style={FILTER_STYLE}>
-                    <Form.Label as="h5" className="mt-1" style={LABEL_STYLE}>Enrollment Status:</Form.Label>
-                    <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleStatusChange}>
-                        {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
-                    </Form.Control>
-                </div>
-            </div>
-            <div className="bg-dark" style={CONTENT_STYLE}>
-                <Row>
-                    {
-                        employeeAccounts.map((currentValue, index) =>
-                            <Col xs={3} style={{ marginTop: "1vw" }}>
-                                <EmployeeCard key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
-                            </Col>
-                        )
+            <Card bg='light'>
+                <Card.Header className={'text-white bg-dark'}>
+                    <Row>
+                        <Col xs={2}>
+                            <h3>Employees</h3>
+                        </Col>
+                        <Col xs={3}>
+                            <Button variant="outline-light" style={{ fontWeight: "bolder" }} onClick={handleAddEmployee}>+</Button>
+                        </Col>
+                        <Col xs={3}>
+                            <Form.Label as="h5" style={{ marginTop: "1vh", textAlign: "right" }}>Enrollment Status</Form.Label>
+                        </Col>
+                        <Col xs={4}>
+                            <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleStatusChange}>
+                                {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
+                            </Form.Control>
+                        </Col>
+                    </Row>
+                </Card.Header>
+                <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
+                    <Row>
+                        {
+                            employeeAccounts.map((currentValue, index) =>
+                                <Col xs={3} style={{ marginTop: "1vw" }}>
+                                    <EmployeeCard key={index} employee={currentValue} handleEmployeeEdit={handleEmployeeEdit} />
+                                </Col>
+                            )
+                        }
+                    </Row>
+                    {isEditingEmployee
+                        &&
+                        <EditEmployeeModal employee={crntEmployee} handleEmployeeSave={handleEmployeeSave}></EditEmployeeModal>
                     }
-                </Row>
-                {isEditingEmployee
-                    &&
-                    <EditEmployeeModal employee={crntEmployee} handleEmployeeSave={handleEmployeeSave}></EditEmployeeModal>
-                }
-            </div>
+                </Card.Body>
+            </Card>
         </div>
     )
 }

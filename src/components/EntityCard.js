@@ -10,6 +10,8 @@ const EntityCard = (props) => {
         entity,
         buttonText,
         handleButtonClick,
+        textClass,
+        buttonVariant,
     } = props;
 
     const getEntityName = () => {
@@ -17,9 +19,9 @@ const EntityCard = (props) => {
     }
 
     return (
-        <Card className="d-flex justify-content-left align-items-left flex-column">
+        <Card>
             <Card.Body>
-                <Card.Title className={"text-info"}>{getEntityName()}</Card.Title>
+                <Card.Title className={textClass}>{getEntityName()}</Card.Title>
                 {entity.title && <Card.Subtitle>{`${entity.title}`}</Card.Subtitle>}
                 {entity.patientList && <Card.Text style={{ marginTop: "10px" }}>
                     <h6>{`Patient Count: ${entity.patientList.length}`}</h6>
@@ -32,7 +34,7 @@ const EntityCard = (props) => {
                         <small className="text-muted">{`${entity.status}`}</small>
                     </Col>
                     <Col xs={6}>
-                        <Button size="sm" id={entity.email} variant={"outline-info"} style={{ marginLeft: "1vw" }} onClick={() => handleButtonClick(entity)}>{buttonText}</Button>
+                        <Button size="sm" id={entity.email} variant={buttonVariant} style={{ marginLeft: "1vw" }} onClick={() => handleButtonClick(entity)}>{buttonText}</Button>
                     </Col>
                 </Row>
             </Card.Footer>

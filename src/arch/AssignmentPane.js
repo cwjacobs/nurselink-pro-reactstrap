@@ -225,7 +225,7 @@ const AssignmentPane = (props) => {
                     </Form.Control>
                 </div>
             </div>
-            <div className="bg-dark" style={CONTENT_STYLE}>
+            <div style={CONTENT_STYLE}>
                 {employeeList && <div>
                     <Row>
                         {

@@ -4,8 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { EmployeeAccordion } from './EmployeeAccordion';
-import { PatientCard } from './PatientCard';
+import { EmployeeAccordion } from '../adminarea/EmployeeAccordion';
+import { PatientCard } from '../adminarea/PatientCard';
 import { Container } from 'react-bootstrap';
 
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
@@ -185,68 +185,47 @@ const AssignmentPane = (props) => {
         setPatientList(sortByLastName(availablePatientList));
     }
 
-    const BANNER_STYLE = {
-        color: "white",
-        display: "flex",
-        justifyContent: "flex-start",
-        margin: "0px 3px",
-        padding: "6px",
-    }
-
-    const CONTENT_STYLE = {
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "white",
-        borderRadius: "20px",
-        borderRight: "none",
-        margin: "0px 3px",
-        padding: "6px",
-        overflowY: "scroll",
-        height: "78vh"
-    }
-
-    const LABEL_STYLE = {
-        width: "65%",
-    }
-
-    const FILTER_STYLE = {
-        display: "flex",
-        width: "35%",
-    }
-
     return (
         <div>
-            <div className="bg-secondary" style={BANNER_STYLE}>
-                <h3 style={LABEL_STYLE}>Patient Assignment</h3>
-                <div style={FILTER_STYLE}>
-                    <Form.Label as="h5" className="mt-1" style={LABEL_STYLE}>Employee Status:</Form.Label>
-                    <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleEmployeeFilterChange}>
-                        {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
-                    </Form.Control>
-                </div>
-            </div>
-            <div className="bg-dark" style={CONTENT_STYLE}>
-                {employeeList && <div>
+            <Card bg='light'>
+                <Card.Header className={'text-white bg-dark'}>
                     <Row>
-                        {
-                            employeeList.map((currentValue, index) =>
-                                <Col xs={3} style={{ marginTop: "1vw" }}>
-                                    <EmployeeAccordion key={index} employee={currentValue}
-                                        addEmployeeAssignment={initializeEmployeeAssignment}
-                                        removePatientAssignment={removePatientAssignment}
-                                        removeAllPatientAssignments={removeAllPatientAssignments}
-                                    />
-                                </Col>
-                            )
-                        }
-                        {isAddingPatient && <Col>
-                            <Button variant="outline-light" className="mt-3 mb-2 mx-2" onClick={closeAddingPatient}>Close</Button>
-                            <ScrollablePane displayList={patientList} entityButtonHandler={addEmployeeAssignment}></ScrollablePane>
-                        </Col>}
+                        <Col xs={5}>
+                            <h3>Patient Assignment</h3>
+                        </Col>
+                        <Col xs={3}>
+                            <Form.Label as="h5" style={{ marginTop: "1vh", textAlign: "right" }}>Patient Status</Form.Label>
+                        </Col>
+                        <Col xs={4}>
+                            <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleEmployeeFilterChange}>
+                                {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
+                            </Form.Control>
+                        </Col>
                     </Row>
-                </div>
-                }
-            </div>
+                </Card.Header>
+                <Card.Body style={{ overflowY: "scroll", height: "78vh" }}>
+                    {employeeList && <div>
+                        <Row>
+                            {
+                                employeeList.map((currentValue, index) =>
+                                    <Col xs={3} style={{ marginTop: "1vw" }}>
+                                        <EmployeeAccordion key={index} employee={currentValue}
+                                            addEmployeeAssignment={initializeEmployeeAssignment}
+                                            removePatientAssignment={removePatientAssignment}
+                                            removeAllPatientAssignments={removeAllPatientAssignments}
+                                        />
+                                    </Col>
+                                )
+                            }
+                            {isAddingPatient && <Col>
+                                <Button className="my-3" onClick={closeAddingPatient}>Close</Button>
+                                <ScrollablePane displayList={patientList} entityButtonHandler={addEmployeeAssignment}></ScrollablePane>
+                            </Col>}
+                        </Row>
+                    </div>
+                    }
+                </Card.Body>
+            </Card>
         </div>
     )
 }
