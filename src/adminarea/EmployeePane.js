@@ -10,6 +10,7 @@ import { Container } from 'react-bootstrap';
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
 import { enrollmentStatus } from '../models/enums';
 import { getSortedAllEmployeesList } from '../conn/nlFirestore'
+import { HEADER, CONTENT } from '../styles/constants';
 
 const EmployeePane = (props) => {
     const {
@@ -77,57 +78,19 @@ const EmployeePane = (props) => {
         setEmployeeAccounts(filteredList);
     }
 
-    const BANNER_STYLE = {
-        color: "white",
-        display: "flex",
-        justifyContent: "flex-start",
-        margin: "0px 3px",
-        padding: "6px",
-    }
-
-    const BUTTON_STYLE = {
-        width: "3%",
-        fontWeight: "bolder",
-        margin: "8px",
-    }
-
-    const CONTENT_STYLE = {
-        borderWidth: "1px",
-        borderStyle: "solid",
-        borderColor: "white",
-        borderRadius: "20px",
-        borderRight: "none",
-        margin: "0px 3px",
-        padding: "6px",
-        overflowY: "scroll",
-        height: "78vh"
-    }
-
-    const LABEL_STYLE = {
-        width: "60%",
-        fontWeight: "bolder",
-        marginTop: "1vh",
-    }
-
-    const FILTER_STYLE = {
-        display: "flex",
-        width: "50%",
-        marginTop: "1vh",
-    }
-
     return (
         <div>
-            <div className="bg-secondary" style={BANNER_STYLE}>
-                <Button variant="outline-light" style={BUTTON_STYLE} onClick={handleAddEmployee}>+</Button>
-                <h3 style={LABEL_STYLE}>Employees</h3>
-                <div style={FILTER_STYLE}>
-                    <Form.Label as="h5" className="mt-1" style={LABEL_STYLE}>Enrollment Status:</Form.Label>
+            <div className="bg-secondary" style={HEADER}>
+                <Button variant="outline-light" style={HEADER.BUTTON} onClick={handleAddEmployee}>+</Button>
+                <h3 style={HEADER.TEXT}>Employees</h3>
+                <div style={HEADER.SELECT}>
+                    <Form.Label as="h5" className="mt-1" style={HEADER.TEXT}>Enrollment Status:</Form.Label>
                     <Form.Control id='status-filter' as="select" defaultValue="Enrolled" onChange={handleStatusChange}>
                         {enrollmentStatus.map(opt => (<option value={opt.value}>{opt.label}</option>))}
                     </Form.Control>
                 </div>
             </div>
-            <div className="bg-dark" style={CONTENT_STYLE}>
+            <div className="bg-dark" style={CONTENT}>
                 <Row>
                     {
                         employeeAccounts.map((currentValue, index) =>
