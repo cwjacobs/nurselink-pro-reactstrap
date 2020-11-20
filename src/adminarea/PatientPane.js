@@ -9,7 +9,7 @@ import { PatientCard } from './PatientCard';
 import { Container } from 'react-bootstrap';
 import { EditPatientModal } from '../modals/EditPatientModal';
 import { enrollmentStatus } from '../models/enums';
-import { getSortedAllPatientsList } from '../conn/nlFirestore'
+import { getSortedPatients } from '../conn/nlFirestore'
 import { HEADER, CONTENT } from '../styles/constants';
 
 const PatientPane = (props) => {
@@ -31,7 +31,7 @@ const PatientPane = (props) => {
     }, []);
 
     const getFilterPatientList = (status) => {
-        let allPatientsList = getSortedAllPatientsList();
+        let allPatientsList = getSortedPatients();
         if (status === 'All') {
             return (allPatientsList);
         }

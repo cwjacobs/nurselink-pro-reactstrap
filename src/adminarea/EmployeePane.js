@@ -9,7 +9,7 @@ import { EmployeeCard } from './EmployeeCard';
 import { Container } from 'react-bootstrap';
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
 import { enrollmentStatus } from '../models/enums';
-import { getSortedAllEmployeesList } from '../conn/nlFirestore'
+import { getSortedEmployees } from '../conn/nlFirestore'
 import { HEADER, CONTENT } from '../styles/constants';
 
 const EmployeePane = (props) => {
@@ -31,7 +31,7 @@ const EmployeePane = (props) => {
     }, []);
 
     const getFilterEmploymentList = (status) => {
-        let allEmployeeList = getSortedAllEmployeesList();
+        let allEmployeeList = getSortedEmployees();
         if (status === 'All') {
             return (allEmployeeList);
         }

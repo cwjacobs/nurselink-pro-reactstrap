@@ -7,6 +7,8 @@ import Accordion from 'react-bootstrap/Accordion';
 
 const EmployeeAccordion = (props) => {
 
+    const removeVariant = 'secondary'
+
     const [myEmployee, setMyEmployee] = useState(props.employee);
 
     useEffect(() => {
@@ -44,7 +46,7 @@ const EmployeeAccordion = (props) => {
                                             disabled={myEmployee.patientList.length === 0 ? true : false}
                                             id={myEmployee.email}
                                             style={{ width: "100%" }}
-                                            variant={"outline-danger"}
+                                            variant={"outline-secondary"}
                                             onClick={() => props.removeAllPatientAssignments(myEmployee)}>Remove All</Button>
                                     </Col>
                                     <Col xs={6}>
@@ -65,7 +67,7 @@ const EmployeeAccordion = (props) => {
                                             <Accordion.Toggle as={Card.Header} className="text-primary" eventKey="0">{`${patient.firstName} ${patient.lastName}`}</Accordion.Toggle>
                                             <Accordion.Collapse eventKey="0">
                                                 <Row>
-                                                    <Button id={`${patient.email}`} size="sm" variant="outline-danger" style={{ borderColor: "white", width: "100%" }}
+                                                    <Button id={`${patient.email}`} size="sm" variant="outline-secondary" style={{ borderColor: "white", width: "100%" }}
                                                         onClick={(event) => props.removePatientAssignment(myEmployee, event.target.id)}>Remove</Button>
                                                 </Row>
                                             </Accordion.Collapse>

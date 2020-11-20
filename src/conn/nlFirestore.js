@@ -101,10 +101,10 @@ const sortByLastName = (list) => {
     return sortedList;
 }
 
-export function getSortedAllPatientsList() {
+export function getSortedPatients() {
     return sortByLastName(patientList);
 };
 
-export function getSortedAllEmployeesList() {
+export function getSortedEmployees() {
     return sortByLastName(employeeList);
 };

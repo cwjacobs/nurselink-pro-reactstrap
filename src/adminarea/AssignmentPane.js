@@ -10,17 +10,19 @@ import { Container } from 'react-bootstrap';
 
 import { EditEmployeeModal } from '../modals/EditEmployeeModal';
 import { enrollmentStatus } from '../models/enums';
-import { getSortedAllEmployeesList, getSortedAllPatientsList } from '../conn/nlFirestore'
+// import { getSortedEmployees as conn_getSortedEmployees, getSortedPatients as conn_getSortedPatients } from '../conn/nlFirestore'
 import { ScrollablePane } from '../components/ScrollablePane'
 import { HEADER, CONTENT } from '../styles/constants';
+
+import * as conn from '../conn/nlFirestore';
 
 const AssignmentPane = (props) => {
     const {
         isAddButtonDisplayed = false,
     } = props;
 
-    const [patientList, setPatientList] = useState(getSortedAllPatientsList());
-    const [employeeList, setEmployeeList] = useState(getSortedAllEmployeesList());
+    const [patientList, setPatientList] = useState(conn.getSortedPatients());
+    const [allEmployees, setAllEmployees] = useState(conn.getSortedEmployees());
     const [isAddingPatient, setIsAddingPatient] = useState(false);
 
     useEffect(() => {
@@ -29,8 +31,8 @@ const AssignmentPane = (props) => {
         let filteredList = getFilteredList(statusElement.value, patientList);
         setPatientList(sortByLastName(filteredList));
 
-        filteredList = getFilteredList(statusElement.value, employeeList);
-        setEmployeeList(sortByLastName(filteredList));
+        filteredList = getFilteredList(statusElement.value, allEmployees);
+        setAllEmployees(sortByLastName(filteredList));
     }, []);
 
     const sortByLastName = (list) => {
@@ -79,8 +81,8 @@ const AssignmentPane = (props) => {
     }
 
     const handleEmployeeFilterChange = (event) => {
-        let filteredList = getFilteredList(event.target.value, getSortedAllEmployeesList());
-        setEmployeeList(filteredList);
+        let filteredList = getFilteredList(event.target.value, conn.getSortedEmployees());
+        setAllEmployees(filteredList);
     }
 
     const handleEmployeeEdit = (event) => {
@@ -97,50 +99,41 @@ const AssignmentPane = (props) => {
     }
 
     const initializeEmployeeAssignment = (employee) => {
-        let filteredList = employeeList.filter((el) => {
-            return (el.email === employee.email);
-        });
-        setEmployeeList(sortByLastName(filteredList));
+        setAllEmployees([employee]);
 
-        let employeePatientList = filteredList[0].patientList;
-
-        filteredList = [...patientList];
-        employeePatientList.forEach(el => {
-            filteredList = removeElementFromListOptions(el, filteredList)
+        let availablePatients = [...patientList];
+        employee.patientList.forEach(el => {
+            availablePatients = removeElementFromListOptions(el, availablePatients)
         });
-        setPatientList(sortByLastName(filteredList));
+        setPatientList(sortByLastName(availablePatients));
         setIsAddingPatient(true);
     }
 
     const addEmployeeAssignment = (patient) => {
-        let employee = employeeList[0];
+        let employee = allEmployees[0];
         employee.patientList = [...employee.patientList, patient];
 
-        // remove old version of employee from employee list
-        let filteredEmployeeList = employeeList.filter((el) => {
+        let employeeRemovedList = allEmployees.filter((el) => {
             return (el.email !== employee.email);
         });
+        setAllEmployees(sortByLastName([...employeeRemovedList, employee]));
 
-        // add updated version of employee back to employee list
-        let updatedEmployeeList = [...filteredEmployeeList, employee];
-        setEmployeeList(sortByLastName(updatedEmployeeList));
-
-        let filteredPatientList = [...patientList];
-        employee.patientList.forEach(element => {
-            filteredPatientList = removeElementFromListOptions(element, filteredPatientList)
+        let patientsRemovedList = [...patientList];
+        employee.patientList.forEach(el => {
+            patientsRemovedList = removeElementFromListOptions(el, patientsRemovedList)
         });
-        setPatientList(sortByLastName(filteredPatientList));
+        setPatientList(sortByLastName(patientsRemovedList));
     }
 
     const closeAddingPatient = () => {
-        let element = document.getElementById('status-filter');
-        let value = element.value;
+        let selectElement = document.getElementById('status-filter');
+        let filterValue = selectElement.value;
 
-        let filteredList = getFilteredList(value, getSortedAllEmployeesList());
-        setEmployeeList(filteredList);
+        let filteredList = getFilteredList(filterValue, conn.getSortedEmployees());
+        setAllEmployees(filteredList);
 
         // let allPatients = getAllPatientsList();
-        filteredList = getFilteredList(value, getSortedAllPatientsList());
+        filteredList = getFilteredList(filterValue, conn.getSortedPatients());
         setPatientList(filteredList);
 
         setIsAddingPatient(false);
@@ -149,33 +142,33 @@ const AssignmentPane = (props) => {
     const removeAllPatientAssignments = (employee) => {
         employee.patientList.length = 0;
 
-        let editiedList = employeeList.filter((el) => {
+        let employeeRemovedList = allEmployees.filter((el) => {
             return el.email !== employee.email;
         });
-        setEmployeeList(sortByLastName([...editiedList, employee]));
-        setPatientList(getSortedAllPatientsList());
+        setAllEmployees(sortByLastName([...employeeRemovedList, employee]));
+        setPatientList(conn.getSortedPatients());
     }
 
     const removePatientAssignment = (employee, patientId) => {
-        let filteredPatientList = employee.patientList.filter((el) => {
+        let patientRemovedList = employee.patientList.filter((el) => {
             return el.email !== patientId;
         });
-        employee.patientList = [...filteredPatientList];
+        employee.patientList = [...patientRemovedList];
 
-        let editedEmployeeList = employeeList.filter((el) => {
-            return el.email !== employee.email;
+        let employeeRemovedList = allEmployees.filter((el) => {
+            return el.email !== employee.eamil;
         });
-        setEmployeeList(sortByLastName([...editedEmployeeList, employee]));
+        setAllEmployees(sortByLastName([...employeeRemovedList, employee]));
 
-        let patient = getSortedAllPatientsList().find((el) => {
+        let patient = conn.getSortedPatients().find((el) => {
             return el.email === patientId;
         })
-        let availablePatientList = [...patientList, patient];
-        setPatientList(sortByLastName(availablePatientList));
+        let patientsAvailableList = [...patientList, patient];
+        setPatientList(sortByLastName(patientsAvailableList));
     }
 
     return (
-        <div>
+        <Container fluid>
             <div className="bg-secondary" style={HEADER}>
                 {isAddButtonDisplayed && <Button variant="outline-light" style={HEADER.BUTTON}>+</Button>}
                 <h3 style={HEADER.TEXT}>Patient Assignment</h3>
@@ -188,10 +181,10 @@ const AssignmentPane = (props) => {
                 </div>
             </div>
             <div className="bg-dark" style={CONTENT}>
-                {employeeList && <div>
+                {allEmployees && <div>
                     <Row>
                         {
-                            employeeList.map((currentValue, index) =>
+                            allEmployees.map((currentValue, index) =>
                                 <Col xs={3} style={{ marginTop: "1vw" }}>
                                     <EmployeeAccordion key={index} employee={currentValue}
                                         addEmployeeAssignment={initializeEmployeeAssignment}
@@ -209,7 +202,7 @@ const AssignmentPane = (props) => {
                 </div>
                 }
             </div>
-        </div>
+        </Container>
     )
 }
 
