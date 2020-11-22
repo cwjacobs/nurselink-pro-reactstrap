@@ -26,13 +26,9 @@ const AssignmentPane = (props) => {
     const [isAddingPatient, setIsAddingPatient] = useState(false);
 
     useEffect(() => {
-        let statusElement = document.getElementById('status-filter');
-
-        let filteredList = getFilteredList(statusElement.value, patientList);
-        setPatientList(sortByLastName(filteredList));
-
-        filteredList = getFilteredList(statusElement.value, allEmployees);
-        setAllEmployees(sortByLastName(filteredList));
+        let statusFilter = document.getElementById('status-filter');
+        setPatientList(sortByLastName(getFilteredList(statusFilter.value, patientList)));
+        setAllEmployees(sortByLastName(getFilteredList(statusFilter.value, allEmployees)));
     }, []);
 
     const sortByLastName = (list) => {
@@ -91,25 +87,25 @@ const AssignmentPane = (props) => {
     const handleEmployeeSave = (event) => {
     }
 
-    const removeElementFromListOptions = (element, list) => {
+    const removeFromListOptions = (element, list) => {
         let filteredList = list.filter(el => {
             return el.email !== element.email;
         })
         return filteredList
     }
 
-    const initializeEmployeeAssignment = (employee) => {
+    const initializePatientAssignment = (employee) => {
         setAllEmployees([employee]);
 
         let availablePatients = [...patientList];
         employee.patientList.forEach(el => {
-            availablePatients = removeElementFromListOptions(el, availablePatients)
+            availablePatients = removeFromListOptions(el, availablePatients)
         });
         setPatientList(sortByLastName(availablePatients));
         setIsAddingPatient(true);
     }
 
-    const addEmployeeAssignment = (patient) => {
+    const addPatientAssignment = (patient) => {
         let employee = allEmployees[0];
         employee.patientList = [...employee.patientList, patient];
 
@@ -120,7 +116,7 @@ const AssignmentPane = (props) => {
 
         let patientsRemovedList = [...patientList];
         employee.patientList.forEach(el => {
-            patientsRemovedList = removeElementFromListOptions(el, patientsRemovedList)
+            patientsRemovedList = removeFromListOptions(el, patientsRemovedList)
         });
         setPatientList(sortByLastName(patientsRemovedList));
     }
@@ -132,7 +128,6 @@ const AssignmentPane = (props) => {
         let filteredList = getFilteredList(filterValue, conn.getSortedEmployees());
         setAllEmployees(filteredList);
 
-        // let allPatients = getAllPatientsList();
         filteredList = getFilteredList(filterValue, conn.getSortedPatients());
         setPatientList(filteredList);
 
@@ -156,11 +151,12 @@ const AssignmentPane = (props) => {
         employee.patientList = [...patientRemovedList];
 
         let employeeRemovedList = allEmployees.filter((el) => {
-            return el.email !== employee.eamil;
+            return el.email !== employee.email;
         });
         setAllEmployees(sortByLastName([...employeeRemovedList, employee]));
 
-        let patient = conn.getSortedPatients().find((el) => {
+        let patients = conn.getSortedPatients();
+        let patient = patients.find((el) => {
             return el.email === patientId;
         })
         let patientsAvailableList = [...patientList, patient];
@@ -168,7 +164,7 @@ const AssignmentPane = (props) => {
     }
 
     return (
-        <Container fluid>
+        <div>
             <div className="bg-secondary" style={HEADER}>
                 {isAddButtonDisplayed && <Button variant="outline-light" style={HEADER.BUTTON}>+</Button>}
                 <h3 style={HEADER.TEXT}>Patient Assignment</h3>
@@ -187,7 +183,7 @@ const AssignmentPane = (props) => {
                             allEmployees.map((currentValue, index) =>
                                 <Col xs={3} style={{ marginTop: "1vw" }}>
                                     <EmployeeAccordion key={index} employee={currentValue}
-                                        addEmployeeAssignment={initializeEmployeeAssignment}
+                                        addEmployeeAssignment={initializePatientAssignment}
                                         removePatientAssignment={removePatientAssignment}
                                         removeAllPatientAssignments={removeAllPatientAssignments}
                                     />
@@ -196,13 +192,13 @@ const AssignmentPane = (props) => {
                         }
                         {isAddingPatient && <Col>
                             <Button variant="outline-light" className="mt-3 mb-2 mx-2" onClick={closeAddingPatient}>Close</Button>
-                            <ScrollablePane displayList={patientList} entityButtonHandler={addEmployeeAssignment}></ScrollablePane>
+                            <ScrollablePane displayList={patientList} entityButtonHandler={addPatientAssignment}></ScrollablePane>
                         </Col>}
                     </Row>
                 </div>
                 }
             </div>
-        </Container>
+        </div>
     )
 }
 

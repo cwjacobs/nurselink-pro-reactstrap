@@ -164,7 +164,7 @@ const EditPatientModal = (props) => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button size="sm" variant="outline-danger" style={{ width: "6vw" }} onClick={(event) => props.handleEmployeeSave(event)}>Cancel</Button>
+                    <Button size="sm" variant="outline-secondary" style={{ width: "6vw" }} onClick={(event) => props.handleEmployeeSave(event)}>Cancel</Button>
                     <Button size="sm" variant="outline-primary" style={{ width: "6vw" }} onClick={(event) => props.handleEmployeeSave(event)}>Save</Button>
                 </Modal.Footer>
             </Modal >
