@@ -123,80 +123,82 @@ const AddMedicineModal = (props) => {
     }
 
     return (
-        <Modal size="xl" centered show={true}>
-            <Modal.Header className="bg-info">
-                <Modal.Title className="text-white">Add Medicine</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                {/* <h4>Centered Modal</h4> */}
-                <Table className="medtable" responsive="sm" striped bordered hover size="sm" variant="light">
-                    <thead>
-                        <tr style={{ textAlign: "center" }}>
-                            <th style={{ textAlign: "left", paddingLeft: "14px", width: "8%" }}>Id</th>
-                            <th style={{ textAlign: "left", paddingLeft: "14px", width: "40%" }}>Medicine</th>
-                            <th style={{ width: "8%" }}>Doses/Day</th>
-                            <th style={{ width: "8%" }}>Qty/Dose</th>
-                            <th style={{ width: "12%" }}>Form Factor</th>
-                            <th style={{ width: "8%" }}>Strength</th>
-                            <th style={{ width: "12%" }}>Units</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style={{ textAlign: "center" }} className="data-row">
-                            <td id="addmed-uuid" style={{ textAlign: "left", paddingLeft: ".5vw", paddingTop: "10px" }}>{getUUID()}</td>
-                            <td style={{ textAlign: "left" }}>
-                                <InputGroup><FormControl id="addmed-medicineName" placeholder="Medicine"></FormControl></InputGroup>
-                            </td>
-                            <td style={{ textAlign: "center" }}>
-                                <InputGroup><FormControl id="addmed-numDailyDoses" type="number" min="0"></FormControl></InputGroup>
-                            </td>
-                            <td style={{ textAlign: "center" }}>
-                                <InputGroup><FormControl id="addmed-quantityPerDose" type="number" min="0"></FormControl></InputGroup>
-                            </td>
-                            <td style={{ textAlign: "center" }}>
-                                <Form.Group controlId="addmed-formfactor">
-                                    {/* <Form.Label>Select</Form.Label> */}
-                                    <Form.Control as="select" onChange={handleFormFactorChange}>
-                                        <option>Select...</option>
-                                        <option>pill</option>
-                                        <option>powder</option>
-                                        <option>solution</option>
-                                        <option>drops</option>
-                                        <option>inhaler</option>
-                                        <option>injection</option>
-                                        <option>other</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </td>
-                            <td style={{ textAlign: "center" }}>
-                                <InputGroup><FormControl id="addmed-strength" type="number" min="0"></FormControl></InputGroup>
-                            </td>
-                            <td style={{ textAlign: "center" }}>
-                                <Form.Group controlId="addmed-units">
-                                    {/* <Form.Label>Select</Form.Label> */}
-                                    <Form.Control as="select" onChange={handleStrengthUnitsChange}>
-                                        <option>Select...</option>
-                                        <option>g</option>
-                                        <option>mg</option>
-                                        <option>ml</option>
-                                        <option>iu</option>
-                                        <option>mcg</option>
-                                        <option>meq</option>
-                                        <option>mgml</option>
-                                        <option>mcgml</option>
-                                        <option>percent</option>
-                                    </Form.Control>
-                                </Form.Group>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant={"outline-info"} onClick={closeModal}>Cancel</Button>
-                <Button variant={"info"} onClick={saveMedicine}>Save</Button>
-            </Modal.Footer>
-        </Modal >
+        <div>
+            <Modal size="xl" centered show={true}>
+                <Modal.Header className="bg-info">
+                    <Modal.Title className="text-white">Add Medicine</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {/* <h4>Centered Modal</h4> */}
+                    <Table className="medtable" responsive="sm" striped bordered hover size="sm" variant="light">
+                        <thead>
+                            <tr style={{ textAlign: "center" }}>
+                                <th style={{ textAlign: "left", paddingLeft: "14px", width: "8%" }}>Id</th>
+                                <th style={{ textAlign: "left", paddingLeft: "14px", width: "40%" }}>Medicine</th>
+                                <th style={{ width: "8%" }}>Doses/Day</th>
+                                <th style={{ width: "8%" }}>Qty/Dose</th>
+                                <th style={{ width: "12%" }}>Form Factor</th>
+                                <th style={{ width: "8%" }}>Strength</th>
+                                <th style={{ width: "12%" }}>Units</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style={{ textAlign: "center" }} className="data-row">
+                                <td id="addmed-uuid" style={{ textAlign: "left", paddingLeft: ".5vw", paddingTop: "10px" }}>{getUUID()}</td>
+                                <td style={{ textAlign: "left" }}>
+                                    <InputGroup><FormControl id="addmed-medicineName" placeholder="Medicine"></FormControl></InputGroup>
+                                </td>
+                                <td style={{ textAlign: "center" }}>
+                                    <InputGroup><FormControl id="addmed-numDailyDoses" type="number" min="0"></FormControl></InputGroup>
+                                </td>
+                                <td style={{ textAlign: "center" }}>
+                                    <InputGroup><FormControl id="addmed-quantityPerDose" type="number" min="0"></FormControl></InputGroup>
+                                </td>
+                                <td style={{ textAlign: "center" }}>
+                                    <Form.Group controlId="addmed-formfactor">
+                                        {/* <Form.Label>Select</Form.Label> */}
+                                        <Form.Control as="select" onChange={handleFormFactorChange}>
+                                            <option>Select...</option>
+                                            <option>pill</option>
+                                            <option>powder</option>
+                                            <option>solution</option>
+                                            <option>drops</option>
+                                            <option>inhaler</option>
+                                            <option>injection</option>
+                                            <option>other</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </td>
+                                <td style={{ textAlign: "center" }}>
+                                    <InputGroup><FormControl id="addmed-strength" type="number" min="0"></FormControl></InputGroup>
+                                </td>
+                                <td style={{ textAlign: "center" }}>
+                                    <Form.Group controlId="addmed-units">
+                                        {/* <Form.Label>Select</Form.Label> */}
+                                        <Form.Control as="select" onChange={handleStrengthUnitsChange}>
+                                            <option>Select...</option>
+                                            <option>g</option>
+                                            <option>mg</option>
+                                            <option>ml</option>
+                                            <option>iu</option>
+                                            <option>mcg</option>
+                                            <option>meq</option>
+                                            <option>mgml</option>
+                                            <option>mcgml</option>
+                                            <option>percent</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button size="sm" variant={"outline-secondary"} style={{ width: "6vw" }} onClick={closeModal}>Cancel</Button>
+                    <Button size="sm" variant={"outline-info"} style={{ width: "6vw" }} onClick={saveMedicine}>Save</Button>
+                </Modal.Footer>
+            </Modal >
+        </div>
     );
 }
 
